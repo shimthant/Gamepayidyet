@@ -286,21 +286,21 @@ Order via Telegram
       <p>Mobile games Topup</p>
     </div>
 
-    <div class="app-grid">
-      <div class="app-card active" onclick="showGame('mlbb', this)">
-        <h3>MLBB</h3>
-        <div class="app-grid" id="gameMenu">
-      </div>
-      <div class="app-card" onclick="showGame('genshin', this)">
-        <h3>Genshin Impact</h3>
-      </div>
-      <div class="app-card" onclick="showGame('hsr', this)">
-        <h3>Honkai Star Rail</h3>
-      </div>
-      <div class="app-card" onclick="showGame('zzz', this)">
-        <h3>Zenless Zero Zone</h3>
-      </div>
-    </div>
+    <div class="app-card" onclick="showGame('mlbb')">
+MLBB
+</div>
+
+<div class="app-card" onclick="showGame('genshin')">
+Genshin Impact
+</div>
+
+<div class="app-card" onclick="showGame('hsr')">
+Honkai Star Rail
+</div>
+
+<div class="app-card" onclick="showGame('zzz')">
+Zenless Zero Zone
+</div>
 
     <div id="gamePage" class="content" style="display:none;">
       <div class="panel">
@@ -518,8 +518,18 @@ message += "\nAccount Info:\n" + account;
 let url = "https://t.me/angsthtun?text=" + encodeURIComponent(message);
 
 window.open(url,"_blank");
+window.open(url,"_blank");
+}
 
-      }
+function showGame(game){
+
+document.getElementById("gameMenu").style.display="none";
+document.getElementById("gamePage").style.display="block";
+
+}
+      }<script>
+
+  
 
       const total = document.getElementById("totalPrice").textContent.replace(/,/g, "");
       message += `%0ATotal: ${total} ks%0A`;
