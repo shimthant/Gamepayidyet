@@ -1387,14 +1387,19 @@ stockModal.classList.add("active");
         closeStockEditor();
       }
     });
+window.addEventListener("load", function () {
 
-    window.addEventListener("load", function() {
-      renderGameMenu();
+renderGameMenu();
 
-      setTimeout(() => {
-        document.getElementById("loadingScreen").classList.add("hide");
-      }, 1800);
-    });
+setTimeout(function(){
+const loader = document.getElementById("loadingScreen");
+if(loader){
+loader.style.display = "none";
+}
+},2000);
+
+});
+    
   </script>
 </body>
 </html>
