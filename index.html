@@ -1318,8 +1318,7 @@ Name:"></textarea>
       const url = "https://t.me/" + TELEGRAM_USERNAME + "?text=" + encodeURIComponent(message);
       window.open(url, "_blank");
     }
-
- function openStockEditor(){
+function openStockEditor(){
 
 const password = prompt("Enter admin password");
 
@@ -1338,16 +1337,11 @@ image: game.image,
 items: game.items
 };
 
-stockEditor.value = JSON.stringify(editableData,null,2);
+stockEditor.value = JSON.stringify(editableData, null, 2);
 
 stockModal.classList.add("active");
 
- }
-
-      stockEditor.value = JSON.stringify(editableData, null, 2);
-      stockModal.classList.add("active");
-    }
-
+}
     function closeStockEditor() {
       stockModal.classList.remove("active");
     }
