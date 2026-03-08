@@ -1317,15 +1317,7 @@ Name:"></textarea>
     }
 
     function openStockEditor() {
-
   if (!currentGame) return;
-
-  const password = prompt("Enter Admin Password");
-
-  if(password !== "gamepay12345xx"){
-    alert("Access Denied");
-    return;
-  }
 
   const game = gameData[currentGame];
 
