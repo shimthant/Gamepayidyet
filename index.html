@@ -1319,18 +1319,30 @@ Name:"></textarea>
       window.open(url, "_blank");
     }
 
-    function openStockEditor() {
-      if (!currentGame) return;
+ function openStockEditor(){
 
-      const game = gameData[currentGame];
+const password = prompt("Enter admin password");
 
-      const editableData = {
-        title: game.title,
-        subtitle: game.subtitle,
-        icon: game.icon,
-        image: game.image,
-        items: game.items
-      };
+if(password !== "diameter888"){
+alert("Access denied");
+return;
+}
+
+const game = gameData[currentGame];
+
+const editableData = {
+title: game.title,
+subtitle: game.subtitle,
+icon: game.icon,
+image: game.image,
+items: game.items
+};
+
+stockEditor.value = JSON.stringify(editableData,null,2);
+
+stockModal.classList.add("active");
+
+ }
 
       stockEditor.value = JSON.stringify(editableData, null, 2);
       stockModal.classList.add("active");
