@@ -1,400 +1,437 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gamepay Hub Ultra</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gamepay Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet" />
 
-<style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Poppins,sans-serif;
-}
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Poppins,sans-serif;
+    }
 
-html,body{
-  width:100%;
-  max-width:100%;
-  overflow-x:hidden;
-}
+    html,body{
+      width:100%;
+      max-width:100%;
+      overflow-x:hidden;
+      scroll-behavior:smooth;
+    }
 
-body{
-  min-height:100vh;
-  color:#fff;
-  background:linear-gradient(135deg,#03122e 0%, #062a66 45%, #0a4ec7 100%);
-}
+    body{
+      min-height:100vh;
+      color:#fff;
+      background:linear-gradient(135deg,#03142f 0%, #083a86 55%, #0c54c7 100%);
+    }
 
-#particles-js{
-  position:fixed;
-  inset:0;
-  z-index:-1;
-}
+    #particles-js{
+      position:fixed;
+      inset:0;
+      z-index:-1;
+    }
 
-.container{
-  width:100%;
-  max-width:1080px;
-  margin:0 auto;
-  padding:16px;
-}
+    .container{
+      width:100%;
+      max-width:1100px;
+      margin:0 auto;
+      padding:16px;
+    }
 
-.header{
-  text-align:center;
-  margin-bottom:22px;
-}
+    .header{
+      text-align:center;
+      margin-bottom:18px;
+    }
 
-.header h1{
-  font-size:34px;
-  font-weight:800;
-  color:#ffffff;
-  text-shadow:0 0 8px #00d9ff,0 0 24px #00d9ff;
-  letter-spacing:.5px;
-}
+    .header h1{
+      font-size:36px;
+      font-weight:800;
+      color:#fff;
+      text-shadow:0 0 8px #00eaff,0 0 24px #00eaff;
+      letter-spacing:.3px;
+    }
 
-.header p{
-  color:#c9f5ff;
-  font-size:14px;
-  margin-top:6px;
-}
+    .header p{
+      margin-top:6px;
+      color:#d8f8ff;
+      font-size:14px;
+    }
 
-.hero{
-  background:linear-gradient(135deg,rgba(0,225,255,.18),rgba(255,255,255,.06));
-  border:1px solid rgba(133,235,255,.25);
-  border-radius:22px;
-  padding:16px;
-  margin-bottom:18px;
-  backdrop-filter:blur(8px);
-  box-shadow:0 0 30px rgba(0,225,255,.12);
-}
+    .hero{
+      background:linear-gradient(180deg,rgba(10,87,180,.35),rgba(255,255,255,.05));
+      border:1px solid rgba(120,232,255,.2);
+      border-radius:22px;
+      padding:16px;
+      margin-bottom:18px;
+      box-shadow:0 0 25px rgba(0,234,255,.12);
+      backdrop-filter:blur(10px);
+    }
 
-.hero-title{
-  font-size:18px;
-  font-weight:700;
-  color:#ffffff;
-  text-shadow:0 0 10px #00d9ff;
-}
+    .hero-title{
+      font-size:18px;
+      font-weight:800;
+      color:#fff;
+      text-shadow:0 0 10px #00eaff;
+    }
 
-.hero-sub{
-  margin-top:6px;
-  color:#d5f6ff;
-  font-size:13px;
-}
+    .hero-sub{
+      margin-top:6px;
+      color:#d8f8ff;
+      font-size:13px;
+      line-height:1.5;
+    }
 
-.grid{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:14px;
-}
+    .game-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px;
+    }
 
-.card{
-  background:linear-gradient(180deg,rgba(12,72,170,.95),rgba(8,44,109,.95));
-  border:1px solid rgba(120,230,255,.22);
-  border-radius:20px;
-  text-align:center;
-  padding:18px 12px;
-  cursor:pointer;
-  transition:.25s ease;
-  box-shadow:0 8px 24px rgba(0,0,0,.18);
-}
+    .card{
+      background:linear-gradient(180deg,rgba(15,82,193,.96),rgba(8,50,122,.96));
+      border:1px solid rgba(118,231,255,.22);
+      border-radius:22px;
+      padding:18px 12px;
+      text-align:center;
+      cursor:pointer;
+      transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+      box-shadow:0 8px 24px rgba(0,0,0,.18);
+      position:relative;
+      overflow:hidden;
+    }
 
-.card:hover{
-  transform:translateY(-4px) scale(1.01);
-  box-shadow:0 0 18px rgba(0,234,255,.55),0 12px 28px rgba(0,0,0,.24);
-}
+    .card:hover{
+      transform:translateY(-6px) scale(1.015);
+      box-shadow:0 0 16px rgba(0,234,255,.6),0 12px 28px rgba(0,0,0,.22);
+      border-color:rgba(118,231,255,.5);
+    }
 
-.card img{
-  width:84px;
-  height:84px;
-  object-fit:contain;
-  display:block;
-  margin:0 auto 10px;
-  padding:10px;
-  border-radius:22px;
-  background:radial-gradient(circle at top,rgba(0,234,255,.22),rgba(255,255,255,.05));
-  box-shadow:0 0 16px rgba(0,234,255,.35);
-}
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:auto -40% -60% -40%;
+      height:120px;
+      background:radial-gradient(circle,rgba(0,234,255,.18),transparent 65%);
+      pointer-events:none;
+    }
 
-.card span{
-  display:block;
-  font-size:16px;
-  font-weight:700;
-  line-height:1.35;
-  color:#fff;
-  text-shadow:0 0 8px rgba(0,234,255,.75);
-  word-break:break-word;
-}
+    .game-icon-wrap{
+      width:92px;
+      height:92px;
+      margin:0 auto 12px;
+      border-radius:24px;
+      background:radial-gradient(circle at top,rgba(0,234,255,.18),rgba(255,255,255,.05));
+      box-shadow:0 0 18px rgba(0,234,255,.28);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
 
-.game-page{
-  display:none;
-  grid-template-columns:1fr;
-  gap:16px;
-  margin-top:12px;
-}
+    .card img{
+      width:74px;
+      height:74px;
+      object-fit:contain;
+      display:block;
+      animation:floatIcon 3s ease-in-out infinite;
+    }
 
-.panel{
-  background:linear-gradient(180deg,rgba(8,47,108,.97),rgba(6,34,82,.97));
-  border:1px solid rgba(116,227,255,.18);
-  border-radius:20px;
-  padding:16px;
-  box-shadow:0 10px 26px rgba(0,0,0,.2);
-}
+    @keyframes floatIcon{
+      0%{transform:translateY(0);}
+      50%{transform:translateY(-5px);}
+      100%{transform:translateY(0);}
+    }
 
-.topbar{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  margin-bottom:12px;
-  flex-wrap:wrap;
-}
+    .card span{
+      display:block;
+      font-size:16px;
+      font-weight:700;
+      line-height:1.35;
+      color:#fff;
+      text-shadow:0 0 8px rgba(0,234,255,.8);
+      word-break:break-word;
+    }
 
-.topbar h2{
-  font-size:22px;
-  font-weight:800;
-  color:#ffffff;
-  text-shadow:0 0 10px rgba(0,234,255,.75);
-}
+    .game-page{
+      display:none;
+      grid-template-columns:1fr;
+      gap:16px;
+      margin-top:14px;
+    }
 
-.back-btn{
-  border:none;
-  background:#12d7ff;
-  color:#04204e;
-  padding:10px 14px;
-  border-radius:10px;
-  font-weight:700;
-  cursor:pointer;
-}
+    .panel{
+      background:linear-gradient(180deg,rgba(8,49,112,.97),rgba(6,36,86,.97));
+      border:1px solid rgba(120,232,255,.18);
+      border-radius:22px;
+      padding:16px;
+      box-shadow:0 10px 28px rgba(0,0,0,.2);
+    }
 
-.gameBanner{
-  width:100%;
-  height:180px;
-  object-fit:cover;
-  border-radius:16px;
-  border:1px solid rgba(132,236,255,.18);
-  margin-bottom:14px;
-  background:#0d2e67;
-}
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:12px;
+    }
 
-.section-title{
-  font-size:15px;
-  font-weight:700;
-  color:#d7f9ff;
-  margin-bottom:10px;
-}
+    .game-title{
+      font-size:20px;
+      font-weight:800;
+      color:#fff;
+      text-shadow:0 0 10px #00eaff;
+    }
 
-.item{
-  display:grid;
-  grid-template-columns:1fr auto auto;
-  align-items:center;
-  gap:10px;
-  background:linear-gradient(180deg,#0f4dc0,#0b3ea2);
-  padding:11px 12px;
-  border-radius:12px;
-  margin-bottom:8px;
-}
+    .back-btn{
+      border:none;
+      background:#17e6ff;
+      color:#03244e;
+      padding:10px 16px;
+      border-radius:12px;
+      font-weight:800;
+      cursor:pointer;
+      box-shadow:0 0 14px rgba(23,230,255,.28);
+    }
 
-.item-name{
-  font-size:14px;
-  font-weight:600;
-  line-height:1.35;
-}
+    .section-label{
+      font-size:15px;
+      font-weight:700;
+      color:#d8f8ff;
+      margin-bottom:10px;
+    }
 
-.item-price{
-  font-size:13px;
-  font-weight:700;
-  color:#dbf9ff;
-  white-space:nowrap;
-}
+    .item{
+      display:grid;
+      grid-template-columns:1fr auto auto;
+      align-items:center;
+      gap:10px;
+      background:linear-gradient(180deg,#1254cb,#0d42a7);
+      border-radius:14px;
+      padding:12px 14px;
+      margin-bottom:10px;
+    }
 
-.qty{
-  display:flex;
-  align-items:center;
-  gap:6px;
-}
+    .item-name{
+      font-size:14px;
+      font-weight:700;
+      line-height:1.35;
+    }
 
-.qty button{
-  width:30px;
-  height:30px;
-  border:none;
-  border-radius:8px;
-  background:#10e5ff;
-  color:#04204e;
-  font-weight:800;
-  font-size:18px;
-  cursor:pointer;
-}
+    .qty{
+      display:flex;
+      align-items:center;
+      gap:6px;
+    }
 
-.qty span{
-  min-width:18px;
-  text-align:center;
-  font-weight:700;
-}
+    .qty button{
+      width:34px;
+      height:34px;
+      border:none;
+      border-radius:10px;
+      background:#16e8ff;
+      color:#03244e;
+      font-weight:800;
+      font-size:18px;
+      cursor:pointer;
+    }
 
-.summary-box{
-  background:linear-gradient(180deg,#0f4dc0,#0b3ea2);
-  border-radius:14px;
-  padding:12px;
-  margin-bottom:12px;
-}
+    .qty span{
+      min-width:18px;
+      text-align:center;
+      font-weight:700;
+      font-size:16px;
+    }
 
-#cart{
-  font-size:14px;
-  line-height:1.65;
-  color:#ffffff;
-  min-height:24px;
-}
+    .item-price{
+      font-size:14px;
+      font-weight:800;
+      color:#e8fbff;
+      white-space:nowrap;
+    }
 
-.total{
-  margin-top:10px;
-  font-size:16px;
-  font-weight:800;
-  color:#fff176;
-  text-shadow:0 0 10px rgba(255,241,118,.35);
-}
+    .cart-box{
+      background:linear-gradient(180deg,#1353c7,#0d419f);
+      border-radius:16px;
+      padding:14px;
+      transition:box-shadow .25s ease, transform .25s ease;
+      box-shadow:0 0 0 rgba(0,234,255,0);
+    }
 
-textarea{
-  width:100%;
-  border:none;
-  outline:none;
-  resize:vertical;
-  min-height:86px;
-  border-radius:12px;
-  padding:12px;
-  font-size:14px;
-  margin-top:10px;
-}
+    .cart-box.highlight{
+      box-shadow:0 0 18px rgba(0,234,255,.55);
+      transform:scale(1.01);
+    }
 
-.payment-title{
-  margin-top:12px;
-  margin-bottom:8px;
-  font-size:14px;
-  color:#d7f9ff;
-  font-weight:700;
-}
+    #cart{
+      font-size:14px;
+      line-height:1.7;
+      min-height:24px;
+    }
 
-.payment{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-}
+    .empty-cart{
+      color:#d6f7ff;
+      opacity:.9;
+    }
 
-.payment label{
-  background:#0f4dc0;
-  padding:7px 10px;
-  border-radius:10px;
-  font-size:13px;
-  display:flex;
-  align-items:center;
-  gap:6px;
-  border:1px solid rgba(255,255,255,.08);
-}
+    .total{
+      margin-top:10px;
+      font-size:16px;
+      font-weight:800;
+      color:#fff176;
+      text-shadow:0 0 10px rgba(255,241,118,.35);
+    }
 
-.telegram{
-  width:100%;
-  margin-top:14px;
-  background:#11e7ff;
-  color:#03244f;
-  border:none;
-  padding:13px 14px;
-  border-radius:12px;
-  font-size:17px;
-  font-weight:800;
-  cursor:pointer;
-  animation:pulseGlow 1.8s infinite alternate;
-  box-shadow:0 0 18px rgba(17,231,255,.35);
-}
+    textarea{
+      width:100%;
+      min-height:92px;
+      border:none;
+      outline:none;
+      resize:vertical;
+      border-radius:14px;
+      padding:12px;
+      font-size:14px;
+      margin-top:12px;
+    }
 
-@keyframes pulseGlow{
-  from{box-shadow:0 0 10px rgba(17,231,255,.25);}
-  to{box-shadow:0 0 24px rgba(17,231,255,.65);}
-}
+    .payment-title{
+      margin-top:14px;
+      margin-bottom:8px;
+      font-size:14px;
+      font-weight:700;
+      color:#d8f8ff;
+    }
 
-.tip{
-  margin-top:10px;
-  font-size:12px;
-  color:#d8f7ff;
-}
+    .payment{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
 
-.footer{
-  text-align:center;
-  margin-top:24px;
-  color:#c7f4ff;
-  font-size:13px;
-  padding-bottom:6px;
-}
+    .payment label{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      background:#0f4ec3;
+      border:1px solid rgba(255,255,255,.08);
+      padding:8px 10px;
+      border-radius:12px;
+      font-size:13px;
+    }
 
-.popup{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.55);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  z-index:999;
-}
+    .order-btn{
+      width:100%;
+      margin-top:16px;
+      border:none;
+      background:#19e8ff;
+      color:#03244e;
+      padding:14px;
+      border-radius:14px;
+      font-size:18px;
+      font-weight:800;
+      cursor:pointer;
+      box-shadow:0 0 18px rgba(25,232,255,.36);
+      animation:buttonPulse 1.8s infinite alternate;
+    }
 
-.popup-box{
-  width:100%;
-  max-width:360px;
-  background:linear-gradient(180deg,#0a326f,#08285e);
-  border:1px solid rgba(112,230,255,.25);
-  border-radius:18px;
-  padding:18px;
-  text-align:center;
-  box-shadow:0 0 24px rgba(0,225,255,.2);
-}
+    @keyframes buttonPulse{
+      from{box-shadow:0 0 10px rgba(25,232,255,.26);}
+      to{box-shadow:0 0 24px rgba(25,232,255,.62);}
+    }
 
-.popup-box h3{
-  font-size:22px;
-  color:#ffffff;
-  text-shadow:0 0 10px #00d9ff;
-  margin-bottom:8px;
-}
+    .tip{
+      margin-top:10px;
+      color:#d8f8ff;
+      font-size:12px;
+      line-height:1.6;
+    }
 
-.popup-box p{
-  font-size:14px;
-  color:#d8f7ff;
-  line-height:1.6;
-}
+    .footer{
+      text-align:center;
+      margin-top:22px;
+      padding-bottom:6px;
+      color:#d3f8ff;
+      font-size:13px;
+    }
 
-.popup-box button{
-  margin-top:14px;
-  border:none;
-  background:#11e7ff;
-  color:#03244f;
-  padding:10px 16px;
-  border-radius:10px;
-  font-weight:700;
-  cursor:pointer;
-}
+    .popup{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.55);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      z-index:999;
+    }
 
-@media (min-width:768px){
-  .container{
-    padding:24px;
-  }
+    .popup-box{
+      width:100%;
+      max-width:360px;
+      background:linear-gradient(180deg,#0c3a82,#082d67);
+      border:1px solid rgba(120,232,255,.26);
+      border-radius:20px;
+      padding:20px;
+      text-align:center;
+      box-shadow:0 0 24px rgba(0,234,255,.22);
+      animation:popIn .25s ease;
+    }
 
-  .header h1{
-    font-size:44px;
-  }
+    @keyframes popIn{
+      from{transform:scale(.85); opacity:0;}
+      to{transform:scale(1); opacity:1;}
+    }
 
-  .grid{
-    grid-template-columns:repeat(4,minmax(0,1fr));
-    gap:18px;
-  }
+    .popup-box h3{
+      font-size:22px;
+      color:#fff;
+      text-shadow:0 0 10px #00eaff;
+      margin-bottom:8px;
+    }
 
-  .game-page{
-    grid-template-columns:1.3fr .95fr;
-    gap:18px;
-  }
+    .popup-box p{
+      color:#d8f8ff;
+      font-size:14px;
+      line-height:1.6;
+    }
 
-  .gameBanner{
-    height:260px;
-  }
-}
-</style>
-</head>
+    .popup-box button{
+      margin-top:14px;
+      border:none;
+      background:#19e8ff;
+      color:#03244e;
+      padding:10px 16px;
+      border-radius:10px;
+      font-weight:800;
+      cursor:pointer;
+    }
+
+    @media (min-width:768px){
+      .container{
+        padding:24px;
+      }
+
+      .header h1{
+        font-size:46px;
+      }
+
+      .hero-title{
+        font-size:20px;
+      }
+
+      .game-grid{
+        grid-template-columns:repeat(4,minmax(0,1fr));
+        gap:18px;
+      }
+
+      .game-page{
+        grid-template-columns:1.25fr .9fr;
+        gap:18px;
+      }
+    }
+  </style>
+  </head>
 <body>
 
 <div id="particles-js"></div>
@@ -410,26 +447,24 @@ textarea{
     <div class="hero-sub">Select your game, choose items, and send your order to Telegram in one tap.</div>
   </div>
 
-  <div id="menu" class="grid"></div>
+  <div id="menu" class="game-grid"></div>
 
   <div id="gamePage" class="game-page">
     <div class="panel">
       <div class="topbar">
-        <h2 id="gameTitle">Game Title</h2>
+        <div id="gameTitle" class="game-title">Game Title</div>
         <button class="back-btn" onclick="backMenu()">Back</button>
       </div>
 
-      <img id="gameImage" class="gameBanner" alt="Game banner">
-
-      <div class="section-title">Topup Items</div>
+      <div class="section-label">Topup Items</div>
       <div id="items"></div>
     </div>
 
     <div class="panel">
-      <div class="section-title">Order Cart</div>
+      <div class="section-label">Order Cart</div>
 
-      <div class="summary-box">
-        <div id="cart">No items selected yet.</div>
+      <div id="cartBox" class="cart-box">
+        <div id="cart" class="empty-cart">No items selected yet.</div>
         <div class="total">Total Amount: <span id="total">0</span> ks</div>
       </div>
 
@@ -445,7 +480,7 @@ textarea{
         <label><input type="radio" name="pay" value="WeChat Pay"> WeChat</label>
       </div>
 
-      <button class="telegram" onclick="sendOrder()">🚀 Order via Telegram</button>
+      <button class="order-btn" onclick="sendOrder()">🚀 Order via Telegram</button>
       <div class="tip">Telegram message will include Game, Selected Items, Payment, and Total Amount.</div>
     </div>
   </div>
@@ -456,12 +491,12 @@ textarea{
 <div id="successPopup" class="popup">
   <div class="popup-box">
     <h3>Order Ready</h3>
-    <p>Your order text has been prepared and Telegram will open now.</p>
+    <p>Your order text has been prepared. Telegram will open now.</p>
     <button onclick="closePopup()">OK</button>
   </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <script>
 particlesJS("particles-js",{
   particles:{
@@ -493,11 +528,9 @@ particlesJS("particles-js",{
   retina_detect:true
 });
 </script>
-<script>
+  <script>
 const TELEGRAM = "angsthtun";
-
 const ICON_FALLBACK = "https://via.placeholder.com/120x120.png?text=GAME";
-const BANNER_FALLBACK = "https://via.placeholder.com/1200x600.png?text=Game+Banner";
 
 let cart = {};
 let currentGame = "";
@@ -505,48 +538,51 @@ let currentGame = "";
 let data = {
   mlbb:{
     title:"Mobile Legends",
-    icon:"images/mlbb.png ",
-    image:"images/Fannysjsr.jpg",
+    icon:"images/mlbb.png",
     items:[
       {name:"Weekly Pass",price:5700},
       {name:"50 Diamonds",price:3100},
       {name:"150 Diamonds",price:9000}
     ]
   },
-
   genshin:{
     title:"Genshin Impact",
     icon:"images/genshin.png",
-    image:"images/genshin.jpg",
     items:[
       {name:"Blessing",price:13800},
       {name:"60 Genesis Crystal",price:2750},
       {name:"300+30 Genesis Crystal",price:13800},
-      {name:"980+110 Genesis Crystal",price:42000}
+      {name:"980+110 Genesis Crystal",price:42000},
+      {name:"1980+260 Genesis Crystal",price:87250},
+      {name:"3280+600 Genesis Crystal",price:143000},
+      {name:"6480+1600 Genesis Crystal",price:273000}
     ]
   },
-
   starrail:{
     title:"Honkai: Star Rail",
     icon:"images/starrail.png",
-    image:"images/starrail.jpg",
     items:[
       {name:"60 Oneiric Shard",price:2800},
       {name:"330 Oneiric Shard",price:14000},
       {name:"1090 Oneiric Shard",price:42500},
+      {name:"2240 Oneiric Shard",price:84800},
+      {name:"3880 Oneiric Shard",price:144800},
+      {name:"8080 Oneiric Shard",price:272800},
       {name:"Express Supply Pass",price:13800}
     ]
   },
-
   arena:{
     title:"Arena Breakout",
     icon:"images/arena.png",
-    image:"images/arena.jpg",
     items:[
       {name:"66 Bonds",price:3500},
       {name:"335 Bonds",price:17600},
       {name:"675 Bonds",price:35000},
-      {name:"Advanced Battle Pass",price:13700}
+      {name:"1690 Bonds",price:85600},
+      {name:"3400 Bonds",price:171200},
+      {name:"6820 Bonds",price:329500},
+      {name:"Advanced Battle Pass",price:13700},
+      {name:"Premium Battle Pass",price:40000}
     ]
   }
 };
@@ -554,20 +590,29 @@ let data = {
 const menu = document.getElementById("menu");
 const gamePage = document.getElementById("gamePage");
 const gameTitle = document.getElementById("gameTitle");
-const gameImage = document.getElementById("gameImage");
 const itemsBox = document.getElementById("items");
 const cartBox = document.getElementById("cart");
 const totalBox = document.getElementById("total");
 const accountInput = document.getElementById("account");
+const cartWrap = document.getElementById("cartBox");
 const successPopup = document.getElementById("successPopup");
 
 function safeText(value){
   return typeof value === "string" ? value.trim() : "";
 }
 
-function safeImagePath(path,fallback){
+function safeIcon(path){
   const p = safeText(path);
-  return p ? p : fallback;
+  return p ? p : ICON_FALLBACK;
+}
+
+function flashCart(){
+  cartWrap.classList.remove("highlight");
+  void cartWrap.offsetWidth;
+  cartWrap.classList.add("highlight");
+  setTimeout(() => {
+    cartWrap.classList.remove("highlight");
+  }, 420);
 }
 
 function renderMenu(){
@@ -575,11 +620,12 @@ function renderMenu(){
 
   for(const key in data){
     const g = data[key];
-    const iconPath = safeImagePath(g.icon, ICON_FALLBACK);
 
     menu.innerHTML += `
       <div class="card" onclick="openGame('${key}')">
-        <img src="${iconPath}" alt="${g.title}" onerror="this.onerror=null;this.src='${ICON_FALLBACK}'">
+        <div class="game-icon-wrap">
+          <img src="${safeIcon(g.icon)}" alt="${g.title}" onerror="this.onerror=null;this.src='${ICON_FALLBACK}'">
+        </div>
         <span>${g.title}</span>
       </div>
     `;
@@ -593,15 +639,7 @@ function openGame(key){
   menu.style.display = "none";
   gamePage.style.display = "grid";
 
-  const g = data[key];
-
-  gameTitle.textContent = g.title;
-  gameImage.src = safeImagePath(g.image, BANNER_FALLBACK);
-  gameImage.onerror = function(){
-    this.onerror = null;
-    this.src = BANNER_FALLBACK;
-  };
-
+  gameTitle.textContent = data[key].title;
   accountInput.value = "";
   document.querySelectorAll('input[name="pay"]').forEach(el => el.checked = false);
 
@@ -613,8 +651,10 @@ function openGame(key){
 function backMenu(){
   currentGame = "";
   cart = {};
+
   menu.style.display = "grid";
   gamePage.style.display = "none";
+
   updateCart();
   window.scrollTo({top:0,behavior:"smooth"});
 }
@@ -622,14 +662,14 @@ function backMenu(){
 function renderItems(){
   itemsBox.innerHTML = "";
 
-  data[currentGame].items.forEach((item,i) => {
+  data[currentGame].items.forEach((item,index) => {
     itemsBox.innerHTML += `
       <div class="item">
         <div class="item-name">${item.name}</div>
         <div class="qty">
-          <button onclick="changeQty(${i},-1)">-</button>
-          <span id="q${i}">0</span>
-          <button onclick="changeQty(${i},1)">+</button>
+          <button onclick="changeQty(${index},-1)">-</button>
+          <span id="q${index}">0</span>
+          <button onclick="changeQty(${index},1)">+</button>
         </div>
         <div class="item-price">${item.price} ks</div>
       </div>
@@ -645,40 +685,41 @@ function changeQty(index,delta){
   if(qtyEl) qtyEl.textContent = cart[index];
 
   updateCart();
-}
-
-function updateCart(){
-  let html = "";
-  let total = 0;
-  let hasItems = false;
-
-  if(currentGame && data[currentGame]){
-    for(const i in cart){
-      if(cart[i] > 0){
-        hasItems = true;
-        const item = data[currentGame].items[i];
-        const price = item.price * cart[i];
-        total += price;
-        html += `<div>${item.name} x${cart[i]} - ${price} ks</div>`;
-      }
-    }
-  }
-
-  cartBox.innerHTML = hasItems ? html : "No items selected yet.";
-  totalBox.textContent = total;
+  flashCart();
 }
 
 function buildSelectedItems(){
-  let lines = [];
+  const lines = [];
+
+  if(!currentGame) return lines;
 
   for(const i in cart){
     if(cart[i] > 0){
       const item = data[currentGame].items[i];
-      lines.push(item.name + " x" + cart[i]);
+      lines.push({
+        text: item.name + " x" + cart[i],
+        total: item.price * cart[i]
+      });
     }
   }
 
   return lines;
+}
+
+function updateCart(){
+  const selected = buildSelectedItems();
+  let total = 0;
+
+  if(selected.length === 0){
+    cartBox.innerHTML = `<div class="empty-cart">No items selected yet.</div>`;
+  }else{
+    cartBox.innerHTML = selected.map(entry => {
+      total += entry.total;
+      return `<div>${entry.text} - ${entry.total} ks</div>`;
+    }).join("");
+  }
+
+  totalBox.textContent = total;
 }
 
 function sendOrder(){
@@ -687,8 +728,8 @@ function sendOrder(){
     return;
   }
 
-  const selectedItems = buildSelectedItems();
-  if(selectedItems.length === 0){
+  const selected = buildSelectedItems();
+  if(selected.length === 0){
     alert("Please select at least one item.");
     return;
   }
@@ -700,7 +741,8 @@ function sendOrder(){
 
   let msg = "Gamepay Hub Order\n\n";
   msg += "Game: " + data[currentGame].title + "\n\n";
-  msg += "Selected Items:\n" + selectedItems.join("\n") + "\n\n";
+  msg += "Selected Items:\n";
+  msg += selected.map(item => item.text).join("\n") + "\n\n";
   msg += "Account: " + account + "\n";
   msg += "Payment: " + payment + "\n";
   msg += "Total Amount: " + total + " ks";
