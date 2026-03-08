@@ -1,6 +1,499 @@
-body{
-  font-family:sans-serif;
-  background:linear-gradient(135deg,#001f3f,#00eaff);
-  color:white;
-  text-align:center;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gamepay Hub</title>
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family:Arial, sans-serif;
+      background:#00d9ff;
+      color:#fff;
+      min-height:100vh;
+    }
+
+    .container{
+      width:100%;
+      max-width:1200px;
+      margin:0 auto;
+      padding:20px;
+    }
+
+    .header{
+      text-align:center;
+      padding:24px 16px;
+      margin-bottom:24px;
+      background:#032b5c;
+      border:2px solid #021d42;
+      border-radius:20px;
+      box-shadow:0 0 20px rgba(255, 221, 0, 0.6);
+    }
+
+    .header h1{
+      color:#ffd900;
+      font-size:38px;
+      text-shadow:0 0 8px #ffd900, 0 0 16px #ffd900, 0 0 24px #ffea61;
+      margin-bottom:8px;
+    }
+
+    .header p{
+      color:#ffe866;
+      font-size:18px;
+      text-shadow:0 0 8px #ffd900;
+    }
+
+    .app-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:18px;
+      margin-bottom:28px;
+    }
+
+    .app-card{
+      background:#032b5c;
+      border:2px solid #021d42;
+      border-radius:18px;
+      padding:20px;
+      cursor:pointer;
+      text-align:center;
+      transition:0.25s;
+      box-shadow:0 0 12px rgba(0,0,0,0.25);
+    }
+
+    .app-card:hover,
+    .app-card.active{
+      transform:translateY(-4px) scale(1.02);
+      box-shadow:0 0 18px #001d4d;
+      background:#043672;
+    }
+
+    .app-card h3{
+      font-size:20px;
+      color:#ffffff;
+    }
+
+    .content{
+      display:grid;
+      grid-template-columns:1.7fr 1fr;
+      gap:22px;
+    }
+
+    .panel{
+      background:#032b5c;
+      border:2px solid #021d42;
+      border-radius:20px;
+      padding:22px;
+      box-shadow:0 0 14px rgba(0,0,0,0.2);
+    }
+
+    .section-title{
+      font-size:28px;
+      margin-bottom:16px;
+      color:#ffd900;
+      text-shadow:0 0 8px #ffd900;
+    }
+
+    .sub-title{
+      margin:18px 0 12px;
+      font-size:20px;
+      color:#9cecff;
+    }
+
+    .items{
+      display:grid;
+      gap:12px;
+    }
+
+    .item{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      background:#043672;
+      border:1px solid #0d234b;
+      border-radius:14px;
+      padding:14px;
+      flex-wrap:wrap;
+    }
+
+    .item label{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      cursor:pointer;
+      font-size:16px;
+      flex:1;
+      min-width:200px;
+    }
+
+    .item input[type="checkbox"]{
+      width:18px;
+      height:18px;
+      accent-color:#ffd900;
+    }
+
+    .price{
+      color:#ffe866;
+      font-weight:bold;
+      font-size:17px;
+    }
+
+    .preview-box{
+      margin-top:16px;
+      width:100%;
+      border-radius:16px;
+      overflow:hidden;
+      border:2px solid #0d234b;
+      background:#043672;
+    }
+
+    .preview-box img{
+      width:100%;
+      display:block;
+      object-fit:cover;
+      max-height:340px;
+    }
+
+    .preview-placeholder{
+      padding:40px 20px;
+      text-align:center;
+      color:#d7f8ff;
+    }
+
+    .cart-title{
+      font-size:26px;
+      color:#ffd900;
+      text-shadow:0 0 8px #ffd900;
+      margin-bottom:16px;
+    }
+
+    .cart-list{
+      min-height:120px;
+      background:#043672;
+      border-radius:14px;
+      padding:14px;
+      margin-bottom:16px;
+    }
+
+    .cart-empty{
+      color:#d8f7ff;
+      opacity:0.9;
+    }
+
+    .cart-row{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      padding:8px 0;
+      border-bottom:1px solid rgba(255,255,255,0.12);
+      font-size:15px;
+    }
+
+    .cart-row:last-child{
+      border-bottom:none;
+    }
+
+    .total{
+      margin:14px 0 16px;
+      font-size:20px;
+      font-weight:bold;
+      color:#ffe866;
+    }
+
+    .input-label{
+      display:block;
+      margin-bottom:8px;
+      color:#ffffff;
+      font-weight:bold;
+    }
+
+    textarea{
+      width:100%;
+      min-height:120px;
+      border:none;
+      outline:none;
+      border-radius:14px;
+      padding:14px;
+      resize:vertical;
+      font-size:15px;
+      background:#eafcff;
+      color:#00122c;
+      margin-bottom:16px;
+    }
+
+    .telegram-box{
+      background:#043672;
+      padding:14px;
+      border-radius:14px;
+      margin-top:10px;
+    }
+
+    .telegram-box a{
+      color:#ffd900;
+      font-weight:bold;
+      text-decoration:none;
+      text-shadow:0 0 8px #ffd900;
+    }
+
+    .telegram-btn{
+      display:inline-block;
+      margin-top:14px;
+      background:#ffd900;
+      color:#032b5c;
+      padding:12px 18px;
+      border-radius:12px;
+      text-decoration:none;
+      font-weight:bold;
+      box-shadow:0 0 12px rgba(255, 217, 0, 0.7);
+    }
+
+    .hint{
+      margin-top:12px;
+      font-size:14px;
+      color:#d9f7ff;
+      line-height:1.5;
+    }
+
+    @media (max-width: 900px){
+      .content{
+        grid-template-columns:1fr;
+      }
+
+      .header h1{
+        font-size:30px;
+      }
+
+      .section-title,
+      .cart-title{
+        font-size:24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Gamepay Hub</h1>
+      <p>Mobile games Topup</p>
+    </div>
+
+    <div class="app-grid">
+      <div class="app-card active" onclick="showGame('mlbb', this)">
+        <h3>MLBB</h3>
+      </div>
+      <div class="app-card" onclick="showGame('genshin', this)">
+        <h3>Genshin Impact</h3>
+      </div>
+      <div class="app-card" onclick="showGame('hsr', this)">
+        <h3>Honkai Star Rail</h3>
+      </div>
+      <div class="app-card" onclick="showGame('zzz', this)">
+        <h3>Zenless Zero Zone</h3>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="panel">
+        <div id="gameTitle" class="section-title">Mobile Legends Top up</div>
+
+        <div class="preview-box" id="previewBox">
+          <img id="gameImage" src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80" alt="game preview">
+        </div>
+
+        <div class="sub-title">Price</div>
+        <div id="itemsContainer" class="items"></div>
+      </div>
+
+      <div class="panel">
+        <div class="cart-title">Order Cart</div>
+        <div id="cartList" class="cart-list">
+          <div class="cart-empty">No items selected yet.</div>
+        </div>
+
+        <div class="total">Total: <span id="totalPrice">0</span> ks</div>
+
+        <label class="input-label" for="accountInfo">Account information</label>
+        <textarea id="accountInfo" placeholder="Enter your account information here...&#10;Example:&#10;Game ID:&#10;Server ID:&#10;Name:"></textarea>
+
+        <div class="telegram-box">
+          Order via Telegram:
+          <a href="https://t.me/angsthtun" target="_blank">@angsthtun</a>
+          <br>
+          <a class="telegram-btn" id="telegramOrderBtn" href="https://t.me/angsthtun" target="_blank">Order via Telegram</a>
+          <div class="hint">
+            Select items first, then write your account information.<br>
+            Telegram button ကိုနှိပ်ပြီး order ပို့နိုင်ပါတယ်။
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const gameData = {
+      mlbb: {
+        title: "Mobile Legends Top up",
+        image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80",
+        items: [
+          { name: "2×💎 50+50", price: 3100 },
+          { name: "2×💎 150+150", price: 9000 },
+          { name: "2×💎 250+250", price: 14800 },
+          { name: "2×💎 500+500", price: 30000 },
+          { name: "✉️ Twilight pass", price: 32300 },
+          { name: "📆📆📆 3wp + 11💎", price: 17900 },
+          { name: "📆📆 2wp + 86", price: 16350 },
+          { name: "📆 1wp + 172💎", price: 15400 },
+          { name: "💎 343", price: 19150 },
+          { name: "💎 279", price: 15700 }
+        ]
+      },
+      genshin: {
+        title: "GENSHIN IMPACT",
+        image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1200&q=80",
+        items: [
+          { name: "Blessing", price: 13800 },
+          { name: "Genesis Crystal 60", price: 2750 },
+          { name: "Genesis Crystal 300+30", price: 13800 },
+          { name: "Genesis Crystal 980+110", price: 42000 },
+          { name: "Genesis Crystal 1989+260", price: 87250 },
+          { name: "Genesis Crystal 3280+60", price: 143000 },
+          { name: "Genesis Crystal 6489+1600", price: 273000 }
+        ]
+      },
+      hsr: {
+        title: "Honkai: Star Rail",
+        image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80",
+        items: [
+          { name: "60", price: 2800 },
+          { name: "330", price: 14000 },
+          { name: "1090", price: 42500 },
+          { name: "2240", price: 84800 },
+          { name: "3880", price: 144800 },
+          { name: "8080", price: 272800 },
+          { name: "Express Supply", price: 13800 }
+        ]
+      },
+      zzz: {
+        title: "Zenless Zero Zone",
+        image: "https://images.unsplash.com/photo-1560253023-3ec5d502959f?auto=format&fit=crop&w=1200&q=80",
+        items: [
+          { name: "Coming Soon", price: 0 }
+        ]
+      }
+    };
+
+    let currentGame = "mlbb";
+
+    function showGame(gameKey, cardEl){
+      currentGame = gameKey;
+      const game = gameData[gameKey];
+
+      document.getElementById("gameTitle").textContent = game.title;
+      document.getElementById("gameImage").src = game.image;
+      document.getElementById("gameImage").alt = game.title;
+
+      document.querySelectorAll(".app-card").forEach(card => card.classList.remove("active"));
+      if(cardEl) cardEl.classList.add("active");
+
+      renderItems();
+      updateCart();
+    }
+
+    function renderItems(){
+      const container = document.getElementById("itemsContainer");
+      const game = gameData[currentGame];
+
+      container.innerHTML = "";
+
+      game.items.forEach((item, index) => {
+        const row = document.createElement("div");
+        row.className = "item";
+
+        row.innerHTML = `
+          <label>
+            <input type="checkbox" class="item-check" data-name="${item.name}" data-price="${item.price}">
+            <span>${item.name}</span>
+          </label>
+          <div class="price">${item.price.toLocaleString()} ks</div>
+        `;
+
+        container.appendChild(row);
+      });
+
+      document.querySelectorAll(".item-check").forEach(check => {
+        check.addEventListener("change", updateCart);
+      });
+    }
+
+    function updateCart(){
+      const checks = document.querySelectorAll(".item-check:checked");
+      const cartList = document.getElementById("cartList");
+      const totalPrice = document.getElementById("totalPrice");
+
+      if(checks.length === 0){
+        cartList.innerHTML = `<div class="cart-empty">No items selected yet.</div>`;
+        totalPrice.textContent = "0";
+        updateTelegramLink([]);
+        return;
+      }
+
+      let total = 0;
+      let html = "";
+      let selectedItems = [];
+
+      checks.forEach(check => {
+        const name = check.dataset.name;
+        const price = Number(check.dataset.price);
+        total += price;
+        selectedItems.push({ name, price });
+
+        html += `
+          <div class="cart-row">
+            <span>${name}</span>
+            <span>${price.toLocaleString()} ks</span>
+          </div>
+        `;
+      });
+
+      cartList.innerHTML = html;
+      totalPrice.textContent = total.toLocaleString();
+      updateTelegramLink(selectedItems);
+    }
+
+    function updateTelegramLink(selectedItems){
+      const accountInfo = document.getElementById("accountInfo").value.trim();
+      const button = document.getElementById("telegramOrderBtn");
+
+      let message = `Hello, I want to order from Gamepay Hub.%0A%0AGame: ${gameData[currentGame].title}%0A`;
+
+      if(selectedItems.length > 0){
+        message += `%0ASelected Items:%0A`;
+        selectedItems.forEach((item, i) => {
+          message += `${i + 1}. ${item.name} - ${item.price} ks%0A`;
+        });
+      }
+
+      const total = document.getElementById("totalPrice").textContent.replace(/,/g, "");
+      message += `%0ATotal: ${total} ks%0A`;
+
+      if(accountInfo){
+        message += `%0AAccount Information:%0A${encodeURIComponent(accountInfo)}%0A`;
+      } else {
+        message += `%0AAccount Information:%0A`;
+      }
+
+      button.href = `https://t.me/angsthtun`;
+    }
+
+    document.getElementById("accountInfo").addEventListener("input", updateCart);
+
+    renderItems();
+  </script>
+</body>
+</html>
