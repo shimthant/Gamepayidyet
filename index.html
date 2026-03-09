@@ -820,9 +820,9 @@ function sendOrder(){
   successPopup.style.display = "flex";
 
   setTimeout(() => {
-    const url = "https://t.me/" + TELEGRAM + "?text=" + encodeURIComponent(msg);
-    window.open(url, "_blank");
-  }, 450);
+    const url = "https://t.me/share/url?text=" + encodeURIComponent(msg);
+window.open(url, "_blank");
+  },450);
 }
 
 function closePopup(){
