@@ -385,6 +385,9 @@ box-shadow:0 0 10px #00eaff;
       text-align:center;
       box-shadow:0 0 24px rgba(0,234,255,.22);
       animation:popIn .25s ease;
+      word-break: break-word;
+overflow-wrap: anywhere;
+white-space: normal;
     }
 
     @keyframes popIn{
@@ -403,6 +406,12 @@ padding:18px;
 }
 
 }
+    .popup-box{
+max-width:92vw;
+padding:18px;
+font-size:14px;
+line-height:1.5;
+    }
     .popup-box h3{
       font-size:22px;
       color:#fff;
@@ -426,7 +435,12 @@ padding:18px;
       font-weight:800;
       cursor:pointer;
     }
-
+.popup-box pre,
+.popup-box textarea{
+white-space:pre-wrap;
+word-break:break-word;
+overflow-wrap:anywhere;
+      }
     @media (min-width:768px){
       .container{
         padding:24px;
