@@ -804,7 +804,8 @@ function sendOrder(){
   const pay = document.querySelector('input[name="pay"]:checked');
   const payment = pay ? pay.value : "Not selected";
   const total = totalBox.textContent;
-
+const TELEGRAM_USERNAME = "angsthtun";
+  
   let msg = "🧾 GAMEPAY HUB ORDER\n\n";
   msg += "🎮 Game: " + data[currentGame].title + "\n\n";
   msg += "💌 Items:\n";
@@ -812,8 +813,14 @@ function sendOrder(){
   msg += "👤 Account: " + account + "\n";
   msg += "💳 Payment: " + payment + "\n";
   msg += "💰 Total: " + total + " ks";
+// COPY ORDER TEXT
+navigator.clipboard.writeText(msg).catch(()=>{});
+
+// TELEGRAM LINK
 const url = "https://t.me/" + TELEGRAM_USERNAME + "?text=" + encodeURIComponent(msg);
-  window.location.href = url;
+
+// OPEN TELEGRAM
+window.location.href = url;
 }
 
 renderMenu();
