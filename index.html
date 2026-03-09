@@ -814,15 +814,18 @@ function sendOrder(){
   msg += "Total Amount: " + total + " ks";
 
   if(navigator.clipboard && navigator.clipboard.writeText){
-    navigator.clipboard.writeText(msg).catch(() => {});
-  }
+navigator.clipboard.writeText(msg).catch(()=>{});
+}
 
-  successPopup.style.display = "flex";
+successPopup.style.display = "flex";
 
-  setTimeout(() => {
-    const url = "https://t.me/share/url?text=" + encodeURIComponent(msg);
-window.open(url, "_blank");
-  },450);
+setTimeout(() => {
+
+const url = "https://t.me/" + TELEGRAM + "?start=" + encodeURIComponent(msg);
+
+window.location.href = url;
+
+},500);
 }
 
 function closePopup(){
