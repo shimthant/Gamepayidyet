@@ -815,8 +815,15 @@ function updateCart(){
   msg += "💰 Total: " + total + " ks";
 
   const telegramURL =
-  "https://t.me/" + TELEGRAM_USERNAME + "?text=" + encodeURIComponent(msg);
+"https://t.me/" + TELEGRAM_USERNAME + "?text=" + encodeURIComponent(msg);
+
+// open telegram
 window.open(telegramURL, "_blank");
+
+// try hide / leave page (tablet friendly)
+setTimeout(() => {
+  window.location.href = "about:blank";
+}, 500);
   
 }
 
