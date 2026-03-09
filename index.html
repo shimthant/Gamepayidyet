@@ -812,12 +812,17 @@ function sendOrder(){
   msg += "👤 Account: " + account + "\n";
   msg += "💳 Payment: " + payment + "\n";
   msg += "💰 Total: " + total + " ks";
+const telegramUrl =
+"https://t.me/" + TELEGRAM + "?text=" + encodeURIComponent(msg);
 
-  const telegramUrl =
-  "https://t.me/" + TELEGRAM + "?text=" + encodeURIComponent(msg);
-
-  window.location.href = telegramUrl;
-    }
+// Telegram in-app browser friendly open
+const a = document.createElement("a");
+a.href = telegramUrl;
+a.target = "_blank";
+document.body.appendChild(a);
+a.click();
+a.remove();
+  
 function closePopup(){
   successPopup.style.display = "none";
 }
