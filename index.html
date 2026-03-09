@@ -786,8 +786,7 @@ function updateCart(){
   }
 
   totalBox.textContent = total;
-}
-function sendOrder(){
+}function sendOrder(){
 
   if(!currentGame){
     alert("Please select a game first.");
@@ -815,10 +814,11 @@ function sendOrder(){
   msg += "💳 Payment: " + payment + "\n";
   msg += "💰 Total: " + total + " ks";
 
-  const url = "https://t.me/" + TELEGRAM_USERNAME + "?text=" + encodeURIComponent(msg);
+  const telegramURL =
+  "https://t.me/" + TELEGRAM_USERNAME + "?text=" + encodeURIComponent(msg);
 
-  // OPEN TELEGRAM DIRECT
-  window.location.href = url;
+  window.location.href = telegramURL;
+
 }
 
 renderMenu();
