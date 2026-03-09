@@ -807,22 +807,25 @@ function sendOrder(){
 
   let msg = "🧾 GAMEPAY HUB ORDER\n\n";
   msg += "🎮 Game: " + data[currentGame].title + "\n\n";
-  msg += "💎 Items:\n";
+  msg += "💌 Items:\n";
   msg += selected.map(i => "• " + i.text).join("\n") + "\n\n";
   msg += "👤 Account: " + account + "\n";
   msg += "💳 Payment: " + payment + "\n";
   msg += "💰 Total: " + total + " ks";
+const telegramUrl =
+"https://t.me/" + TELEGRAM + "?text=" + encodeURIComponent(msg);
 
-  const telegramUrl =
-  "https://t.me/" + TELEGRAM + "?text=" + encodeURIComponent(msg);
+// COPY ORDER (mobile try)
+navigator.clipboard.writeText(msg).catch(()=>{});
 
-  // create link and open (telegram browser friendly)
-  const link = document.createElement("a");
-  link.href = telegramUrl;
-  link.target = "_blank";
-  document.body.appendChild(link);
-  link.click();
-  link.remove();
+// create link and open (telegram browser friendly)
+const link = document.createElement("a");
+link.href = telegramUrl;
+link.target = "_blank";
+document.body.appendChild(link);
+link.click();
+link.remove();
+  
 }
   
 
