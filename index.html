@@ -835,7 +835,7 @@ setTimeout(()=>{
 const telegramUrl =
 "https://t.me/" + TELEGRAM + "?text=" + encodeURIComponent(msg);
 
-window.location.href = telegramUrl;
+window.open(telegramUrl, "_blank");
 
 },500);
 
