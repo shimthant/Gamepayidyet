@@ -816,9 +816,8 @@ function updateCart(){
 
   const telegramURL =
   "https://t.me/" + TELEGRAM_USERNAME + "?text=" + encodeURIComponent(msg);
-
-  window.location.href = telegramURL;
-
+window.open(telegramURL, "_blank");
+  
 }
 
 renderMenu();
