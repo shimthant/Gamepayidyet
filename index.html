@@ -810,17 +810,6 @@ alert("Please select a game first.");
 return;
 }
 
-const selected = buildSelectedItems();
-if(selected.length === 0){
-alert("Please select at least one item.");
-return;
-}
-
-const account = safeText(accountInput.value) || "-";
-const pay = document.querySelector('input[name="pay"]:checked');
-const payment = pay ? pay.value : "Not selected";
-const total = totalBox.textContent;
-
 let msg = "Gamepay Hub Order\n\n";
 msg += "Game: " + data[currentGame].title + "\n\n";
 msg += "Selected Items:\n";
