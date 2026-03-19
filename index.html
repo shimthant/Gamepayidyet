@@ -744,18 +744,23 @@ function updateCart(){
   msg += "💳 Payment: " + payment + "\n";
   msg += "💰 Total: " + total + " ks";
 
-  const telegramURL =
-"https://t.me/" + TELEGRAM_USERNAME + "?text=" + encodeURIComponent(msg);
+  const encodedMsg = encodeURIComponent(msg);
 
-// open telegram
-window.open(telegramURL, "_blank");
+  // ✅ Telegram Deep Link (NO browser chooser)
+  const telegramURL = "tg://resolve?domain=" + TELEGRAM_USERNAME + "&text=" + encodedMsg;
 
-// try hide / leave page (tablet friendly)
-setTimeout(() => {
-  window.location.href = "about:blank";
-}, 500);
-  
-}
+  // fallback (if tg:// not supported)
+  const fallbackURL = "https://t.me/" + TELEGRAM_USERNAME + "?text=" + encodedMsg;
+
+  // try open telegram app
+  window.location.href = telegramURL;
+
+  // fallback after 1 sec
+  setTimeout(() => {
+    window.location.href = fallbackURL;
+  }, 1000);
+
+    }
 
 renderMenu();
 updateCart();
