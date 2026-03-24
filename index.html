@@ -107,7 +107,6 @@ box-shadow:0 0 10px #00eaff;
       box-shadow:0 8px 24px rgba(0,0,0,.18);
       position:relative;
       overflow:hidden;
-        filter: brightness(1.25) saturate(1.3);
     }
 
     .card:hover{
@@ -404,6 +403,14 @@ padding:12px;
 max-width:92vw;
 padding:18px;
 }
+   .card{
+    filter: brightness(1.3) saturate(1.3) !important;
+    opacity:1 !important;
+  }
+
+  .card::before{
+    display:none !important;
+  }
 
 }
     .popup-box{
