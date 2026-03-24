@@ -395,23 +395,34 @@ white-space: normal;
     }
 @media (max-width:600px){
 
-.popup{
-padding:12px;
-}
-
-.popup-box{
-max-width:92vw;
-padding:18px;
-  filter: brightness(1) saturate(1.35);
-}
-  .container{
-    filter: brightness(1) saturate(1.35);
-  }
-   .card{
-    filter: brightness(1) saturate(1.35) !important;
-    opacity:1 !important;
+  /* remove all filter */
+  .card,
+  .container,
+  .popup-box{
+    filter: none !important;
   }
 
+  /* stronger gradient for mobile */
+  .card{
+    background: linear-gradient(
+      180deg,
+      rgba(25,110,255,1),
+      rgba(10,60,160,1)
+    ) !important;
+
+    box-shadow:
+      0 10px 30px rgba(0,0,0,.25),
+      0 0 20px rgba(0,180,255,.4);
+  }
+
+  /* glow effect */
+  .game-icon-wrap{
+    box-shadow:
+      0 0 15px rgba(0,200,255,.6),
+      0 0 30px rgba(0,200,255,.3);
+  }
+
+  /* remove dull overlay */
   .card::before{
     display:none !important;
   }
