@@ -1339,11 +1339,15 @@ const webLink = "https://t.me/" + TELEGRAM_USERNAME + "?text=" + encodedMsg;
 
 // 🔥 open telegram app first
 window.location.href = tgLink;
+  // iPad / Telegram Web fix hint
+setTimeout(() => {
+  alert("📩 Order sent!\n👉 Telegram chat ကို manually ဖွင့်ပါ");
+}, 800);
 
 // 🔥 fallback (important)
 setTimeout(() => {
   window.open(webLink, "_blank");
-}, 1500);
+}, 500);
   
 
     }
