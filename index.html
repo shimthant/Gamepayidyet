@@ -593,7 +593,10 @@ overflow-wrap:anywhere;
         <label><input type="radio" name="pay" value="AyaPay"> AyaPay</label>
         <label><input type="radio" name="pay" value="WeChat Pay"> WeChat</label>
       </div>
-
+<div id="paymentInfo" style="display:none; margin-top:12px; background:linear-gradient(180deg,#1353c7,#0d419f); border:1px solid rgba(120,232,255,.22); border-radius:14px; padding:12px; color:#e8fbff; font-size:14px; line-height:1.7; box-shadow:0 0 14px rgba(0,234,255,.12);">
+  <div><strong>Phone:</strong> <span id="paymentPhone"></span></div>
+  <div><strong>Name:</strong> <span id="paymentName"></span></div>
+</div>
       <button class="order-btn" onclick="sendOrder()">🚀 Order via Telegram</button>
       <div class="tip">Telegram message will include Game, Selected Items, Payment, and Total Amount.</div>
     </div>
@@ -645,7 +648,24 @@ particlesJS("particles-js",{
   <script>
 const TELEGRAM = "angsthtun";
 const ICON_FALLBACK = "https://via.placeholder.com/120x120.png?text=GAME";
-
+const paymentData = {
+  Kpay: {
+    phone: "09795687480",
+    name: "Aung Shin Thant Htun"
+  },
+  Wave: {
+    phone: "09795687480",
+    name: "Aung Shin Thant Htun"
+  },
+  UAB: {
+    phone: "09795687480",
+    name: "Aung Shin Thant Htun"
+  },
+  AyaPay: {
+    phone: "09795687480",
+    name: "Aung Shin Thant Htun"
+  }
+};
 let cart = {};
 let currentGame = "";
 
@@ -1284,7 +1304,25 @@ const totalBox = document.getElementById("total");
 const accountInput = document.getElementById("account");
 const cartWrap = document.getElementById("cartBox");
 const successPopup = document.getElementById("successPopup");
+const paymentInfo = document.getElementById("paymentInfo");
+const paymentPhone = document.getElementById("paymentPhone");
+const paymentName = document.getElementById("paymentName");
 
+function updatePaymentInfo(){
+  const pay = document.querySelector('input[name="pay"]:checked');
+  const payment = pay ? pay.value : "";
+  const info = paymentData[payment];
+
+  if(info){
+    paymentPhone.textContent = info.phone;
+    paymentName.textContent = info.name;
+    paymentInfo.style.display = "block";
+  }else{
+    paymentPhone.textContent = "";
+    paymentName.textContent = "";
+    paymentInfo.style.display = "none";
+  }
+}
 function safeText(value){
   return typeof value === "string" ? value.trim() : "";
 }
@@ -1339,12 +1377,12 @@ function openGame(key){
   gameTitle.textContent = data[key].title;
   accountInput.value = "";
   document.querySelectorAll('input[name="pay"]').forEach(el => el.checked = false);
+  updatePaymentInfo();
 
   renderItems();
   updateCart();
   window.scrollTo({top:0,behavior:"smooth"});
 }
-
 function backMenu(){
   currentGame = "";
   cart = {};
@@ -1461,6 +1499,9 @@ setTimeout(() => {
   
 
     }
+    document.querySelectorAll('input[name="pay"]').forEach(el => {
+  el.addEventListener("change", updatePaymentInfo);
+});
 
 renderMenu();
 updateCart();
