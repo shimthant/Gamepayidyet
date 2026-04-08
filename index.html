@@ -1470,19 +1470,26 @@ function sendOrder(){
   }
 
   const account = accountInput.value || "-";
-  const pay = document.querySelector('input[name="pay"]:checked');
-  const payment = pay ? pay.value : "Not selected";
-  const total = totalBox.textContent;
+const pay = document.querySelector('input[name="pay"]:checked');
+const payment = pay ? pay.value : "Not selected";
+const payInfo = paymentData[payment];
+const total = totalBox.textContent;
 
   const TELEGRAM_USERNAME = "angsthtun";
 
   let msg = "🧾 GAMEPAY HUB ORDER\n\n";
-  msg += "🎮 Game: " + data[currentGame].title + "\n\n";
-  msg += "💎 Items:\n";
-  msg += selected.map(i => "• " + i.text).join("\n") + "\n\n";
-  msg += "👤 Account: " + account + "\n";
-  msg += "💳 Payment: " + payment + "\n";
-  msg += "💰 Total: " + total + " ks";
+msg += "🎮 Game: " + data[currentGame].title + "\n\n";
+msg += "💎 Items:\n";
+msg += selected.map(i => "• " + i.text).join("\n") + "\n\n";
+msg += "👤 Account: " + account + "\n";
+msg += "💳 Payment: " + payment + "\n";
+
+if(payInfo){
+  msg += "📱 Payment Phone: " + payInfo.phone + "\n";
+  msg += "👤 Payment Name: " + payInfo.name + "\n";
+}
+
+msg += "💰 Total: " + total + " ks";
 
   const encodedMsg = encodeURIComponent(msg);
 const tgLink = "tg://resolve?domain=" + TELEGRAM_USERNAME + "&text=" + encodedMsg;
