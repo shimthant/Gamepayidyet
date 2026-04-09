@@ -243,19 +243,46 @@ box-shadow:0 0 10px #00eaff;
 .item.best-seller::before{
   content:"⭐";
   position:absolute;
-  top:8px;
-  left:10px;
-  font-size:12px;
+  top:10px;
+  left:12px;
+  font-size:16px;
   line-height:1;
-  opacity:.95;
+  color:#ffd84d;
+  text-shadow:
+    0 0 6px rgba(255,216,77,.95),
+    0 0 12px rgba(255,193,7,.75),
+    0 0 18px rgba(255,193,7,.45);
+  opacity:1;
 }
     .item-name{
       font-size:14px;
       font-weight:700;
       line-height:1.35;
     }
-.item.best-seller .item-name{
-  padding-left:18px;
+.item.best-seller{
+  border:1.5px solid #ffd84d;
+
+  box-shadow:
+    0 0 6px #ffd84d,
+    0 0 12px #ffc107,
+    0 0 20px rgba(255,193,7,.8),
+    0 0 30px rgba(255,193,7,.6);
+
+  animation: glowPulse 1.8s infinite alternate;
+}
+
+@keyframes glowPulse{
+  from{
+    box-shadow:
+      0 0 6px #ffd84d,
+      0 0 12px #ffc107;
+  }
+  to{
+    box-shadow:
+      0 0 12px #ffd84d,
+      0 0 24px #ffc107,
+      0 0 36px rgba(255,193,7,.7);
+  }
 }
     .qty{
       display:flex;
