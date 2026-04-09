@@ -226,12 +226,33 @@ box-shadow:0 0 10px #00eaff;
   grid-template-columns:1fr auto auto;
   align-items:center;
   gap:10px;
-      background:linear-gradient(180deg,#1254cb,#0d42a7);
-      border-radius:14px;
-      padding:12px 14px;
-      margin-bottom:10px;
-    }
+  background:linear-gradient(180deg,#1254cb,#0d42a7);
+  border-radius:14px;
+  padding:12px 14px;
+  margin-bottom:10px;
+  position:relative;
+}
+.best-seller-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  margin-right:8px;
+  margin-bottom:6px;
+  padding:4px 8px;
+  border-radius:999px;
+  font-size:10px;
+  font-weight:800;
+  color:#fff;
+  background:linear-gradient(135deg,#ffd54f,#ff9800);
+  border:1px solid rgba(255,255,255,.18);
+  box-shadow:0 4px 10px rgba(255,193,7,.20);
+  vertical-align:middle;
+}
 
+.item.best-seller{
+  border:1px solid rgba(255,213,79,.45);
+  box-shadow:0 0 16px rgba(255,213,79,.18);
+}
     .item-name{
       font-size:14px;
       font-weight:700;
@@ -1415,8 +1436,10 @@ function renderItems(){
   data[currentGame].items.forEach((item,index) => {
     itemsBox.innerHTML += `
   <div class="item ${item.bestSeller ? 'best-seller' : ''}">
-    ${item.bestSeller ? '<div class="best-seller-badge">⭐ Best Seller</div>' : ''}
-    <div class="item-name">${item.name}</div>
+    <div class="item-name">
+      ${item.bestSeller ? '<span class="best-seller-badge">⭐ Best Seller</span>' : ''}
+      ${item.name}
+    </div>
     <div class="qty">
       <button onclick="changeQty(${index},-1)">-</button>
       <span id="q${index}">0</span>
