@@ -287,6 +287,43 @@ box-shadow:0 0 10px #00eaff;
       0 0 36px rgba(255,193,7,.7);
   }
 }
+    .unavailable-badge{
+  position:absolute;
+  top:-10px;
+  right:12px;
+  z-index:3;
+  padding:5px 10px;
+  border-radius:999px;
+  font-size:10px;
+  font-weight:800;
+  color:#fff;
+  background:linear-gradient(135deg,#9aa0a6,#5f6368);
+  border:1px solid rgba(255,255,255,.18);
+  box-shadow:
+    0 6px 14px rgba(0,0,0,.22),
+    0 0 10px rgba(255,255,255,.08);
+  white-space:nowrap;
+}
+
+.item.unavailable{
+  opacity:.58;
+  filter:grayscale(.15);
+  border:1.5px solid rgba(255,255,255,.18);
+  box-shadow:none;
+}
+
+.item.unavailable .qty button{
+  background:#7d8796;
+  color:#e9eef5;
+  cursor:not-allowed;
+  pointer-events:none;
+  opacity:.7;
+}
+
+.item.unavailable .item-price,
+.item.unavailable .item-name{
+  color:rgba(255,255,255,.82);
+}
     .qty{
       display:flex;
       align-items:center;
@@ -818,7 +855,7 @@ let data = {
   icon:"quality_restoration_20260323135629044.jpg",
   items:[
     // 🔥 Login Topup
-    {name:"🎁 Solaris New Voyage Light", price:9500},
+    {name:"🎁 Solaris New Voyage Light", price:9500,unavailable:true},
     {name:"🎁 Sage Solvent Aid", price:19000},
     {name:"🎁 Traveler's Tube Aid Bundle", price:19500},
     {name:"🎁 Traveler's EXP Aid", price:18000},
@@ -1463,21 +1500,29 @@ function renderItems(){
 
   data[currentGame].items.forEach((item,index) => {
     itemsBox.innerHTML += `
-      <div class="item ${item.bestSeller ? 'best-seller' : ''}">
+      <div class="item ${item.bestSeller ? 'best-seller' : ''} ${item.unavailable ? 'unavailable' : ''}">
         ${item.bestSeller ? '<div class="best-seller-badge">🔥 Best Seller</div>' : ''}
+        ${item.unavailable ? '<div class="unavailable-badge">Unavailable now</div>' : ''}
+        
         <div class="item-name">${item.name}</div>
+        
         <div class="qty">
-          <button onclick="changeQty(${index},-1)">-</button>
+          <button onclick="${item.unavailable ? '' : `changeQty(${index},-1)`}">-</button>
           <span id="q${index}">0</span>
-          <button onclick="changeQty(${index},1)">+</button>
+          <button onclick="${item.unavailable ? '' : `changeQty(${index},1)`}">+</button>
         </div>
+        
         <div class="item-price">${item.price} ks</div>
       </div>
     `;
   });
-} 
+}
 
 function changeQty(index,delta){
+const item = data[currentGame].items[index];
+  if(item.unavailable) return;
+
+
   cart[index] = (cart[index] || 0) + delta;
   if(cart[index] < 0) cart[index] = 0;
 
