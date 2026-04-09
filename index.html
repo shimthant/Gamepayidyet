@@ -584,7 +584,41 @@ overflow-wrap:anywhere;
         grid-template-columns:1.25fr .9fr;
         gap:18px;
       }
-    }
+    }.usage-box{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin:14px 0 18px;
+  padding:14px 16px;
+  border-radius:18px;
+  background:linear-gradient(180deg,rgba(10,87,180,.35),rgba(255,255,255,.05));
+  border:1px solid rgba(120,232,255,.22);
+  box-shadow:0 0 18px rgba(0,234,255,.10);
+}
+
+.usage-text{
+  font-size:14px;
+  color:#d8f8ff;
+  line-height:1.5;
+}
+
+.usage-btn{
+  flex-shrink:0;
+  text-decoration:none;
+  border:none;
+  background:#19e8ff;
+  color:#03244e;
+  padding:10px 16px;
+  border-radius:12px;
+  font-size:14px;
+  font-weight:800;
+  box-shadow:0 0 14px rgba(25,232,255,.28);
+}
+
+.usage-btn:hover{
+  filter:brightness(1.05);
+}
     .search-wrap{
   margin: 14px 0 18px;
   display: flex;
@@ -650,6 +684,12 @@ overflow-wrap:anywhere;
   <div class="hero">
     <div class="hero-title">Fast Topup • Neon Blue Store UI</div>
     <div class="hero-sub">Select your game, choose items, and send your order to Telegram in one tap.</div>
+  </div>
+  <div class="usage-box">
+  <div class="usage-text">
+    📘 အသုံးပြုပုံကြည့်ရန် ဒီနေရာကိုနှိပ်ပါ
+  </div>
+  <a href="guide.html" class="usage-btn">အသုံးပြုပုံ</a>
   </div>
 <div class="search-wrap">
   <input
