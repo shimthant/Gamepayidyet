@@ -228,31 +228,34 @@ box-shadow:0 0 10px #00eaff;
   gap:10px;
   background:linear-gradient(180deg,#1254cb,#0d42a7);
   border-radius:14px;
-  padding:12px 14px;
+  padding:18px 14px 12px;
   margin-bottom:10px;
   position:relative;
 }
 
 .item.best-seller{
-  border:1px solid rgba(255,213,79,.55);
+  border:1.5px solid #ffd84d;
   box-shadow:
-    0 0 16px rgba(255,213,79,.18),
-    inset 0 0 0 1px rgba(255,255,255,.04);
+    0 0 8px rgba(255,216,77,.45),
+    0 0 16px rgba(255,193,7,.28);
 }
 
-.item.best-seller::before{
-  content:"⭐";
+.best-seller-badge{
   position:absolute;
-  top:10px;
+  top:-10px;
   left:12px;
-  font-size:16px;
-  line-height:1;
-  color:#ffd84d;
-  text-shadow:
-    0 0 6px rgba(255,216,77,.95),
-    0 0 12px rgba(255,193,7,.75),
-    0 0 18px rgba(255,193,7,.45);
-  opacity:1;
+  z-index:3;
+  padding:5px 10px;
+  border-radius:999px;
+  font-size:10px;
+  font-weight:800;
+  color:#fff;
+  background:linear-gradient(135deg,#ffb347,#ff6b6b);
+  border:1px solid rgba(255,255,255,.18);
+  box-shadow:
+    0 6px 14px rgba(255,107,107,.25),
+    0 0 12px rgba(255,179,71,.22);
+  white-space:nowrap;
 }
     .item-name{
       font-size:14px;
@@ -1455,12 +1458,13 @@ function backMenu(){
   updateCart();
   window.scrollTo({top:0,behavior:"smooth"});
 }
- function renderItems(){
+function renderItems(){
   itemsBox.innerHTML = "";
 
   data[currentGame].items.forEach((item,index) => {
     itemsBox.innerHTML += `
       <div class="item ${item.bestSeller ? 'best-seller' : ''}">
+        ${item.bestSeller ? '<div class="best-seller-badge">🔥 Best Seller</div>' : ''}
         <div class="item-name">${item.name}</div>
         <div class="qty">
           <button onclick="changeQty(${index},-1)">-</button>
@@ -1471,7 +1475,7 @@ function backMenu(){
       </div>
     `;
   });
- } 
+} 
 
 function changeQty(index,delta){
   cart[index] = (cart[index] || 0) + delta;
