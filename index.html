@@ -108,7 +108,20 @@ box-shadow:0 0 10px #00eaff;
       position:relative;
       overflow:hidden;
     }
-
+.top-badge{
+  position:absolute;
+  top:10px;
+  right:10px;
+  z-index:2;
+  padding:5px 10px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:800;
+  color:#fff;
+  background:linear-gradient(135deg,#ffb347,#ff6b6b);
+  border:1px solid rgba(255,255,255,.18);
+  box-shadow:0 6px 16px rgba(255,107,107,.25), 0 0 12px rgba(255,179,71,.22);
+}
     .card:hover{
       transform:translateY(-6px) scale(1.015);
       box-shadow:0 0 16px rgba(0,234,255,.6),0 12px 28px rgba(0,0,0,.22);
@@ -703,9 +716,10 @@ let data = {
 },
   genshin:{
   title:"Genshin Impact",
+  top:true,
   icon:"unnamed.webp",
   items:[
-    {name:"🌛Blessing", price:14000},
+    {name:"🌛Blessing", price:14000,bestSeller:true},
     {name:"💠 60 Genesis Crystal", price:2900},
     {name:"💠 300+30 Genesis Crystal", price:14550},
     {name:"💠 980+110 Genesis Crystal", price:44900},
@@ -1355,14 +1369,15 @@ function renderMenu(){
   for(const key in data){
     const g = data[key];
 
-    menu.innerHTML += `
-      <div class="card" onclick="openGame('${key}')">
-        <div class="game-icon-wrap">
-          <img src="${safeIcon(g.icon)}" alt="${g.title}" onerror="this.onerror=null;this.src='${ICON_FALLBACK}'">
-        </div>
-        <span>${g.title}</span>
-      </div>
-    `;
+   menu.innerHTML += `
+  <div class="card" onclick="openGame('${key}')">
+    ${g.top ? '<div class="top-badge">🔥 Top</div>' : ''}
+    <div class="game-icon-wrap">
+      <img src="${safeIcon(g.icon)}" alt="${g.title}" onerror="this.onerror=null;this.src='${ICON_FALLBACK}'">
+    </div>
+    <span>${g.title}</span>
+  </div>
+`; 
   }
   filterGames();
 }
@@ -1399,16 +1414,17 @@ function renderItems(){
 
   data[currentGame].items.forEach((item,index) => {
     itemsBox.innerHTML += `
-      <div class="item">
-        <div class="item-name">${item.name}</div>
-        <div class="qty">
-          <button onclick="changeQty(${index},-1)">-</button>
-          <span id="q${index}">0</span>
-          <button onclick="changeQty(${index},1)">+</button>
-        </div>
-        <div class="item-price">${item.price} ks</div>
-      </div>
-    `;
+  <div class="item ${item.bestSeller ? 'best-seller' : ''}">
+    ${item.bestSeller ? '<div class="best-seller-badge">⭐ Best Seller</div>' : ''}
+    <div class="item-name">${item.name}</div>
+    <div class="qty">
+      <button onclick="changeQty(${index},-1)">-</button>
+      <span id="q${index}">0</span>
+      <button onclick="changeQty(${index},1)">+</button>
+    </div>
+    <div class="item-price">${item.price} ks</div>
+  </div>
+`;
   });
 }
 
