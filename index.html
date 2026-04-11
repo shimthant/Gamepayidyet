@@ -1680,49 +1680,50 @@ function sendOrder(){
   }
 
   const account = accountInput.value || "-";
-const pay = document.querySelector('input[name="pay"]:checked');
-const payment = pay ? pay.value : "Not selected";
-const payInfo = paymentData[payment];
-const total = totalBox.textContent;
+  const pay = document.querySelector('input[name="pay"]:checked');
+  const payment = pay ? pay.value : "Not selected";
+  const payInfo = paymentData[payment];
+  const total = totalBox.textContent;
 
   const TELEGRAM_USERNAME = "angsthtun";
 
   let msg = "🧾 GAMEPAY HUB ORDER\n\n";
-msg += "🎮 Game: " + data[currentGame].title + "\n\n";
-msg += "💎 Items:\n";
-msg += selected.map(i => "• " + i.text).join("\n") + "\n\n";
-msg += "👤 Account: " + account + "\n";
-msg += "💳 Payment: " + payment + "\n";
+  msg += "🎮 Game: " + data[currentGame].title + "\n\n";
+  msg += "💎 Items:\n";
+  msg += selected.map(i => "• " + i.text).join("\n") + "\n\n";
+  msg += "👤 Account: " + account + "\n";
+  msg += "💳 Payment: " + payment + "\n";
 
-if(payInfo){
-  msg += "📱 Payment Phone: " + payInfo.phone + "\n";
-  msg += "👤 Payment Name: " + payInfo.name + "\n";
-}
-
-msg += "💰 Total: " + total + " ks";
-const encodedMsg = encodeURIComponent(msg);
-const tgLink = "tg://resolve?domain=" + TELEGRAM_USERNAME + "&text=" + encodedMsg;
-
-const isTelegram = /Telegram/i.test(navigator.userAgent);
-
-if(isTelegram){
-  // ✅ Telegram in-app browser
-
-  // copy text
-  if (navigator.clipboard && window.isSecureContext) {
-    navigator.clipboard.writeText(msg).catch(() => {});
+  if(payInfo){
+    msg += "📱 Payment Phone: " + payInfo.phone + "\n";
+    msg += "👤 Payment Name: " + payInfo.name + "\n";
   }
 
-  // alert
-  alert("📋 Order text copied!\nTelegram chat ထဲမှာ paste လုပ်ပြီး send လုပ်ပါ။");
+  msg += "💰 Total: " + total + " ks";
 
-  // open telegram
-  window.location.href = tgLink;
+  const encodedMsg = encodeURIComponent(msg);
 
-}else{
-  // ✅ normal browser
-  const webLink = "https://t.me/" + TELEGRAM_USERNAME + "?text=" + encodedMsg;
-  window.open(webLink, "_blank");
+  const isTelegram = /Telegram/i.test(navigator.userAgent);
+
+  if(isTelegram){
+    // 🔥 Telegram in-app browser (Admin chat case)
+
+    // ✅ copy
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(msg).catch(() => {});
+    }
+
+    // ✅ clear alert
+    alert("📋 Order copied!\n\n👉 Telegram chat ထဲမှာ Paste → Send လုပ်ပါ");
+
+    // ❗ IMPORTANT → text မပို့ဘဲ chat သာဖွင့်
+    window.location.href = "https://t.me/" + TELEGRAM_USERNAME;
+
+  } else {
+    // 🌐 normal browser (best experience)
+    const webLink = "https://t.me/" + TELEGRAM_USERNAME + "?text=" + encodedMsg;
+    window.open(webLink, "_blank");
+  }
 }
   
 }
