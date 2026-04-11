@@ -718,35 +718,11 @@ overflow-wrap:anywhere;
   </div>
   <a href="guide.html" class="usage-btn">အသုံးပြုပုံ</a>
   </div>
-  <!-- Game Page Panel -->
-<div id="gamePage" class="game-page">
-  <div class="panel">
-    <div class="topbar">
-      <div id="gameTitle" class="game-title">Game Title</div>
-      <button class="back-btn" onclick="backMenu()">Back</button>
-    </div>
-
-    <div class="section-label">Topup Items</div>
-    <div id="items"></div>
-    
-    <!-- ❌ Usage box မထည့်ပါ -->
-  </div>
-
-  <div class="panel">
-    <!-- Order Cart, Payment, etc... -->
-  </div>
-</div>
+  <!-- Menu Search only -->
 <div class="search-wrap">
-  <input
-    type="text"
-    id="gameSearch"
-    class="search-input"
-    placeholder="🔎 Search game..."
-    oninput="filterGames()"
-  >
+  <input type="text" id="gameSearch" class="search-input" placeholder="🔎 Search game..." oninput="filterGames()">
 </div>
-  <div id="menu" class="game-grid"></div>
-
+  <!-- Game Page Panel -->
   <div id="gamePage" class="game-page">
     <div class="panel">
       <div class="topbar">
