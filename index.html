@@ -718,6 +718,24 @@ overflow-wrap:anywhere;
   </div>
   <a href="guide.html" class="usage-btn">အသုံးပြုပုံ</a>
   </div>
+  <!-- Game Page Panel -->
+<div id="gamePage" class="game-page">
+  <div class="panel">
+    <div class="topbar">
+      <div id="gameTitle" class="game-title">Game Title</div>
+      <button class="back-btn" onclick="backMenu()">Back</button>
+    </div>
+
+    <div class="section-label">Topup Items</div>
+    <div id="items"></div>
+    
+    <!-- ❌ Usage box မထည့်ပါ -->
+  </div>
+
+  <div class="panel">
+    <!-- Order Cart, Payment, etc... -->
+  </div>
+</div>
 <div class="search-wrap">
   <input
     type="text"
@@ -1564,9 +1582,9 @@ function renderDescription(){
       <div class="hero-title">📌 Game Instruction</div>
       <div class="hero-sub">${desc}</div>
     `;
-    descBox.style.display = "block"; // Game ရွေးလိုက်ရင်သာ ပြမယ်
+    descBox.style.display = "block"; // Game ရွေးထားရင်ပြမယ်
   } else {
-    descBox.style.display = "none"; // description မရှိရင် ဖျောက်မယ်
+    descBox.style.display = "none"; // description မရှိရင်ဖျောက်မယ်
   }
 }
 function backMenu(){
@@ -1577,9 +1595,11 @@ function backMenu(){
   gamePage.style.display = "none";
 
   updateCart();
-  window.scrollTo({top:0,behavior:"smooth"});
-document.getElementById("gameDescription").style.display = "none";
-
+  window.scrollTo({top:0, behavior:"smooth"});
+  
+  // ✅ Main Screen Usage Box အတွက် hide လုပ်မလိုပါ
+  // document.querySelector(".usage-box").style.display = "block";
+  document.getElementById("gameDescription").style.display = "none";
 }
 function renderItems(){
   itemsBox.innerHTML = "";
