@@ -668,19 +668,45 @@ overflow-wrap:anywhere;
     border-radius: 16px;
   }
 }
-  .main-description-box {
-  width: 100%;
-  max-width: 1100px;
-  margin: 14px auto 18px;
-  padding: 16px 18px;
-  border-radius: 18px;
-  background: linear-gradient(180deg, rgba(10,87,180,0.35), rgba(255,255,255,0.05));
-  border: 1px solid rgba(120,232,255,0.22);
-  box-shadow: 0 0 18px rgba(0,234,255,0.10);
-  color: #d8f8ff;
-  font-size: 14px;
-  line-height: 1.6;
-  text-align: center;
+  .game-description-box{
+  margin-bottom:16px;
+  padding:14px 16px;
+  border-radius:18px;
+  background:linear-gradient(180deg,rgba(15,82,193,.22),rgba(8,50,122,.18));
+  border:1px solid rgba(120,232,255,.28);
+  box-shadow:
+    0 0 12px rgba(0,234,255,.18),
+    0 0 24px rgba(0,234,255,.10),
+    inset 0 0 12px rgba(0,234,255,.06);
+
+  backdrop-filter:blur(8px);
+}
+
+.game-description-title{
+  font-size:14px;
+  font-weight:800;
+  color:#dffcff;
+  margin-bottom:8px;
+  text-shadow:0 0 8px rgba(0,234,255,.35);
+}
+
+.game-description-text{
+  color:#d8f8ff;
+  font-size:14px;
+  line-height:1.7;
+  white-space:pre-line;
+  word-break:break-word;
+}
+
+@media (max-width:600px){
+  .game-description-box{
+    padding:12px 14px;
+    border-radius:16px;
+  }
+
+  .game-description-text{
+    font-size:13px;
+    line-height:1.65;
   }
 }
 }
@@ -724,7 +750,10 @@ overflow-wrap:anywhere;
         <div id="gameTitle" class="game-title">Game Title</div>
         <button class="back-btn" onclick="backMenu()">Back</button>
       </div>
-
+<div id="gameDescriptionBox" class="game-description-box">
+<div class="game-description-title">💠 Description</div>
+  <div id="gameDescriptionText" class="game-description-text"></div>
+</div>
       <div class="section-label">Topup Items</div>
       <div id="items"></div>
     </div>
@@ -1464,7 +1493,8 @@ const successPopup = document.getElementById("successPopup");
 const paymentInfo = document.getElementById("paymentInfo");
 const paymentPhone = document.getElementById("paymentPhone");
 const paymentName = document.getElementById("paymentName");
-const usageBox = document.getElementById("usageBox");
+const usageBox = document.getElementById("usageBox");။const gameDescriptionBox = document.getElementById("gameDescriptionBox");
+const gameDescriptionText = document.getElementById("gameDescriptionText");
 function updatePaymentInfo(){
   const pay = document.querySelector('input[name="pay"]:checked');
   const payment = pay ? pay.value : "";
@@ -1540,7 +1570,8 @@ function openGame(key){
   accountInput.value = "";
   document.querySelectorAll('input[name="pay"]').forEach(el => el.checked = false);
   updatePaymentInfo();
-
+  
+renderGameDescription();
   renderItems();
   updateCart();
   window.scrollTo({top:0,behavior:"smooth"});
@@ -1552,6 +1583,7 @@ function backMenu(){
   menu.style.display = "grid";
   gamePage.style.display = "none";
 usageBox.style.display = "flex";
+ gameDescriptionText.textContent = "";
   
   updateCart();
   window.scrollTo({top:0,behavior:"smooth"});
@@ -1578,7 +1610,10 @@ function renderItems(){
     `;
   });
 }
-
+function renderGameDescription(){
+  const desc = data[currentGame]?.description || "No description available.";
+  gameDescriptionText.textContent = desc;
+}
 function changeQty(index,delta){
 const item = data[currentGame].items[index];
   if(item.unavailable) return;
