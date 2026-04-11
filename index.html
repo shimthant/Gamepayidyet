@@ -775,7 +775,21 @@ overflow-wrap:anywhere;
   border:1px solid rgba(255,255,255,.12);
   box-shadow:none;
 }
-
+#copyOrderText{
+  width:100%;
+  height:130px;
+  margin-top:12px;
+  border:none;
+  outline:none;
+  resize:none;
+  border-radius:14px;
+  padding:12px;
+  background:rgba(255,255,255,.08);
+  color:#fff;
+  border:1px solid rgba(255,255,255,.12);
+  font-size:12px;
+  line-height:1.5;
+}
 }
   </style>
   </head>
@@ -1810,21 +1824,7 @@ if(isTelegram){
   const webLink = "https://t.me/" + TELEGRAM_USERNAME + "?text=" + encodedMsg;
   window.open(webLink, "_blank");
 }
-function showCopyPopup(tgLink){
-  const popup = document.getElementById("copyPopup");
-  const openBtn = document.getElementById("openTG");
-  const closeBtn = document.getElementById("closePopup");
 
-  popup.classList.remove("hidden");
-
-  openBtn.onclick = function(){
-    window.location.href = tgLink;
-  };
-
-  closeBtn.onclick = function(){
-    popup.classList.add("hidden");
-  };
-}
   function fallbackCopyText(text){
   const ta = document.createElement("textarea");
   ta.value = text;
@@ -1844,7 +1844,7 @@ function showCopyPopup(tgLink){
   document.body.removeChild(ta);
 }
 
-function showCopyPopup(tgLink, text){
+function showCopyPopup(tgLink, text){။function showCopyPopup(tgLink, text){
   const popup = document.getElementById("copyPopup");
   const openBtn = document.getElementById("openTG");
   const closeBtn = document.getElementById("closePopup");
@@ -1852,20 +1852,15 @@ function showCopyPopup(tgLink, text){
   const copyBtn = document.getElementById("copyAgainBtn");
 
   popup.classList.remove("hidden");
+  textBox.value = text;
 
-  if(textBox){
-    textBox.value = text;
-  }
-
-  if(copyBtn){
-    copyBtn.onclick = function(){
-      if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(text).catch(() => fallbackCopyText(text));
-      } else {
-        fallbackCopyText(text);
-      }
-    };
-  }
+  copyBtn.onclick = function(){
+    textBox.removeAttribute("readonly");
+    textBox.focus();
+    textBox.select();
+    textBox.setSelectionRange(0, 99999);
+    textBox.setAttribute("readonly", "readonly");
+  };
 
   openBtn.onclick = function(){
     window.location.href = tgLink;
