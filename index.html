@@ -668,20 +668,26 @@ overflow-wrap:anywhere;
     font-size: 14px;
     border-radius: 16px;
   }
-  .main-description-box {
-  width: 100%;
-  max-width: 1100px;
-  margin: 14px auto 18px;
-  padding: 16px 18px;
+  .game-description-box{
+  margin: 0 0 14px;
+  padding: 14px 16px;
   border-radius: 18px;
-  background: linear-gradient(180deg, rgba(10,87,180,0.35), rgba(255,255,255,0.05));
-  border: 1px solid rgba(120,232,255,0.22);
-  box-shadow: 0 0 18px rgba(0,234,255,0.10);
+  background: linear-gradient(180deg, rgba(16,92,210,.32), rgba(255,255,255,.05));
+  border: 1px solid rgba(120,232,255,.22);
+  box-shadow: 0 0 18px rgba(0,234,255,.10);
   color: #d8f8ff;
   font-size: 14px;
-  line-height: 1.6;
-  text-align: center;
+  line-height: 1.7;
+  text-align: left;
   }
+@media (max-width:600px){
+  .game-description-box{
+    padding: 13px 14px;
+    font-size: 13px;
+    border-radius: 16px;
+  }
+}
+
 }
 }
   </style>
@@ -700,10 +706,8 @@ overflow-wrap:anywhere;
     <div class="hero-title">Fast Topup • Neon Blue Store UI</div>
     <div class="hero-sub">Select your game, choose items, and send your order to Telegram in one tap.</div>
   </div>
-  <div class="main-description-box">
-  📌 သင့် Game ID / Server ကို မှန်မှန်ထည့်ပြီး Payment Method ကိုရွေးချယ်ပါ။ 
-  Order တင်ပြီး Telegram မှာ confirm လုပ်နိုင်ပါတယ်။
-  </div>
+<div id="gameDescription" class="game-description-box"></div>
+<div class="section-label">Topup Items</div>
   <div class="usage-box">
   <div class="usage-text">
     📘 အသုံးပြုပုံကြည့်ရန် ဒီနေရာကိုနှိပ်ပါ
@@ -732,7 +736,17 @@ overflow-wrap:anywhere;
       <div id="items"></div>
     </div>
 
-    <div class="panel">
+<div class="panel">
+  <div class="topbar">
+    <div id="gameTitle" class="game-title">Game Title</div>
+    <button class="back-btn" onclick="backMenu()">Back</button>
+  </div>
+
+  <div id="gameDescription" class="game-description-box"></div>
+
+  <div class="section-label">Topup Items</div>
+  <div id="items"></div>
+</div>
       <div class="section-label">Order Cart</div>
 
       <div id="cartBox" class="cart-box">
@@ -832,6 +846,8 @@ let data = {
     title:"Mobile Legends",
     top:true,
     icon:"images/mlbb.png",
+description:"📌 Player ID နဲ့ Server ID မှန်မှန်ထည့်ပါ။",
+
     items: [
       {name:"💌 Weekly Pass", price:6400,bestSeller:true},
       {name:"🔑🧰 Weekly Elite Bundle", price:3450},
