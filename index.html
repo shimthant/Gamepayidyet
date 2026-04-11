@@ -699,10 +699,7 @@ overflow-wrap:anywhere;
     <div class="hero-title">Fast Topup • Neon Blue Store UI</div>
     <div class="hero-sub">Select your game, choose items, and send your order to Telegram in one tap.</div>
   </div>
-  <div class="main-description-box">
-  📌 သင့် Game ID / Server ကို မှန်မှန်ထည့်ပြီး Payment Method ကိုရွေးချယ်ပါ။ 
-  Order တင်ပြီး Telegram မှာ confirm လုပ်နိုင်ပါတယ်။
-  </div>
+  <div id="gameDescription" class="main-description-box"></div>
   <div class="usage-box">
   <div class="usage-text">
     📘 အသုံးပြုပုံကြည့်ရန် ဒီနေရာကိုနှိပ်ပါ
@@ -831,6 +828,7 @@ let data = {
     title:"Mobile Legends",
     top:true,
     icon:"images/mlbb.png",
+      description: "📌 သင့် Game ID / Server ကို မှန်မှန်ထည့်ပြီး Payment Method ကိုရွေးချယ်ပါ။",
     items: [
       {name:"💌 Weekly Pass", price:6400,bestSeller:true},
       {name:"🔑🧰 Weekly Elite Bundle", price:3450},
@@ -1542,6 +1540,12 @@ function openGame(key){
   renderItems();
   updateCart();
   window.scrollTo({top:0,behavior:"smooth"});
+}
+    // 🔥 description render function
+function renderDescription(){
+  const descBox = document.getElementById("gameDescription");
+  const desc = data[currentGame].description || "";
+  descBox.textContent = desc;
 }
 function backMenu(){
   currentGame = "";
