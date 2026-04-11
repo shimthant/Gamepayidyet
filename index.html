@@ -667,20 +667,28 @@ overflow-wrap:anywhere;
     font-size: 14px;
     border-radius: 16px;
   }
-  .main-description-box {
-  width: 100%;
-  max-width: 1100px;
-  margin: 14px auto 18px;
-  padding: 16px 18px;
-  border-radius: 18px;
-  background: linear-gradient(180deg, rgba(10,87,180,0.35), rgba(255,255,255,0.05));
-  border: 1px solid rgba(120,232,255,0.22);
-  box-shadow: 0 0 18px rgba(0,234,255,0.10);
+.main-description-box {
+  display: none;
+  margin-top: 12px;
+  padding: 16px;
+  border-radius: 22px;
+
+  background: linear-gradient(
+    180deg,
+    rgba(10,87,180,.35),
+    rgba(255,255,255,.05)
+  );
+
+  border: 1px solid rgba(120,232,255,.2);
+  box-shadow: 0 0 25px rgba(0,234,255,.12);
+
+  backdrop-filter: blur(10px);
+
   color: #d8f8ff;
   font-size: 14px;
   line-height: 1.6;
   text-align: center;
-  }
+}
 /* ✅ ဒီလိုအဆုံးမှာ ထည့်ပါ */
 #gameDescription {
   display: none; /* default ဖျောက်ထား */
@@ -1552,8 +1560,11 @@ function renderDescription(){
   const desc = data[currentGame].description || "";
 
   if(desc){
-    descBox.textContent = desc;
-    descBox.style.display = "block"; // game ရွေးလိုက်ရင်သာ ပြမယ်
+    descBox.innerHTML = `
+      <div class="hero-title">📌 Game Instruction</div>
+      <div class="hero-sub">${desc}</div>
+    `;
+    descBox.style.display = "block"; // Game ရွေးလိုက်ရင်သာ ပြမယ်
   } else {
     descBox.style.display = "none"; // description မရှိရင် ဖျောက်မယ်
   }
