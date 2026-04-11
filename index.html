@@ -732,7 +732,7 @@ overflow-wrap:anywhere;
   </div>
   <a href="guide.html" class="usage-btn">အသုံးပြုပုံ</a>
   </div>
-<div class="search-wrap">
+<div id="searchWrap" class="search-wrap">
   <input
     type="text"
     id="gameSearch"
@@ -1493,6 +1493,7 @@ const paymentInfo = document.getElementById("paymentInfo");
 const paymentPhone = document.getElementById("paymentPhone");
 const paymentName = document.getElementById("paymentName");
 const usageBox = document.getElementById("usageBox");
+const searchWrap = document.getElementById("searchWrap");
 const gameDescriptionBox = document.getElementById("gameDescriptionBox");
 const gameDescriptionText = document.getElementById("gameDescriptionText");
 
@@ -1566,7 +1567,7 @@ function openGame(key){
   menu.style.display = "none";
   gamePage.style.display = "grid";
   usageBox.style.display = "none";
-
+  searchWrap.style.display = "none";
   gameTitle.textContent = data[key].title;
   accountInput.value = "";
   document.querySelectorAll('input[name="pay"]').forEach(el => el.checked = false);
@@ -1584,6 +1585,7 @@ function backMenu(){
   menu.style.display = "grid";
   gamePage.style.display = "none";
 usageBox.style.display = "flex";
+   searchWrap.style.display = "flex";
  gameDescriptionText.textContent = "";
   
   updateCart();
@@ -1718,6 +1720,7 @@ setTimeout(() => {
 });
     
 
+searchWrap.style.display = "flex";
 renderMenu();
 updateCart();
 </script>
