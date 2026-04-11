@@ -667,7 +667,7 @@ overflow-wrap:anywhere;
     font-size: 14px;
     border-radius: 16px;
   }
-
+}
   .game-description-box{
   margin-bottom:16px;
   padding:14px 16px;
@@ -1492,8 +1492,10 @@ const successPopup = document.getElementById("successPopup");
 const paymentInfo = document.getElementById("paymentInfo");
 const paymentPhone = document.getElementById("paymentPhone");
 const paymentName = document.getElementById("paymentName");
-const usageBox = document.getElementById("usageBox");။const gameDescriptionBox = document.getElementById("gameDescriptionBox");
+const usageBox = document.getElementById("usageBox");
+const gameDescriptionBox = document.getElementById("gameDescriptionBox");
 const gameDescriptionText = document.getElementById("gameDescriptionText");
+
 function updatePaymentInfo(){
   const pay = document.querySelector('input[name="pay"]:checked');
   const payment = pay ? pay.value : "";
@@ -1714,9 +1716,7 @@ setTimeout(() => {
     document.querySelectorAll('input[name="pay"]').forEach(el => {
   el.addEventListener("change", updatePaymentInfo);
 });
-    menu.style.display = "grid";
-gamePage.style.display = "none";
-usageBox.style.display = "flex";
+    
 
 renderMenu();
 updateCart();
