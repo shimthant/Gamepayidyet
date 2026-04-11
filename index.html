@@ -1,1 +1,1686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gamepay Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet" />
 
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Poppins,sans-serif;
+    }
+
+    html,body{
+      width:100%;
+      max-width:100%;
+      overflow-x:hidden;
+      scroll-behavior:smooth;
+    }
+
+    body{
+      min-height:100vh;
+      color:#fff;
+      background:linear-gradient(135deg,#03142f 0%, #083a86 55%, #0c54c7 100%);
+    }
+
+    #particles-js{
+      position:fixed;
+      inset:0;
+      z-index:-1;
+    }
+    .card img{
+width:80px;
+height:80px;
+object-fit:cover;
+border-radius:18px;
+box-shadow:0 0 10px #00eaff;
+    }
+
+    .container{
+      width:100%;
+      max-width:1100px;
+      margin:0 auto;
+      padding:16px;
+    }
+
+    .header{
+      text-align:center;
+      margin-bottom:18px;
+    }
+
+    .header h1{
+      font-size:36px;
+      font-weight:800;
+      color:#fff;
+      text-shadow:0 0 8px #00eaff,0 0 24px #00eaff;
+      letter-spacing:.3px;
+    }
+
+    .header p{
+      margin-top:6px;
+      color:#d8f8ff;
+      font-size:14px;
+    }
+
+    .hero{
+      background:linear-gradient(180deg,rgba(10,87,180,.35),rgba(255,255,255,.05));
+      border:1px solid rgba(120,232,255,.2);
+      border-radius:22px;
+      padding:16px;
+      margin-bottom:18px;
+      box-shadow:0 0 25px rgba(0,234,255,.12);
+      backdrop-filter:blur(10px);
+    }
+
+    .hero-title{
+      font-size:18px;
+      font-weight:800;
+      color:#fff;
+      text-shadow:0 0 10px #00eaff;
+    }
+
+    .hero-sub{
+      margin-top:6px;
+      color:#d8f8ff;
+      font-size:13px;
+      line-height:1.5;
+    }
+
+    .game-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px;
+    }
+
+    .card{
+      background:linear-gradient(180deg,rgba(15,82,193,.96),rgba(8,50,122,.96));
+      border:1px solid rgba(118,231,255,.22);
+      border-radius:22px;
+      padding:18px 12px;
+      text-align:center;
+      cursor:pointer;
+      transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+      box-shadow:0 8px 24px rgba(0,0,0,.18);
+      position:relative;
+      overflow:hidden;
+    }
+.top-badge{
+  position:absolute;
+  top:10px;
+  right:10px;
+  z-index:2;
+  padding:5px 10px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:800;
+  color:#fff;
+  background:linear-gradient(135deg,#ffb347,#ff6b6b);
+  border:1px solid rgba(255,255,255,.18);
+  box-shadow:0 6px 16px rgba(255,107,107,.25), 0 0 12px rgba(255,179,71,.22);
+}
+    .card:hover{
+      transform:translateY(-6px) scale(1.015);
+      box-shadow:0 0 16px rgba(0,234,255,.6),0 12px 28px rgba(0,0,0,.22);
+      border-color:rgba(118,231,255,.5);
+    }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:auto -40% -60% -40%;
+      height:120px;
+      background:radial-gradient(circle,rgba(0,234,255,.18),transparent 65%);
+      pointer-events:none;
+    }
+
+    .game-icon-wrap{
+      width:92px;
+      height:92px;
+      margin:0 auto 12px;
+      border-radius:24px;
+      background:radial-gradient(circle at top,rgba(0,234,255,.18),rgba(255,255,255,.05));
+      box-shadow:0 0 18px rgba(0,234,255,.28);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .card img{
+      width:74px;
+      height:74px;
+      object-fit:contain;
+      display:block;
+      animation:floatIcon 3s ease-in-out infinite;
+    }
+
+    @keyframes floatIcon{
+      0%{transform:translateY(0);}
+      50%{transform:translateY(-5px);}
+      100%{transform:translateY(0);}
+    }
+
+    .card span{
+      display:block;
+      font-size:16px;
+      font-weight:700;
+      line-height:1.35;
+      color:#fff;
+      text-shadow:0 0 8px rgba(0,234,255,.8);
+      word-break:break-word;
+    }
+
+    .game-page{
+      display:none;
+      grid-template-columns:1fr;
+      gap:16px;
+      margin-top:14px;
+    }
+
+    .panel{
+      background:linear-gradient(180deg,rgba(8,49,112,.97),rgba(6,36,86,.97));
+      border:1px solid rgba(120,232,255,.18);
+      border-radius:22px;
+      padding:16px;
+      box-shadow:0 10px 28px rgba(0,0,0,.2);
+    }
+
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:12px;
+    }
+
+    .game-title{
+      font-size:20px;
+      font-weight:800;
+      color:#fff;
+      text-shadow:0 0 10px #00eaff;
+    }
+
+    .back-btn{
+      border:none;
+      background:#17e6ff;
+      color:#03244e;
+      padding:10px 16px;
+      border-radius:12px;
+      font-weight:800;
+      cursor:pointer;
+      box-shadow:0 0 14px rgba(23,230,255,.28);
+    }
+
+    .section-label{
+      font-size:15px;
+      font-weight:700;
+      color:#d8f8ff;
+      margin-bottom:10px;
+    }
+.item{
+  display:grid;
+  grid-template-columns:1fr auto auto;
+  align-items:center;
+  gap:10px;
+  background:linear-gradient(180deg,#1254cb,#0d42a7);
+  border-radius:14px;
+  padding:18px 14px 12px;
+  margin-bottom:10px;
+  position:relative;
+}
+
+.item.best-seller{
+  border:1.5px solid #ffd84d;
+  box-shadow:
+    0 0 8px rgba(255,216,77,.45),
+    0 0 16px rgba(255,193,7,.28);
+}
+
+.best-seller-badge{
+  position:absolute;
+  top:-10px;
+  left:12px;
+  z-index:3;
+  padding:5px 10px;
+  border-radius:999px;
+  font-size:10px;
+  font-weight:800;
+  color:#fff;
+  background:linear-gradient(135deg,#ffb347,#ff6b6b);
+  border:1px solid rgba(255,255,255,.18);
+  box-shadow:
+    0 6px 14px rgba(255,107,107,.25),
+    0 0 12px rgba(255,179,71,.22);
+  white-space:nowrap;
+}
+    .item-name{
+      font-size:14px;
+      font-weight:700;
+      line-height:1.35;
+    }
+.item.best-seller{
+  border:1.5px solid #ffd84d;
+
+  box-shadow:
+    0 0 6px #ffd84d,
+    0 0 12px #ffc107,
+    0 0 20px rgba(255,193,7,.8),
+    0 0 30px rgba(255,193,7,.6);
+
+  animation: glowPulse 1.8s infinite alternate;
+}
+
+@keyframes glowPulse{
+  from{
+    box-shadow:
+      0 0 6px #ffd84d,
+      0 0 12px #ffc107;
+  }
+  to{
+    box-shadow:
+      0 0 12px #ffd84d,
+      0 0 24px #ffc107,
+      0 0 36px rgba(255,193,7,.7);
+  }
+}
+    .unavailable-badge{
+  position:absolute;
+  top:-10px;
+  right:12px;
+  z-index:3;
+  padding:5px 10px;
+  border-radius:999px;
+  font-size:10px;
+  font-weight:800;
+  color:#fff;
+  background:linear-gradient(135deg,#9aa0a6,#5f6368);
+  border:1px solid rgba(255,255,255,.18);
+  box-shadow:
+    0 6px 14px rgba(0,0,0,.22),
+    0 0 10px rgba(255,255,255,.08);
+  white-space:nowrap;
+}
+
+.item.unavailable{
+  opacity:.58;
+  filter:grayscale(.15);
+  border:1.5px solid rgba(255,255,255,.18);
+  box-shadow:none;
+}
+
+.item.unavailable .qty button{
+  background:#7d8796;
+  color:#e9eef5;
+  cursor:not-allowed;
+  pointer-events:none;
+  opacity:.7;
+}
+
+.item.unavailable .item-price,
+.item.unavailable .item-name{
+  color:rgba(255,255,255,.82);
+}
+    .qty{
+      display:flex;
+      align-items:center;
+      gap:6px;
+    }
+
+    .qty button{
+      width:34px;
+      height:34px;
+      border:none;
+      border-radius:10px;
+      background:#16e8ff;
+      color:#03244e;
+      font-weight:800;
+      font-size:18px;
+      cursor:pointer;
+    }
+
+    .qty span{
+      min-width:18px;
+      text-align:center;
+      font-weight:700;
+      font-size:16px;
+    }
+
+    .item-price{
+      font-size:14px;
+      font-weight:800;
+      color:#e8fbff;
+      white-space:nowrap;
+    }
+
+    .cart-box{
+      background:linear-gradient(180deg,#1353c7,#0d419f);
+      border-radius:16px;
+      padding:14px;
+      transition:box-shadow .25s ease, transform .25s ease;
+      box-shadow:0 0 0 rgba(0,234,255,0);
+    }
+
+    .cart-box.highlight{
+      box-shadow:0 0 18px rgba(0,234,255,.55);
+      transform:scale(1.01);
+    }
+
+    #cart{
+      font-size:14px;
+      line-height:1.7;
+      min-height:24px;
+    }
+
+    .empty-cart{
+      color:#d6f7ff;
+      opacity:.9;
+    }
+
+    .total{
+      margin-top:10px;
+      font-size:16px;
+      font-weight:800;
+      color:#fff176;
+      text-shadow:0 0 10px rgba(255,241,118,.35);
+    }
+
+    textarea{
+      width:100%;
+      min-height:92px;
+      border:none;
+      outline:none;
+      resize:vertical;
+      border-radius:14px;
+      padding:12px;
+      font-size:14px;
+      margin-top:12px;
+    }
+
+    .payment-title{
+      margin-top:14px;
+      margin-bottom:8px;
+      font-size:14px;
+      font-weight:700;
+      color:#d8f8ff;
+    }
+
+    .payment{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+
+    .payment label{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      background:#0f4ec3;
+      border:1px solid rgba(255,255,255,.08);
+      padding:8px 10px;
+      border-radius:12px;
+      font-size:13px;
+    }
+
+    .order-btn{
+      width:100%;
+      margin-top:16px;
+      border:none;
+      background:#19e8ff;
+      color:#03244e;
+      padding:14px;
+      border-radius:14px;
+      font-size:18px;
+      font-weight:800;
+      cursor:pointer;
+      box-shadow:0 0 18px rgba(25,232,255,.36);
+      animation:buttonPulse 1.8s infinite alternate;
+    }
+
+    @keyframes buttonPulse{
+      from{box-shadow:0 0 10px rgba(25,232,255,.26);}
+      to{box-shadow:0 0 24px rgba(25,232,255,.62);}
+    }
+
+    .tip{
+      margin-top:10px;
+      color:#d8f8ff;
+      font-size:12px;
+      line-height:1.6;
+    }
+
+    .footer{
+      text-align:center;
+      margin-top:22px;
+      padding-bottom:6px;
+      color:#d3f8ff;
+      font-size:13px;
+    }
+
+    .popup{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.55);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      z-index:999;
+    }
+
+    .popup-box{
+      width:100%;
+      max-width:320px;
+      background:linear-gradient(180deg,#0c3a82,#082d67);
+      border:1px solid rgba(120,232,255,.26);
+      border-radius:20px;
+      padding:20px;
+      word-break:break-word;
+      overflow-wrap:break-word;
+      text-align:center;
+      box-shadow:0 0 24px rgba(0,234,255,.22);
+      animation:popIn .25s ease;
+      word-break: break-word;
+overflow-wrap: anywhere;
+white-space: normal;
+    }
+
+    @keyframes popIn{
+      from{transform:scale(.85); opacity:0;}
+      to{transform:scale(1); opacity:1;}
+    }
+@media (max-width:600px){
+
+  /* remove all filter */
+  .card,
+  .container,
+  .popup-box{
+    filter: none !important;
+  }
+
+  /* stronger gradient for mobile */
+  .card{
+    background: linear-gradient(
+      180deg,
+      rgba(25,110,255,1),
+      rgba(10,60,160,1)
+    ) !important;
+
+    box-shadow:
+      0 10px 30px rgba(0,0,0,.25),
+      0 0 20px rgba(0,180,255,.4);
+  }
+
+  /* glow effect */
+  .game-icon-wrap{
+    box-shadow:
+      0 0 15px rgba(0,200,255,.6),
+      0 0 30px rgba(0,200,255,.3);
+  }
+
+  /* remove dull overlay */
+  .card::before{
+    display:none !important;
+  }
+
+}
+    .popup-box{
+max-width:92vw;
+padding:18px;
+font-size:14px;
+line-height:1.5;
+    }
+    .popup-box h3{
+      font-size:22px;
+      color:#fff;
+      text-shadow:0 0 10px #00eaff;
+      margin-bottom:8px;
+    }
+
+    .popup-box p{
+      color:#d8f8ff;
+      font-size:14px;
+      line-height:1.6;
+    }
+
+    .popup-box button{
+      margin-top:14px;
+      border:none;
+      background:#19e8ff;
+      color:#03244e;
+      padding:10px 16px;
+      border-radius:10px;
+      font-weight:800;
+      cursor:pointer;
+    }
+.popup-box pre,
+.popup-box textarea{
+white-space:pre-wrap;
+word-break:break-word;
+overflow-wrap:anywhere;
+      }
+    @media (min-width:768px){
+      .container{
+        padding:24px;
+      }
+
+      .header h1{
+        font-size:46px;
+      }
+
+      .hero-title{
+        font-size:20px;
+      }
+
+      .game-grid{
+        grid-template-columns:repeat(4,minmax(0,1fr));
+        gap:18px;
+      }
+
+      .game-page{
+        grid-template-columns:1.25fr .9fr;
+        gap:18px;
+      }
+    }.usage-box{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin:14px 0 18px;
+  padding:14px 16px;
+  border-radius:18px;
+  background:linear-gradient(180deg,rgba(10,87,180,.35),rgba(255,255,255,.05));
+  border:1px solid rgba(120,232,255,.22);
+  box-shadow:0 0 18px rgba(0,234,255,.10);
+}
+
+.usage-text{
+  font-size:14px;
+  color:#d8f8ff;
+  line-height:1.5;
+}
+
+.usage-btn{
+  flex-shrink:0;
+  text-decoration:none;
+  border:none;
+  background:#19e8ff;
+  color:#03244e;
+  padding:10px 16px;
+  border-radius:12px;
+  font-size:14px;
+  font-weight:800;
+  box-shadow:0 0 14px rgba(25,232,255,.28);
+}
+
+.usage-btn:hover{
+  filter:brightness(1.05);
+}
+    .search-wrap{
+  margin: 14px 0 18px;
+  display: flex;
+  justify-content: center;
+}
+
+.search-input{
+  width: 100%;
+  max-width: 460px;
+  padding: 14px 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(120,232,255,.22);
+  outline: none;
+  background: linear-gradient(180deg, rgba(15,82,193,.96), rgba(8,50,122,.96));
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.03) inset,
+    0 8px 24px rgba(0,0,0,.18),
+    0 0 14px rgba(0,234,255,.16);
+  transition: .25s ease;
+}
+
+.search-input::placeholder{
+  color: #cfe7ff;
+  opacity: .9;
+}
+
+.search-input:focus{
+  border-color: rgba(0,234,255,.5);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.04) inset,
+    0 10px 28px rgba(0,0,0,.22),
+    0 0 18px rgba(0,234,255,.28);
+}
+
+@media (max-width:600px){
+  .search-wrap{
+    margin: 12px 0 16px;
+  }
+
+  .search-input{
+    max-width: 100%;
+    padding: 13px 16px;
+    font-size: 14px;
+    border-radius: 16px;
+  }
+  .main-description-box {
+  width: 100%;
+  max-width: 1100px;
+  margin: 14px auto 18px;
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(10,87,180,0.35), rgba(255,255,255,0.05));
+  border: 1px solid rgba(120,232,255,0.22);
+  box-shadow: 0 0 18px rgba(0,234,255,0.10);
+  color: #d8f8ff;
+  font-size: 14px;
+  line-height: 1.6;
+  text-align: center;
+  }
+}
+}
+  </style>
+  </head>
+<body>
+
+<div id="particles-js"></div>
+
+<div class="container">
+  <div class="header">
+    <h1>Gamepay Hub</h1>
+    <p>Mobile Game Store</p>
+  </div>
+
+  <div class="hero">
+    <div class="hero-title">Fast Topup • Neon Blue Store UI</div>
+    <div class="hero-sub">Select your game, choose items, and send your order to Telegram in one tap.</div>
+  </div>
+  <div class="main-description-box">
+  📌 သင့် Game ID / Server ကို မှန်မှန်ထည့်ပြီး Payment Method ကိုရွေးချယ်ပါ။ 
+  Order တင်ပြီး Telegram မှာ confirm လုပ်နိုင်ပါတယ်။
+  </div>
+  <div class="usage-box">
+  <div class="usage-text">
+    📘 အသုံးပြုပုံကြည့်ရန် ဒီနေရာကိုနှိပ်ပါ
+  </div>
+  <a href="guide.html" class="usage-btn">အသုံးပြုပုံ</a>
+  </div>
+<div class="search-wrap">
+  <input
+    type="text"
+    id="gameSearch"
+    class="search-input"
+    placeholder="🔎 Search game..."
+    oninput="filterGames()"
+  >
+</div>
+  <div id="menu" class="game-grid"></div>
+
+  <div id="gamePage" class="game-page">
+    <div class="panel">
+      <div class="topbar">
+        <div id="gameTitle" class="game-title">Game Title</div>
+        <button class="back-btn" onclick="backMenu()">Back</button>
+      </div>
+
+      <div class="section-label">Topup Items</div>
+      <div id="items"></div>
+    </div>
+
+    <div class="panel">
+      <div class="section-label">Order Cart</div>
+
+      <div id="cartBox" class="cart-box">
+        <div id="cart" class="empty-cart">No items selected yet.</div>
+        <div class="total">Total Amount: <span id="total">0</span> ks</div>
+      </div>
+
+      <textarea id="account" placeholder="Game ID / Server / Name"></textarea>
+
+      <div class="payment-title">Payment Method</div>
+      <div class="payment">
+        <label><input type="radio" name="pay" value="Kpay"> Kpay</label>
+        <label><input type="radio" name="pay" value="Wave"> Wave</label>
+        <label><input type="radio" name="pay" value="UAB"> UAB</label>
+        <label><input type="radio" name="pay" value="Binance"> Binance</label>
+        <label><input type="radio" name="pay" value="AyaPay"> AyaPay</label>
+        <label><input type="radio" name="pay" value="WeChat Pay"> WeChat</label>
+      </div>
+<div id="paymentInfo" style="display:none; margin-top:12px; background:linear-gradient(180deg,#1353c7,#0d419f); border:1px solid rgba(120,232,255,.22); border-radius:14px; padding:12px; color:#e8fbff; font-size:14px; line-height:1.7; box-shadow:0 0 14px rgba(0,234,255,.12);">
+  <div><strong>Phone:</strong> <span id="paymentPhone"></span></div>
+  <div><strong>Name:</strong> <span id="paymentName"></span></div>
+</div>
+      <button class="order-btn" onclick="sendOrder()">🚀 Order via Telegram</button>
+      <div class="tip">Telegram message will include Game, Selected Items, Payment, and Total Amount.</div>
+    </div>
+  </div>
+
+  <div class="footer">Founder : Diameter Eight</div>
+</div>
+
+<div id="successPopup" class="popup">
+  <div class="popup-box">
+    <h3>Order Ready</h3>
+    <p>Your order text has been prepared. Telegram will open now.</p>
+    <button onclick="closePopup()">OK</button>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script>
+particlesJS("particles-js",{
+  particles:{
+    number:{value:80},
+    color:{value:"#00eaff"},
+    shape:{type:"circle"},
+    opacity:{value:0.45},
+    size:{value:3},
+    line_linked:{
+      enable:true,
+      distance:150,
+      color:"#00eaff",
+      opacity:0.28,
+      width:1
+    },
+    move:{
+      enable:true,
+      speed:2
+    }
+  },
+  interactivity:{
+    detect_on:"canvas",
+    events:{
+      onhover:{enable:false},
+      onclick:{enable:false},
+      resize:true
+    }
+  },
+  retina_detect:true
+});
+</script>
+  <script>
+const TELEGRAM = "angsthtun";
+const ICON_FALLBACK = "https://via.placeholder.com/120x120.png?text=GAME";
+const paymentData = {
+  Kpay: {
+    phone: "09795687480",
+    name: "Aung Shin Thant Htun"
+  },
+  Wave: {
+    phone: "09795687480",
+    name: "Aung Shin Thant Htun"
+  },
+  UAB: {
+    phone: "09795687480",
+    name: "Aung Shin Thant Htun"
+  },
+  AyaPay: {
+    phone: "09795687480",
+    name: "Aung Shin Thant Htun"
+  }
+};
+let cart = {};
+let currentGame = "";
+
+let data = {
+  mlbb:{
+    title:"Mobile Legends",
+    top:true,
+    icon:"images/mlbb.png",
+    items: [
+      {name:"💌 Weekly Pass", price:6400,bestSeller:true},
+      {name:"🔑🧰 Weekly Elite Bundle", price:3450},
+      {name:"💼 Monthly Epic Bundle", price:17200},
+      {name:"🧰 Twilight Pass", price:32800},
+      {name:"စိန်2ဆ 💎50+50", price:3550},
+      {name:"စိန်2ဆ 💎150+150", price:10400},
+      {name:"စိန်2ဆ 💎250+250", price:16600},
+      {name:"စိန်2ဆ 💎500+500", price:33600},
+     {name:"💎11 Diamonds", price:850},
+     {name:"💎33 Diamonds", price:2950},
+     {name:"💎55 Diamonds", price:4000},
+     {name:"💎86 Diamonds", price:5300},
+     {name:"💎172 Diamonds", price:10600},
+     {name:"💎257 Diamonds", price:15300},
+     {name:"💎343 Diamonds (250 Recharge)", price:20600},
+     {name:"💎429 Diamonds", price:25800},
+     {name:"💎514 Diamonds", price:30600},
+     {name:"💎600 Diamonds (500 Recharge)", price:35900},
+     {name:"💎772 Diamonds", price:45300},
+     {name:"💎943 Diamonds", price:56800},
+     {name:"💎1049 Diamonds", price:61800},
+     {name:"💎1135 Diamonds (1000 Recharge)", price:66950},
+     {name:"💎1412 Diamonds", price:82500},
+     {name:"💎2195 Diamonds", price:125200},
+     {name:"💎3688 Diamonds", price:209000}    
+] 
+},
+  genshin:{
+  title:"Genshin Impact",
+  top:true,
+  icon:"unnamed.webp",
+  items:[
+    {name:"🌛Blessing", price:14000,bestSeller:true},
+    {name:"💠 60 Genesis Crystal", price:2900},
+    {name:"💠 300+30 Genesis Crystal", price:14550},
+    {name:"💠 980+110 Genesis Crystal", price:44900},
+    {name:"💠 1980+260 Genesis Crystal", price:93750},
+    {name:"💠 3280+600 Genesis Crystal", price:153750},
+    {name:"💠 6480+1600 Genesis Crystal", price:294280}
+  ]
+},
+  honkaistarrail: {
+  title: "Honkai: Star Rail",
+  icon: "1942.jpg",
+  items: [
+        // 🏷️ Supply
+    {name:"🌟🏷️Express Supply", price:14000},
+
+    // 💠 Oneiric Shards Topup
+    {name:"💠60", price:2950},
+    {name:"💠330", price:14600},
+    {name:"💠1090", price:45000},
+    {name:"💠2240", price:89900},
+    {name:"💠3880", price:154000},
+    {name:"💠8080", price:295000}
+
+  ]
+},
+  zenlesszonezero: {
+  title: "Zenless Zone Zero",
+  icon: "Zenless_Zone_Zero_icon.webp",
+  items: [
+
+    // 🤩 Membership
+    {name:"🔑💼Inter-Knot Membership", price:15000},
+
+    // 🤩 Monochrome Topup
+    {name:"🎲60", price:3050},
+    {name:"🎲330", price:15150},
+    {name:"🎲1090", price:48270},
+    {name:"🎲2240", price:92570},
+    {name:"🎲3880", price:153470},
+    {name:"🎲8080", price:305000}
+
+  ]
+},
+  wuthering:{
+  title:"Wuthering Waves",
+  icon:"quality_restoration_20260323135629044.jpg",
+  items:[
+    // 🔥 Login Topup
+    {name:"🎁 Solaris New Voyage Light", price:9500,unavailable:true},
+    {name:"🎁 Sage Solvent Aid", price:19000},
+    {name:"🎁 Traveler's Tube Aid Bundle", price:19500},
+    {name:"🎁 Traveler's EXP Aid", price:18000},
+    {name:"🎁 Gardener's Aid", price:18000},
+    {name:"🧾 Insider Channel", price:35000},
+    {name:"🧾 Connoisseur Upgrade", price:37000},
+    {name:"🧾 Connoisseur Channel", price:67000},
+
+    // 🔥 UID Topup (Echo / Lunite)
+    {name:"🎴✨ Lunite Subscription", price:18500},
+    {name:"🌑 60 Echo", price:3700},
+    {name:"🌑 180 Echo", price:19000},
+    {name:"🌑 300 Echo", price:57200},
+    {name:"🌑 600 Echo", price:115800},
+    {name:"🌑 900 Echo", price:191000},
+    {name:"🌑 1800 Echo", price:374500}
+
+  ]
+  },
+  arknights_endfield: {
+  title: "Arknights: Endfield Login Topup",
+  icon: "ArknightsEndfield (1).webp",
+  items: [
+    
+// 🔥 Login Topup
+    {name:"💼 Grand Vision Arsenal Value Pack", price:5500},
+    {name:"📃 Monthly Pass", price:24000},
+    {name:"🧰 Weekly Material Bundle", price:24000},
+    {name:"🧰🪛 Monthly Material Bundle", price:61000},
+    {name:"🗂️ Originium Supply", price:55500}
+
+  ]
+},
+  genshin_blessing: {
+  title: "Genshin Impact Others",
+  icon: "unnamed.webp",
+  items: [
+    {name:"🇹🇭 Blessing of the Welkin Moon", price:20950},
+    {name:"🇧🇷 Blessing of the Welkin Moon", price:20100},
+    {name:"🇮🇩 Blessing of the Welkin Moon", price:17600},
+    {name:"🇰🇭 Blessing of the Welkin Moon", price:22400},
+    {name:"🇰🇷 Blessing of the Welkin Moon", price:18560},
+    {name:"🇲🇾 Blessing of the Welkin Moon", price:18750},
+    {name:"🇵🇭 Blessing of the Welkin Moon", price:17550},
+    {name:"🇺🇸 Blessing of the Welkin Moon", price:20300}
+  ]
+},
+  arena:{
+  title:"Arena Breakout",
+  icon:"arena-breakout-infinite.jpg",
+  items:[
+
+    // 🔥 Bonds
+    {name:"🪙 66 Bonds", price:3680},
+    {name:"🪙 335 Bonds", price:18890},
+    {name:"🪙 675 Bonds", price:37700},
+    {name:"🪙 1690 Bonds", price:97890},
+    {name:"🪙 3400 Bonds", price:191000},
+    {name:"🪙 6820 Bonds", price:370000},
+
+    // 🔥 Cases & Passes
+    {name:"🥡 Beginner Select", price:3350},
+    {name:"💼 Bulletproof Case (30D)", price:10050},
+    {name:"💼 Composite Case (30D)", price:30550},
+    {name:"🔑🧾 Advanced Battle Pass", price:4150},
+     {name:"🔑🧾 Premium Battle Pass", price:16780},
+    {name:"🔑🧾 Quarterly Premium Battle Pass", price:50300}
+  ]
+  },
+
+  deltaforce:{
+  title:"Delta Force",
+  icon:"delta-force-hawk-ops_drnc.1200.webp",
+  items:[
+    {name:"✉️ Blaze Supplies", price:2150},
+    {name:"✉️ Blaze Supplies Advanced", price:6350},
+    {name:"💌 Season Pass Warfare Special", price:19950},
+    {name:"💌 Season Pass Operations Special", price:19950},
+    {name:"💌 Season Pass Delta Force Deluxe", price:27750},
+    {name:"🪙 60 Delta Coins", price:3700},
+    {name:"🪙 320 Delta Coins", price:18450},
+    {name:"🪙 750 Delta Coins", price:36250},
+    {name:"🪙 1480 Delta Coins", price:723300},
+    {name:"🪙 1980 Delta Coins", price:90500},
+    {name:"🪙 3950 Delta Coins", price:181000},
+    {name:"🪙 8100 Delta Coins", price:365000}
+  ]
+},
+  codm: {
+  title: "Call Of Duty Mobile",
+  icon: "call-of-duty-mobile-logo.jpg",
+  items: [
+    { name: "🪙 88 CP", price: 4600 },
+    { name: "🪙 460 CP", price: 18560 },
+    { name: "🪙 960 CP", price: 37110 },
+    { name: "🪙 2600 CP", price: 92890 },
+    { name: "🪙 5400 CP", price: 185600 },
+    { name: "🪙 11600 CP", price: 464000 },
+    { name: "🪙 23200 CP", price: 928000 },
+    { name: "🪙 34800 CP", price: 1399830 },
+    { name: "🪙 58000 CP", price: 2329260 }
+  ]
+  },
+  
+  bloodstrike: {
+  title: "Blood Strike",
+  icon: "blood-strike (1).jpg",
+  items: [
+
+    // ⚜️ Gold Topup
+    {name:"⚜️105 Golds", price:3500},
+    {name:"⚜️320 Golds", price:10100},
+    {name:"⚜️540 Golds", price:16780},
+    {name:"⚜️1100 Golds", price:33400 },
+    {name:"⚜️2260 Golds", price:64950},
+    {name:"⚜️5800 Golds", price:164800},
+
+    // 🎟️ Pass
+    {name:"⚜️🧰Strike Pass Elite", price:13250},
+    {name:"⚜️🧰Strike Pass Premium", price:30350}
+
+  ]
+},
+  clashofclans: {
+  title: "Clash of Clans",
+  icon: "1698.jpg",
+  items: [
+
+    // 🔥 Login Top up
+    {name:"⚒️Builder Pack", price:9900},
+    {name:"🧰Resource Relief Pack", price:19500},
+    {name:"🧰Skilled to Build Pack", price:9900},
+    {name:"🧰Dragon Escape Scenery", price:49000},
+
+    {name:"🥎80 Gems", price:5000},
+    {name:"🥎500 Gems", price:22800},
+    {name:"🥎1200 Gems", price:49000},
+    {name:"🥎2500 Gems", price:93000},
+    {name:"🥎6500 Gems", price:225000}
+
+  ]
+},
+  harry_potter_magic_awakened: {
+  title: "Harry Potter: Magic Awakened",
+  icon: "harry-potter-magic-awakened.jpg",
+
+  items: [
+
+    // 🎫 Cards / Packs
+    {name:"🀄 Monthly Card", price:15666},
+    {name:"🎫 Gold Supply Pack", price:15666},
+    {name:"🪀 Ruby Key Pack", price:31416},
+    {name:"🔑💼 Clock Key Pack", price:47082},
+    {name:"🔑💼 Golden Key Pack", price:62664},
+
+    // 💎 Jewels
+    {name:"💎 60 Jewels", price:3402},
+    {name:"💎 300 Jewels", price:17220},
+    {name:"💎 680+70 Jewels", price:34482},
+    {name:"💎 980+165 Jewels", price:51744},
+    {name:"💎 1280+270 Jewels", price:69006},
+    {name:"💎 1980+380 Jewels", price:102900}
+
+  ]
+},
+  honorofkings: {
+  title: "Honor Of Kings",
+  icon: "1515.jpg ",
+  items: [
+
+    // 🎮 Token TopUp
+    {name:"🧩18 Tokens", price:800},
+    {name:"🧩80 Tokens", price:3600},
+    {name:"🧩240 Tokens", price:10900},
+    {name:"🧩400 Tokens", price:18300},
+    {name:"🧩560 Tokens", price:25600},
+    {name:"🧩830 Tokens", price:36300},
+    {name:"🧩1245 Tokens", price:54500},
+    {name:"🧩2508 Tokens", price:109800},
+    {name:"🧩4180 Tokens", price:181900},
+    {name:"🧩8360 Tokens", price:363900},
+
+    // 📦 Card and Pack Topup
+    {name:"🎴Weekly Card", price:4400},
+    {name:"🎴Weekly Card Plus", price:13900},
+    {name:"🥡Honor Point Value Pack", price:1300},
+    {name:"🥡Double Token Lucky Bag", price:1300},
+    {name:"💼Standard Purchase Rebate Pack", price:1300},
+    {name:"💼Premium Purchase Rebate Pack", price:5300}
+
+  ]
+},
+  swordofjustice: {
+  title: "Sword of Justice",
+  icon: "sword-of-justice.jpg",
+  items: [
+  // 🎁 Packs
+    {name:"Exquisite Treasures", price:750},
+
+    // 🎟 Pass
+    {name:"Monthly Pass", price:18300},
+    {name:"Basic Battle Pass", price:34700},
+    {name:"Battle Pass Upgrade", price:55400},
+    {name:"Advanced Battle Pass", price:83100},
+
+    // 💎 Jades Topup
+    {name:"60 Ornate Jades", price:4580},
+    {name:"330 Ornate Jades", price:19850},
+    {name:"1100 Ornate Jades", price:61150},
+    {name:"2268 Ornate Jades", price:122250},
+    {name:"3808 Ornate Jades", price:197980},
+    {name:"7776 Ornate Jades", price:383000}
+
+
+  ]
+},
+  wherewindsmeet: {
+  title: "Where Winds Meet",
+  icon: "3285.jpg",
+  items: [
+
+    // 📋 Pass Packages
+    {name:"📋Monthly Pass", price:21350},
+    {name:"🔑📋Elite Battle Pass", price:42500},
+    {name:"🔑📋Premium Battle Pass", price:84900},
+
+    // 🦪 Echo Topup
+  {name:"🦪🦪60 Echo", price:4150},
+  {name:"🦪180 Echo", price:12850},
+  {name:"🦪300 Echo", price:21100},
+  {name:"🦪600 Echo", price:42100},
+  {name:"🦪900 Echo", price:63300},
+  {name:"🦪1800 Echo", price:125300},
+  {name:"🦪3000 Echo", price:207400},
+  {name:"🦪6000 Echo", price:414920},
+  {name:"🦪12000 Echo", price:832820}
+
+  ]
+},
+  pubgmobile_packs: {
+  title: "PUBG Mobile Packs & Passes",
+  icon: "1372.jpg",
+  items: [
+
+// 🎟️ Prime
+    {name:"📮1️⃣Prime (1 Month)", price:4150},
+    {name:"📮3️⃣Prime (3 Months)", price:12450},
+    {name:"📮6️⃣Prime (6 Months)", price:25060},
+    {name:"📮1️⃣2️⃣Prime (12 Months)", price:49950},
+
+    {name:"🧰1️⃣Prime Plus (1 Month)", price:41600},
+    {name:"🧰6️⃣Prime Plus (6 Months)", price:244900},
+    {name:"🧰1️⃣2️⃣Prime Plus (12 Months)", price:489200},
+
+    // 🎁 Packs
+    {name:"🧰First Purchase Pack", price:4150},
+    {name:"🔑🧰Upgradable Firearm Materials Pack", price:12600},
+    {name:"🔑💼Mythic Emblem Pack", price:20950}
+
+  ]
+},
+  pubg_uc: {
+  title: "PUBG Mobile UC",
+  icon: "pubg (1).jpg",
+  items: [
+
+    // 🪙 UC Topup
+    {name:"🪙60 UC", price:4200},
+    {name:"🪙325 UC", price:20950},
+    {name:"🪙660 UC", price:41650},
+    {name:"🪙1800 UC", price:103960},
+    {name:"🪙3850 UC", price:207500},
+    {name:"🪙8100 UC", price:414000}
+
+  ]
+},
+  freefire: {
+  title: "Free Fire (Global)",
+  icon: "IMG_20260324_125340_567.jpg",
+  items: [
+
+    // 💎 Diamonds Topup
+   {name:"💎110 Diamonds", price:3750},
+{name:"💎341 Diamonds", price:11400},
+{name:"💎572 Diamonds", price:18650},
+{name:"💎1166 Diamonds", price:37550},
+{name:"💎2398 Diamonds", price:75000},
+{name:"💎6160 Diamonds", price:189950},
+
+{name:"🎟 Weekly Lite", price:1800},
+{name:"🎟 Weekly Membership", price:7500},
+{name:"🎟 Monthly Membership", price:26950},
+
+{name:"🔑 Evo Access (3D)", price:2000},
+{name:"🔑 Evo Access (7D)", price:3450},
+{name:"🔑 Evo Access (30D)", price:1000} 
+  ]
+},
+  duetnightabyss: {
+  title: "Duet Night Abyss",
+  icon: "duet-night-abyss.jpg",
+  items: [
+
+    // 🌙 Lunar Crystal Topup
+    {name:"💿60 Lunar Crystal", price:5600},     
+    {name:"💿300 Lunar Crystal", price:23000},   
+    {name:"💿980 Lunar Crystal", price:65300},  
+    {name:"💿1980 Lunar Crystal", price:129600}, 
+    {name:"💿3280 Lunar Crystal", price:225000}, 
+    {name:"💿6480 Lunar Crystal", price:428500}  
+
+  ]
+},
+  valorant_th: {
+  title: "Valorant Thailand",
+  icon: "VALORANT_Jett_Red_crop.jpg",
+  items: [
+
+    // 💠 VP Points
+    {name:"💢475 Points", price:17830},
+    {name:"💢1000 Points", price:35690},
+    {name:"💢2050 Points", price:71340},
+    {name:"💢3650 Points", price:126290},
+    {name:"💢5350 Points", price:181200},
+    {name:"💢11000 Points", price:362400}
+
+  ]
+},
+  valorant_sg: {
+  title: "Valorant Singapore",
+  icon: "VALORANT_Jett_Red_crop.jpg",
+  items: [
+
+    // 💠 VP Points
+    {name:"💢475 Points", price:25000},
+    {name:"💢1000 Points", price:47000},
+    {name:"💢2050 Points", price:85000},
+    {name:"💢3650 Points", price:150000},
+    {name:"💢5350 Points", price:220000},
+    {name:"💢11000 Points", price:435000}
+
+  ]
+},
+  oncehuman: {
+  title: "Once Human",
+  icon: "once-human.jpg",
+  items: [
+
+    // 📀 Topup
+    {name:"📀62 Crystgin", price:4400},
+    {name:"📀339 Crystgin", price:22100},
+    {name:"📀1120 Crystgin", price:66300},
+    {name:"📀2340 Crystgin", price:132400},
+    {name:"📀3979 Crystgin", price:220750},
+    {name:"📀8075 Crystgin", price:426680},
+
+    // 🎟️ Pass
+    {name:"📋Meta Pass (30 Days)", price:22000},
+    {name:"📋Battle Pass (Advanced)", price:44250},
+    {name:"📋Battle Pass (Deluxe)", price:103700}
+
+  ]
+},
+  lol_wildrift: {
+  title: "LOL: Wild Rift Cores",
+  icon: "lol-wild-rift.jpg",
+    items:[
+      {name:"💎🇹🇭 425 Cores", price:19460},
+      {name:"💎🇹🇭 1000 Cores", price:44130},
+      {name:"💎🇹🇭1850 Cores", price:77790},
+      {name:"💎🇹🇭 3275 Cores", price:136210},
+      {name:"💎🇹🇭 4800 Cores", price:194580},
+      {name:"💎🇹🇭 10000 Cores", price:389110},
+      {name:"💎🇸🇬 425 Cores", price:23530},
+      {name:"💎🇸🇬 1000 Cores", price:50700},
+      {name:"💎🇸🇬1850 Cores", price:91490},
+      {name:"💎🇸🇬 3275 Cores", price:159500},
+      {name:"💎🇸🇬 4800 Cores", price:230940},
+      {name:"💎🇸🇬 10000 Cores", price:468950}
+    ]
+},
+  carxstreet: {
+  title: "CarX Street Gold & Cash",
+  icon: "bba977e0d57fa56795386b9f901bda565b8c73a9ce1ec3ebf86083ccee87d179_200.jpeg",
+  items: [
+
+    {name:"📀15 Gold", price:7520},
+    {name:"📀40 Gold", price:20070},
+    {name:"📀90 Gold", price:38540},
+    {name:"📀250 Gold", price:74370},
+    {name:"📀750 Gold", price:206020},
+    {name:"📀1800 Gold", price:385070},
+
+    {name:"💸10000 $", price:3880},
+    {name:"💸50000 $", price:14980},
+    {name:"💸120000 $", price:22400},
+    {name:"💸300000 $", price:38540},
+    {name:"💸800000 $", price:74370},
+    {name:"💸2500000 $", price:206020}
+
+  ]
+},
+  carx_others: {
+  title: "CarX Street Packs & Pass",
+  icon: "bba977e0d57fa56795386b9f901bda565b8c73a9ce1ec3ebf86083ccee87d179_200.jpeg",
+  items: [
+
+    {name:"🏎️Street Pass", price:30470},
+    {name:"🏎️Premium (7D)", price:3880},
+    {name:"🏎️Premium (30D)", price:15590},
+    {name:"🏎️Premium (90D)", price:41530},
+    {name:"🏎️Premium (180D)", price:80340},
+
+    {name:"🧰Pack 1", price:7520},
+    {name:"🧰Pack 2", price:32570},
+    {name:"🧰Pack 3", price:116120},
+    {name:"🧰Pack 4", price:235780},
+
+    {name:"🪀500 Event Points", price:15910},
+    {name:"🪀1500 Event Points", price:38540},
+    {name:"🪀2800 Event Points", price:59440},
+    {name:"🪀4000 Event Points", price:80340},
+
+    {name:"🔑🏎️Mountain Drive", price:17360},
+    {name:"🔑🏎️Mountain Drive Ultimate", price:35550},
+    {name:"🔑🏎️Sunset Speedway", price:20070},
+    {name:"🔑🏎️Sunset Speedway Ultimate", price:38540}
+
+  ]
+},
+  racingmaster: {
+  title: "Racing Master",
+  icon: "racing.webp",
+  items: [
+    // Gems Topup
+    { name: "💎 74 Gems", price: 3980 },
+    { name: "💎 147 Gems", price: 8040 },
+    { name: "💎 221 Gems", price: 12010 },
+    { name: "💎 368 Gems", price: 20530 },
+    { name: "💎 735 Gems", price: 40950 },
+    { name: "💎 1050 Gems", price: 57840 },
+    { name: "💎 1470 Gems", price: 81200 },
+    { name: "💎 2205 Gems", price: 122090 },
+    { name: "💎 3570 Gems", price: 196660 },
+    { name: "💎 6930 Gems", price: 381370 },
+
+    // Pack & MP Combo
+    { name: "🗓 Weekly Card", price: 3980 },
+    { name: "🗓 Monthly Card", price: 9290 },
+    { name: "⚡ Deluxe MP", price: 20530 },
+    { name: "⚡ Upgrade to Premium MP", price: 17700 },
+    { name: "☄️ Premium MP", price: 38180 },
+    { name: "☄️ Upgrade MP", price: 76260 },
+    { name: "☄️ MP Combo", price: 96350 },
+
+    // Packs & Fund
+    { name: "🎁🧰 Novice Pack", price: 800 },
+    { name: "🎁🧰 Value Outfit Pack", price: 3980 },
+    { name: "🎁🧰 Growth Fund", price: 26120 },
+    { name: "🎁🧰 Legendary Car Pack", price: 57840 }
+  ]
+},
+  identity_v: {
+  title: "Identity V Echoes & Packs",
+  icon: "identity-v-logo.jpg",
+  items: [
+
+    // 💌 Echoes
+    {name:"💌66 Echoes", price:3570},
+    {name:"💌203 Echoes", price:10690},
+    {name:"💌335 Echoes", price:17960},
+    {name:"💌759 Echoes", price:35950},
+    {name:"💌2277 Echoes", price:107940},
+    {name:"💌3795 Echoes", price:179870},
+    {name:"💌7590 Echoes", price:359790},
+
+    // 🎁 Packages
+    {name:"🧰Inspirations Package", price:4340},
+    {name:"🧰Clues Package", price:21840},
+    {name:"🏷️Memory Sphere Package", price:43670},
+
+    // 🎉 Anniversary Packs
+    {name:"🥡7th Anni Pack I", price:41160},
+    {name:"🥡7th Anni Pack II", price:61760},
+    {name:"🥡7th Anni Pack III", price:205820},
+    {name:"🥡7th Anni Pack IV", price:411670}
+
+  ]
+},
+  afk_journey: {
+  title: "AFK Journey",
+  icon: "afk-journey.jpg",
+
+  items: [
+
+    // 📜 Gazette
+    {name:"💘 Esperia Monthly Classic Gazette", price:19446},
+    {name:"💘 Esperia Monthly Premium Gazette", price:61320},
+
+    // 🎁 Bundle
+    {name:"💘 Growth Bundle", price:117936},
+
+    // 💎 Dragon Crystals
+    {name:"💎 21 Dragon Crystals", price:4200},
+    {name:"💎 126 Dragon Crystals", price:19446},
+    {name:"💎 294 Dragon Crystals", price:39144},
+    {name:"💎 588 Dragon Crystals", price:81018},
+    {name:"💎 1552 Dragon Crystals", price:196728},
+    {name:"💎 3150 Dragon Crystals", price:393666}
+
+  ]
+},
+  heartopia: {
+  title: "Heartopia",
+  icon: "IMG_20260324_095559_596.jpg",
+  items: [
+
+    // 🌟 Membership Packages
+    {name:"📋🌟Junior Membership", price:2700},
+    {name:"📋🌟Formal Membership", price:15300},
+
+    // 💝 Top-up Packages
+    {name:"💝20 ", price:2600},
+    {name:"💝60 ", price:5190},
+    {name:"💝320 ", price:24770},
+    {name:"💝730 ", price:50000},
+    {name:"💝1370 ", price:94000},
+    {name:"💝2130 ", price:144000},
+    {name:"💝3550 ", price:234800},
+    {name:"💝7050 ", price:430000},
+
+    // 🎁 Winter Frost Series
+    {name:"🩷💼Winter Frost Box", price:23000},
+    {name:"🩷💼Winter Frost Box Boost", price:28100},
+    {name:"🩷💼Winter Frost Luxury Box", price:50500}
+
+  ]
+  }
+ };
+
+const menu = document.getElementById("menu");
+const gamePage = document.getElementById("gamePage");
+const gameTitle = document.getElementById("gameTitle");
+const itemsBox = document.getElementById("items");
+const cartBox = document.getElementById("cart");
+const totalBox = document.getElementById("total");
+const accountInput = document.getElementById("account");
+const cartWrap = document.getElementById("cartBox");
+const successPopup = document.getElementById("successPopup");
+const paymentInfo = document.getElementById("paymentInfo");
+const paymentPhone = document.getElementById("paymentPhone");
+const paymentName = document.getElementById("paymentName");
+
+function updatePaymentInfo(){
+  const pay = document.querySelector('input[name="pay"]:checked');
+  const payment = pay ? pay.value : "";
+  const info = paymentData[payment];
+
+  if(info){
+    paymentPhone.textContent = info.phone;
+    paymentName.textContent = info.name;
+    paymentInfo.style.display = "block";
+  }else{
+    paymentPhone.textContent = "";
+    paymentName.textContent = "";
+    paymentInfo.style.display = "none";
+  }
+}
+function safeText(value){
+  return typeof value === "string" ? value.trim() : "";
+}
+
+function safeIcon(path){
+  const p = safeText(path);
+  return p ? p : ICON_FALLBACK;
+}
+
+function flashCart(){
+  cartWrap.classList.remove("highlight");
+  void cartWrap.offsetWidth;
+  cartWrap.classList.add("highlight");
+  setTimeout(() => {
+    cartWrap.classList.remove("highlight");
+  }, 420);
+}
+function filterGames(){
+  const keyword = document.getElementById("gameSearch").value.toLowerCase();
+  const cards = document.querySelectorAll("#menu .card");
+
+  cards.forEach(card => {
+    const text = card.textContent.toLowerCase();
+    card.style.display = text.includes(keyword) ? "" : "none";
+  });
+}
+function renderMenu(){
+  menu.innerHTML = "";
+
+  for(const key in data){
+    const g = data[key];
+
+   menu.innerHTML += `
+  <div class="card" onclick="openGame('${key}')">
+    ${g.top ? '<div class="top-badge">🔥 Top</div>' : ''}
+    <div class="game-icon-wrap">
+      <img src="${safeIcon(g.icon)}" alt="${g.title}" onerror="this.onerror=null;this.src='${ICON_FALLBACK}'">
+    </div>
+    <span>${g.title}</span>
+  </div>
+`; 
+  }
+  filterGames();
+}
+
+function openGame(key){
+  currentGame = key;
+  cart = {};
+
+  menu.style.display = "none";
+  gamePage.style.display = "grid";
+
+  gameTitle.textContent = data[key].title;
+  accountInput.value = "";
+  document.querySelectorAll('input[name="pay"]').forEach(el => el.checked = false);
+  updatePaymentInfo();
+
+  renderItems();
+  updateCart();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function backMenu(){
+  currentGame = "";
+  cart = {};
+
+  menu.style.display = "grid";
+  gamePage.style.display = "none";
+
+  updateCart();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function renderItems(){
+  itemsBox.innerHTML = "";
+
+  data[currentGame].items.forEach((item,index) => {
+    itemsBox.innerHTML += `
+      <div class="item ${item.bestSeller ? 'best-seller' : ''} ${item.unavailable ? 'unavailable' : ''}">
+        ${item.bestSeller ? '<div class="best-seller-badge">🔥 Best Seller</div>' : ''}
+        ${item.unavailable ? '<div class="unavailable-badge">Unavailable now</div>' : ''}
+        
+        <div class="item-name">${item.name}</div>
+        
+        <div class="qty">
+          <button onclick="${item.unavailable ? '' : `changeQty(${index},-1)`}">-</button>
+          <span id="q${index}">0</span>
+          <button onclick="${item.unavailable ? '' : `changeQty(${index},1)`}">+</button>
+        </div>
+        
+        <div class="item-price">${item.price} ks</div>
+      </div>
+    `;
+  });
+}
+
+function changeQty(index,delta){
+const item = data[currentGame].items[index];
+  if(item.unavailable) return;
+
+
+  cart[index] = (cart[index] || 0) + delta;
+  if(cart[index] < 0) cart[index] = 0;
+
+  const qtyEl = document.getElementById("q" + index);
+  if(qtyEl) qtyEl.textContent = cart[index];
+
+  updateCart();
+  flashCart();
+}
+
+function buildSelectedItems(){
+  const lines = [];
+
+  if(!currentGame) return lines;
+
+  for(const i in cart){
+    if(cart[i] > 0){
+      const item = data[currentGame].items[i];
+      lines.push({
+        text: item.name + " x" + cart[i],
+        total: item.price * cart[i]
+      });
+    }
+  }
+
+  return lines;
+}
+function updateCart(){
+  const selected = buildSelectedItems();
+  let total = 0;
+
+  if(selected.length === 0){
+    cartBox.innerHTML = `<div class="empty-cart">No items selected yet.</div>`;
+  }else{
+    cartBox.innerHTML = selected.map(entry => {
+      total += entry.total;
+      return `<div>${entry.text} - ${entry.total} ks</div>`;
+    }).join("");
+  }
+
+  totalBox.textContent = total;
+} // ✅ clean close
+
+function sendOrder(){
+
+  if(!currentGame){
+    alert("Please select a game first.");
+    return;
+  }
+
+  const selected = buildSelectedItems();
+  if(selected.length === 0){
+    alert("Please select at least one item.");
+    return;
+  }
+
+  const account = accountInput.value || "-";
+const pay = document.querySelector('input[name="pay"]:checked');
+const payment = pay ? pay.value : "Not selected";
+const payInfo = paymentData[payment];
+const total = totalBox.textContent;
+
+  const TELEGRAM_USERNAME = "angsthtun";
+
+  let msg = "🧾 GAMEPAY HUB ORDER\n\n";
+msg += "🎮 Game: " + data[currentGame].title + "\n\n";
+msg += "💎 Items:\n";
+msg += selected.map(i => "• " + i.text).join("\n") + "\n\n";
+msg += "👤 Account: " + account + "\n";
+msg += "💳 Payment: " + payment + "\n";
+
+if(payInfo){
+  msg += "📱 Payment Phone: " + payInfo.phone + "\n";
+  msg += "👤 Payment Name: " + payInfo.name + "\n";
+}
+
+msg += "💰 Total: " + total + " ks";
+
+  const encodedMsg = encodeURIComponent(msg);
+const tgLink = "tg://resolve?domain=" + TELEGRAM_USERNAME + "&text=" + encodedMsg;
+const webLink = "https://t.me/" + TELEGRAM_USERNAME + "?text=" + encodedMsg;
+
+// 🔥 open telegram app first
+window.location.href = tgLink;
+
+
+// 🔥 fallback (important)
+setTimeout(() => {
+  window.open(webLink, "_blank");
+}, 800);
+  
+
+    }
+    document.querySelectorAll('input[name="pay"]').forEach(el => {
+  el.addEventListener("change", updatePaymentInfo);
+});
+
+renderMenu();
+updateCart();
+</script>
+
+</body>
+</html>
