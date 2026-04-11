@@ -1703,19 +1703,17 @@ msg += "💰 Total: " + total + " ks";
 
   const encodedMsg = encodeURIComponent(msg);
 const tgLink = "tg://resolve?domain=" + TELEGRAM_USERNAME + "&text=" + encodedMsg;
-const webLink = "https://t.me/" + TELEGRAM_USERNAME + "?text=" + encodedMsg;
 
-// 🔥 open telegram app first
-window.location.href = tgLink;
+const isTelegram = /Telegram/i.test(navigator.userAgent);
 
-
-// 🔥 fallback (important)
-setTimeout(() => {
+if(isTelegram){
+  // Telegram browser → no fallback
+  window.location.href = tgLink;
+}else{
+  // normal browser → use web link
+  const webLink = "https://t.me/" + TELEGRAM_USERNAME + "?text=" + encodedMsg;
   window.open(webLink, "_blank");
-}, 800);
-  
-
-    }
+}
     document.querySelectorAll('input[name="pay"]').forEach(el => {
   el.addEventListener("change", updatePaymentInfo);
 });
