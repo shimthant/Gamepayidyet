@@ -708,6 +708,74 @@ overflow-wrap:anywhere;
     font-size:13px;
     line-height:1.65;
   }
+.copy-popup{
+  position:fixed;
+  inset:0;
+  z-index:99999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(10,0,20,.58);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+}
+
+.copy-popup.hidden{
+  display:none !important;
+}
+
+.copy-box{
+  width:min(92%, 340px);
+  border-radius:24px;
+  padding:22px 18px;
+  text-align:center;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03)),
+    linear-gradient(180deg, rgba(88,25,150,.82), rgba(35,8,60,.92));
+  border:1px solid rgba(224,180,255,.24);
+  box-shadow:
+    0 18px 44px rgba(0,0,0,.34),
+    0 0 24px rgba(213,140,255,.16),
+    inset 0 1px 0 rgba(255,255,255,.06);
+}
+
+.copy-title{
+  font-size:19px;
+  font-weight:900;
+  color:#fff;
+}
+
+.copy-text{
+  margin-top:10px;
+  font-size:13px;
+  line-height:1.6;
+  color:rgba(255,255,255,.82);
+}
+
+.copy-actions{
+  margin-top:18px;
+  display:flex;
+  gap:10px;
+}
+
+.copy-actions button{
+  flex:1;
+  border:none;
+  border-radius:14px;
+  padding:12px 10px;
+  cursor:pointer;
+  font-weight:800;
+  color:#fff;
+  background:linear-gradient(90deg,#7b2cff,#c24dff);
+  box-shadow:0 0 16px rgba(199,125,255,.24);
+}
+
+#closePopup{
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:none;
+}
+
 }
   </style>
   </head>
@@ -795,7 +863,18 @@ overflow-wrap:anywhere;
     <button onclick="closePopup()">OK</button>
   </div>
 </div>
-
+<div id="copyPopup" class="copy-popup hidden">
+  <div class="copy-box">
+    <div class="copy-title">📋 Order Copied</div>
+    <div class="copy-text">
+      Telegram chat ထဲမှာ Paste → Send လုပ်ပါ
+    </div>
+    <div class="copy-actions">
+      <button id="openTG" type="button">Open Telegram</button>
+      <button id="closePopup" type="button">Close</button>
+    </div>
+  </div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <script>
 particlesJS("particles-js",{
@@ -1701,30 +1780,41 @@ function sendOrder(){
 
   msg += "💰 Total: " + total + " ks";
 
-  const encodedMsg = encodeURIComponent(msg);
+ const encodedMsg = encodeURIComponent(msg);
 
-  const isTelegram = /Telegram/i.test(navigator.userAgent);
+const isTelegram = /Telegram/i.test(navigator.userAgent);
 
-  if(isTelegram){
-    // 🔥 Telegram in-app browser (Admin chat case)
+if(isTelegram){
+  // Telegram in-app browser (Admin chat case)
 
-    // ✅ copy
-    if (navigator.clipboard && window.isSecureContext) {
-      navigator.clipboard.writeText(msg).catch(() => {});
-    }
-
-    // ✅ clear alert
-    alert("📋 Order copied!\n\n👉 Telegram chat ထဲမှာ Paste → Send လုပ်ပါ");
-
-    // ❗ IMPORTANT → text မပို့ဘဲ chat သာဖွင့်
-    window.location.href = "https://t.me/" + TELEGRAM_USERNAME;
-
-  } else {
-    // 🌐 normal browser (best experience)
-    const webLink = "https://t.me/" + TELEGRAM_USERNAME + "?text=" + encodedMsg;
-    window.open(webLink, "_blank");
+  // copy
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(msg).catch(() => {});
   }
 
+  // alert မသုံးတော့ဘဲ custom popup ပြ
+  showCopyPopup("https://t.me/" + TELEGRAM_USERNAME);
+
+} else {
+  // normal browser
+  const webLink = "https://t.me/" + TELEGRAM_USERNAME + "?text=" + encodedMsg;
+  window.open(webLink, "_blank");
+} 
+function showCopyPopup(tgLink){
+  const popup = document.getElementById("copyPopup");
+  const openBtn = document.getElementById("openTG");
+  const closeBtn = document.getElementById("closePopup");
+
+  popup.classList.remove("hidden");
+
+  openBtn.onclick = function(){
+    window.location.href = tgLink;
+  };
+
+  closeBtn.onclick = function(){
+    popup.classList.add("hidden");
+  };
+}
 }
     document.querySelectorAll('input[name="pay"]').forEach(el => {
   el.addEventListener("change", updatePaymentInfo);
