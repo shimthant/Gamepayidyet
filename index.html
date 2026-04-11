@@ -681,6 +681,10 @@ overflow-wrap:anywhere;
   line-height: 1.6;
   text-align: center;
   }
+/* ✅ ဒီလိုအဆုံးမှာ ထည့်ပါ */
+#gameDescription {
+  display: none; /* default ဖျောက်ထား */
+}
 }
 }
   </style>
@@ -1546,7 +1550,13 @@ function openGame(key){
 function renderDescription(){
   const descBox = document.getElementById("gameDescription");
   const desc = data[currentGame].description || "";
-  descBox.textContent = desc;
+
+  if(desc){
+    descBox.textContent = desc;
+    descBox.style.display = "block"; // game ရွေးလိုက်ရင်သာ ပြမယ်
+  } else {
+    descBox.style.display = "none"; // description မရှိရင် ဖျောက်မယ်
+  }
 }
 function backMenu(){
   currentGame = "";
@@ -1557,6 +1567,8 @@ function backMenu(){
 
   updateCart();
   window.scrollTo({top:0,behavior:"smooth"});
+document.getElementById("gameDescription").style.display = "none";
+
 }
 function renderItems(){
   itemsBox.innerHTML = "";
