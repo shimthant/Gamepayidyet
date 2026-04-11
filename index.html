@@ -699,10 +699,7 @@ overflow-wrap:anywhere;
     <div class="hero-title">Fast Topup • Neon Blue Store UI</div>
     <div class="hero-sub">Select your game, choose items, and send your order to Telegram in one tap.</div>
   </div>
-  <div class="main-description-box">
-  📌 သင့် Game ID / Server ကို မှန်မှန်ထည့်ပြီး Payment Method ကိုရွေးချယ်ပါ။ 
-  Order တင်ပြီး Telegram မှာ confirm လုပ်နိုင်ပါတယ်။
-  </div>
+
   <div class="usage-box">
   <div class="usage-text">
     📘 အသုံးပြုပုံကြည့်ရန် ဒီနေရာကိုနှိပ်ပါ
@@ -1466,7 +1463,7 @@ const successPopup = document.getElementById("successPopup");
 const paymentInfo = document.getElementById("paymentInfo");
 const paymentPhone = document.getElementById("paymentPhone");
 const paymentName = document.getElementById("paymentName");
-
+const usageBox = document.getElementById("usageBox");
 function updatePaymentInfo(){
   const pay = document.querySelector('input[name="pay"]:checked');
   const payment = pay ? pay.value : "";
@@ -1533,6 +1530,7 @@ function openGame(key){
 
   menu.style.display = "none";
   gamePage.style.display = "grid";
+  usageBox.style.display = "none";
 
   gameTitle.textContent = data[key].title;
   accountInput.value = "";
@@ -1549,7 +1547,8 @@ function backMenu(){
 
   menu.style.display = "grid";
   gamePage.style.display = "none";
-
+usageBox.style.display = "flex";
+  
   updateCart();
   window.scrollTo({top:0,behavior:"smooth"});
 }
