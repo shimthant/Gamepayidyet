@@ -1700,20 +1700,31 @@ if(payInfo){
 }
 
 msg += "💰 Total: " + total + " ks";
-
-  const encodedMsg = encodeURIComponent(msg);
+const encodedMsg = encodeURIComponent(msg);
 const tgLink = "tg://resolve?domain=" + TELEGRAM_USERNAME + "&text=" + encodedMsg;
 
 const isTelegram = /Telegram/i.test(navigator.userAgent);
 
 if(isTelegram){
-  // Telegram browser → no fallback
+  // ✅ Telegram in-app browser
+
+  // copy text
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(msg).catch(() => {});
+  }
+
+  // alert
+  alert("📋 Order text copied!\nTelegram chat ထဲမှာ paste လုပ်ပြီး send လုပ်ပါ။");
+
+  // open telegram
   window.location.href = tgLink;
+
 }else{
-  // normal browser → use web link
+  // ✅ normal browser
   const webLink = "https://t.me/" + TELEGRAM_USERNAME + "?text=" + encodedMsg;
   window.open(webLink, "_blank");
 }
+  
 }
     document.querySelectorAll('input[name="pay"]').forEach(el => {
   el.addEventListener("change", updatePaymentInfo);
