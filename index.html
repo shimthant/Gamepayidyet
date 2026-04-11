@@ -865,11 +865,13 @@ overflow-wrap:anywhere;
 </div>
 <div id="copyPopup" class="copy-popup hidden">
   <div class="copy-box">
-    <div class="copy-title">📋 Order Copied</div>
-    <div class="copy-text">
-      Telegram chat ထဲမှာ Paste → Send လုပ်ပါ
-    </div>
+    <div class="copy-title">📋 Order Ready</div>
+    <div class="copy-text">Copy မအောင်မြင်ရင် အောက်ကစာကို manual copy လုပ်ပြီး Telegram မှာ paste လုပ်ပါ</div>
+
+    <textarea id="copyOrderText" readonly style="width:100%;height:120px;margin-top:12px;border-radius:12px;padding:10px;background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.12);"></textarea>
+
     <div class="copy-actions">
+      <button id="copyAgainBtn" type="button">Copy Again</button>
       <button id="openTG" type="button">Open Telegram</button>
       <button id="closePopup" type="button">Close</button>
     </div>
@@ -1781,25 +1783,33 @@ function sendOrder(){
   msg += "💰 Total: " + total + " ks";
 
  const encodedMsg = encodeURIComponent(msg);
-
 const isTelegram = /Telegram/i.test(navigator.userAgent);
 
 if(isTelegram){
-  // Telegram in-app browser (Admin chat case)
+  // 1) modern copy
+  const doOpenPopup = () => {
+    showCopyPopup("https://t.me/" + TELEGRAM_USERNAME, msg);
+  };
 
-  // copy
   if (navigator.clipboard && window.isSecureContext) {
-    navigator.clipboard.writeText(msg).catch(() => {});
+    navigator.clipboard.writeText(msg)
+      .then(() => {
+        doOpenPopup();
+      })
+      .catch(() => {
+        fallbackCopyText(msg);
+        doOpenPopup();
+      });
+  } else {
+    fallbackCopyText(msg);
+    doOpenPopup();
   }
-
-  // alert မသုံးတော့ဘဲ custom popup ပြ
-  showCopyPopup("https://t.me/" + TELEGRAM_USERNAME);
 
 } else {
   // normal browser
   const webLink = "https://t.me/" + TELEGRAM_USERNAME + "?text=" + encodedMsg;
   window.open(webLink, "_blank");
-} 
+}
 function showCopyPopup(tgLink){
   const popup = document.getElementById("copyPopup");
   const openBtn = document.getElementById("openTG");
@@ -1815,6 +1825,56 @@ function showCopyPopup(tgLink){
     popup.classList.add("hidden");
   };
 }
+  function fallbackCopyText(text){
+  const ta = document.createElement("textarea");
+  ta.value = text;
+  ta.setAttribute("readonly", "");
+  ta.style.position = "fixed";
+  ta.style.top = "-9999px";
+  ta.style.left = "-9999px";
+  document.body.appendChild(ta);
+
+  ta.focus();
+  ta.select();
+
+  try {
+    document.execCommand("copy");
+  } catch (e) {}
+
+  document.body.removeChild(ta);
+}
+
+function showCopyPopup(tgLink, text){
+  const popup = document.getElementById("copyPopup");
+  const openBtn = document.getElementById("openTG");
+  const closeBtn = document.getElementById("closePopup");
+  const textBox = document.getElementById("copyOrderText");
+  const copyBtn = document.getElementById("copyAgainBtn");
+
+  popup.classList.remove("hidden");
+
+  if(textBox){
+    textBox.value = text;
+  }
+
+  if(copyBtn){
+    copyBtn.onclick = function(){
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).catch(() => fallbackCopyText(text));
+      } else {
+        fallbackCopyText(text);
+      }
+    };
+  }
+
+  openBtn.onclick = function(){
+    window.location.href = tgLink;
+  };
+
+  closeBtn.onclick = function(){
+    popup.classList.add("hidden");
+  };
+    }
 }
     document.querySelectorAll('input[name="pay"]').forEach(el => {
   el.addEventListener("change", updatePaymentInfo);
