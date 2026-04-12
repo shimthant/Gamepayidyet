@@ -1843,7 +1843,6 @@ function fallbackCopyText(text){
 
   document.body.removeChild(ta);
 }
-
 function showCopyPopup(tgLink, text){
   const popup = document.getElementById("copyPopup");
   const openBtn = document.getElementById("openTG");
@@ -1856,13 +1855,28 @@ function showCopyPopup(tgLink, text){
 
   copyBtn.onclick = function(){
     textBox.removeAttribute("readonly");
+    textBox.style.display = "block";
     textBox.focus();
     textBox.select();
     textBox.setSelectionRange(0, 99999);
+
+    let copied = false;
+
     try {
-      document.execCommand("copy");
+      copied = document.execCommand("copy");
     } catch (e) {}
+
+    if (!copied && navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(() => {
+        copied = true;
+      }).catch(() => {});
+    }
+
     textBox.setAttribute("readonly", "readonly");
+
+    if(!copied){
+      alert("စာကို manual copy လုပ်ပါ\nLong press > Copy");
+    }
   };
 
   openBtn.onclick = function(){
@@ -1873,6 +1887,7 @@ function showCopyPopup(tgLink, text){
     popup.classList.add("hidden");
   };
 }
+
 }
     document.querySelectorAll('input[name="pay"]').forEach(el => {
   el.addEventListener("change", updatePaymentInfo);
