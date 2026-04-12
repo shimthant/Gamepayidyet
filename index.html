@@ -1825,7 +1825,7 @@ if(isTelegram){
   window.open(webLink, "_blank");
 }
 
-  function fallbackCopyText(text){
+function fallbackCopyText(text){
   const ta = document.createElement("textarea");
   ta.value = text;
   ta.setAttribute("readonly", "");
@@ -1844,7 +1844,7 @@ if(isTelegram){
   document.body.removeChild(ta);
 }
 
-function showCopyPopup(tgLink, text){။function showCopyPopup(tgLink, text){
+function showCopyPopup(tgLink, text){
   const popup = document.getElementById("copyPopup");
   const openBtn = document.getElementById("openTG");
   const closeBtn = document.getElementById("closePopup");
@@ -1859,6 +1859,9 @@ function showCopyPopup(tgLink, text){။function showCopyPopup(tgLink, text){
     textBox.focus();
     textBox.select();
     textBox.setSelectionRange(0, 99999);
+    try {
+      document.execCommand("copy");
+    } catch (e) {}
     textBox.setAttribute("readonly", "readonly");
   };
 
@@ -1869,7 +1872,7 @@ function showCopyPopup(tgLink, text){။function showCopyPopup(tgLink, text){
   closeBtn.onclick = function(){
     popup.classList.add("hidden");
   };
-    }
+}
 }
     document.querySelectorAll('input[name="pay"]').forEach(el => {
   el.addEventListener("change", updatePaymentInfo);
