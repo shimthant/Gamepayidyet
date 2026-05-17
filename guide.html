@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>အသုံးပြုပုံ - Gamepay Hub</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
   <style>
     *{
       margin:0;
@@ -13,81 +14,147 @@
       font-family:Poppins,sans-serif;
     }
 
+    html,body{
+      width:100%;
+      overflow-x:hidden;
+    }
+
     body{
-      background:linear-gradient(135deg,#03142f 0%, #083a86 55%, #0c54c7 100%);
-      color:#fff;
       min-height:100vh;
-      padding:20px;
+      padding:22px;
+      background:
+        radial-gradient(circle at top left, rgba(0,225,255,.25), transparent 28%),
+        radial-gradient(circle at top right, rgba(110,150,255,.22), transparent 34%),
+        linear-gradient(135deg,#eefbff 0%, #dff4ff 45%, #b8dcff 100%);
+      color:#123b64;
     }
 
     .container{
       width:100%;
-      max-width:900px;
+      max-width:920px;
       margin:0 auto;
     }
 
     .topbar{
-      margin-bottom:20px;
+      margin-bottom:22px;
     }
 
     .back-btn{
-      display:inline-block;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
       text-decoration:none;
-      background:#19e8ff;
-      color:#03244e;
-      padding:10px 16px;
-      border-radius:12px;
+      background:linear-gradient(135deg,#56d9ff,#4e9dff);
+      color:#ffffff;
+      padding:12px 18px;
+      border-radius:16px;
       font-weight:800;
-      box-shadow:0 0 14px rgba(25,232,255,.28);
+      font-size:14px;
+      box-shadow:
+        0 10px 24px rgba(60,160,255,.24),
+        0 0 16px rgba(90,220,255,.18);
     }
 
     .title{
       text-align:center;
-      font-size:30px;
-      font-weight:800;
+      font-size:40px;
+      font-weight:900;
+      color:#0c4c91;
+      text-shadow:
+        0 1px 0 rgba(255,255,255,.75),
+        0 0 18px rgba(0,180,255,.28);
       margin-bottom:10px;
-      text-shadow:0 0 10px #00eaff;
     }
 
     .subtitle{
       text-align:center;
-      color:#d8f8ff;
-      margin-bottom:24px;
-      font-size:14px;
+      color:#4c6e8f;
+      margin-bottom:28px;
+      font-size:15px;
+      line-height:1.7;
     }
 
     .guide-card{
-      background:linear-gradient(180deg,rgba(8,49,112,.97),rgba(6,36,86,.97));
-      border:1px solid rgba(120,232,255,.18);
-      border-radius:20px;
-      padding:18px;
-      margin-bottom:18px;
-      box-shadow:0 10px 28px rgba(0,0,0,.2);
+      position:relative;
+      overflow:hidden;
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,.82), transparent 34%),
+        linear-gradient(180deg, rgba(210,240,255,.92), rgba(140,210,255,.82));
+      border:1px solid rgba(255,255,255,.88);
+      border-radius:28px;
+      padding:22px;
+      margin-bottom:22px;
+      box-shadow:
+        0 18px 42px rgba(70,150,220,.16),
+        inset 0 1px 0 rgba(255,255,255,.92),
+        0 0 16px rgba(90,210,255,.12);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
     }
 
     .guide-card h3{
-      font-size:18px;
-      margin-bottom:10px;
-      color:#fff;
-      text-shadow:0 0 8px #00eaff;
+      font-size:20px;
+      font-weight:900;
+      margin-bottom:12px;
+      color:#0c4c91;
+      text-shadow:
+        0 1px 0 rgba(255,255,255,.7),
+        0 0 12px rgba(0,180,255,.18);
     }
 
     .guide-card p{
-      color:#d8f8ff;
-      line-height:1.7;
+      color:#28557d;
+      line-height:1.9;
       font-size:14px;
-      margin-bottom:12px;
+      font-weight:600;
+      margin-bottom:16px;
     }
 
     .guide-card img{
       width:100%;
-      border-radius:16px;
       display:block;
-      border:1px solid rgba(255,255,255,.12);
-      box-shadow:0 0 18px rgba(0,234,255,.12);
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.82);
+      box-shadow:
+        0 14px 30px rgba(70,150,220,.16),
+        0 0 14px rgba(120,220,255,.14);
+    }
+
+    @media (max-width:600px){
+      body{
+        padding:16px;
+      }
+
+      .title{
+        font-size:30px;
+      }
+
+      .subtitle{
+        font-size:13px;
+        margin-bottom:22px;
+      }
+
+      .guide-card{
+        padding:18px;
+        border-radius:24px;
+      }
+
+      .guide-card h3{
+        font-size:17px;
+      }
+
+      .guide-card p{
+        font-size:13px;
+        line-height:1.8;
+      }
+
+      .guide-card img{
+        border-radius:18px;
+      }
     }
   </style>
 </head>
+
 <body>
   <div class="container">
     <div class="topbar">
@@ -111,14 +178,20 @@
 
     <div class="guide-card">
       <h3>၃။ Account ဖြည့်ပါ</h3>
-      <p>Game ID / Server / Name ကိုမှန်မှန်ကန်ကန်ဖြည့်ပေးပါ။</p>
+      <p>Game ID / Server / Name ကို မှန်မှန်ကန်ကန် ဖြည့်ပေးပါ။ မှားရိုက်မိရင် topup မှားနိုင်လို့ သေချာစစ်ပေးပါ။</p>
       <img src="images/guide3.jpg" alt="Guide Step 3">
     </div>
 
     <div class="guide-card">
-      <h3>၄။ Payment ရွေးပြီး Order တင်ပါ</h3>
-      <p>Payment method ကိုရွေးပြီး Order via Telegram ကိုနှိပ်ကာ order တင်နိုင်ပါတယ်။</p>
+      <h3>၄။ Payment ရွေးပါ</h3>
+      <p>KPay / Wave / UAB / AyaPay စတဲ့ payment method ကိုရွေးပါ။ ရွေးပြီးရင် payment phone number နဲ့ name ပေါ်လာပါမယ်။</p>
       <img src="images/guide4.jpg" alt="Guide Step 4">
+    </div>
+
+    <div class="guide-card">
+      <h3>၅။ Order via Telegram နှိပ်ပါ</h3>
+      <p>Order via Telegram ကိုနှိပ်ပြီး order စာကို Telegram မှာပို့ပါ။ ငွေလွှဲပြီးရင် payment screenshot ကိုပါ ပို့ပေးပါ။</p>
+      <img src="images/guide5.jpg" alt="Guide Step 5">
     </div>
   </div>
 </body>
