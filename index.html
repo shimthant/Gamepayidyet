@@ -1020,6 +1020,133 @@ textarea::placeholder,
     text-shadow:none !important;
   }
     }
+    /* ✅ Pearl + Blue Bright Fix */
+
+body{
+  color:#0d2f5c;
+  background:
+    radial-gradient(circle at top left, rgba(0,180,255,.35), transparent 30%),
+    radial-gradient(circle at top right, rgba(80,120,255,.25), transparent 34%),
+    linear-gradient(135deg,#f7fdff 0%, #d8f3ff 45%, #b8dcff 100%) !important;
+}
+
+/* Pearl blue cards */
+.card,
+.hero,
+.panel,
+.usage-box,
+.game-description-box,
+.search-input,
+textarea{
+  background:linear-gradient(
+    180deg,
+    rgba(255,255,255,.82),
+    rgba(198,235,255,.55)
+  ) !important;
+  border:1px solid rgba(255,255,255,.75) !important;
+  box-shadow:
+    0 14px 34px rgba(18,104,190,.18),
+    0 0 18px rgba(0,185,255,.16) !important;
+}
+
+/* Product cards need blue-pearl, not pure white */
+.card{
+  background:linear-gradient(
+    180deg,
+    rgba(95,165,255,.95),
+    rgba(52,105,235,.92)
+  ) !important;
+}
+
+.card span{
+  color:#ffffff !important;
+  text-shadow:0 1px 6px rgba(0,45,120,.45) !important;
+}
+
+/* Cart items + payment info readable */
+.item,
+.cart-box,
+.payment label,
+#paymentInfo{
+  background:linear-gradient(
+    180deg,
+    rgba(25,105,220,.92),
+    rgba(16,75,175,.92)
+  ) !important;
+  color:#ffffff !important;
+  border:1px solid rgba(160,230,255,.35) !important;
+  box-shadow:
+    0 10px 24px rgba(0,75,180,.22),
+    0 0 14px rgba(0,200,255,.16) !important;
+}
+
+.item-name,
+.item-price,
+#cart,
+#paymentInfo,
+#paymentInfo strong,
+#paymentPhone,
+#paymentName{
+  color:#ffffff !important;
+  text-shadow:0 1px 5px rgba(0,30,90,.45) !important;
+}
+
+.empty-cart{
+  color:#e9fbff !important;
+}
+
+.total{
+  color:#fff176 !important;
+  text-shadow:0 0 10px rgba(255,241,118,.45) !important;
+}
+
+/* Payment method buttons */
+.payment label{
+  font-weight:700;
+}
+
+.payment label input{
+  accent-color:#19e8ff;
+}
+
+/* Search / textarea readable */
+.search-input,
+textarea{
+  color:#0d2f5c !important;
+}
+
+.search-input::placeholder,
+textarea::placeholder{
+  color:#55728f !important;
+}
+
+/* Mobile fix */
+@media (max-width:600px){
+  body{
+    background:
+      radial-gradient(circle at top left, rgba(0,190,255,.32), transparent 34%),
+      linear-gradient(135deg,#f8fdff 0%, #d7f3ff 45%, #b7dcff 100%) !important;
+  }
+
+  .card{
+    background:linear-gradient(
+      180deg,
+      rgba(88,160,255,1),
+      rgba(55,95,235,1)
+    ) !important;
+  }
+
+  .item,
+  .cart-box,
+  .payment label,
+  #paymentInfo{
+    background:linear-gradient(
+      180deg,
+      rgba(28,110,230,.96),
+      rgba(18,75,175,.96)
+    ) !important;
+  }
+}
   </style>
   </head>
 <body>
