@@ -1257,7 +1257,7 @@ textarea::placeholder{
     0 6px 14px rgba(35,145,255,.28),
     0 0 10px rgba(80,210,255,.22) !important;
 }
-/* Mobile */
+    /* Mobile */
 @media (max-width:600px){
 
   .item,
@@ -1267,23 +1267,34 @@ textarea::placeholder{
     background:
       radial-gradient(
         circle at top left,
-        rgba(255,255,255,.88),
-        transparent 42%
+        rgba(255,255,255,.82),
+        transparent 38%
       ),
 
       linear-gradient(
         180deg,
-        rgba(225,245,255,.98) 0%,
-        rgba(198,236,255,.92) 45%,
-        rgba(168,223,255,.86) 100%
+        rgba(205,240,255,.98) 0%,
+        rgba(150,220,255,.92) 48%,
+        rgba(102,195,255,.88) 100%
       ) !important;
 
-    border:1px solid rgba(255,255,255,.92) !important;
+    border:1px solid rgba(235,250,255,.95) !important;
 
     box-shadow:
-      0 10px 24px rgba(120,190,235,.16),
-      inset 0 1px 0 rgba(255,255,255,.95),
-      0 0 14px rgba(150,225,255,.18) !important;
+      0 10px 24px rgba(70,170,235,.20),
+      inset 0 1px 0 rgba(255,255,255,.92),
+      0 0 18px rgba(90,210,255,.22) !important;
+  }
+
+  .item-name,
+  .item-price,
+  #cart,
+  #paymentInfo,
+  #paymentInfo strong,
+  #paymentPhone,
+  #paymentName,
+  .payment label{
+    color:#0d4575 !important;
   }
 
 }
