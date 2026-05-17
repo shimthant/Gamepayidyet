@@ -2332,21 +2332,31 @@ function sendOrder(){
   const total = totalBox.textContent;
 
   const TELEGRAM_USERNAME = "angsthtun";
-
   let msg = "🧾 GAMEPAY HUB ORDER\n\n";
-  msg += "🎮 Game: " + data[currentGame].title + "\n\n";
-  msg += "💎 Items:\n";
-  msg += selected.map(i => "• " + i.text).join("\n") + "\n\n";
-  msg += "👤 Account: " + account + "\n";
-  msg += "💳 Payment: " + payment + "\n";
 
-  if(payInfo){
-    msg += "📱 Payment Phone: " + payInfo.phone + "\n";
-    msg += "👤 Payment Name: " + payInfo.name + "\n";
-  }
+msg += "🎮 Game\n";
+msg += data[currentGame].title + "\n\n";
 
-  msg += "💰 Total: " + total + " ks";
+msg += "📦 Selected Items\n";
+msg += selected.map(i => "• " + i.text + " — " + i.total + " Ks").join("\n") + "\n\n";
 
+msg += "👤 Account Info\n";
+msg += account + "\n\n";
+
+msg += "💳 Payment Method\n";
+msg += payment + "\n\n";
+
+if(payInfo){
+  msg += "📱 Transfer To\n";
+  msg += payInfo.phone + "\n";
+  msg += payInfo.name + "\n\n";
+}
+
+msg += "💰 Total Amount\n";
+msg += total + " Ks\n\n";
+
+msg += "✅ Please send payment screenshot after transfer.";
+  
  const encodedMsg = encodeURIComponent(msg);
 const isTelegram = /Telegram/i.test(navigator.userAgent);
 
