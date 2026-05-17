@@ -1147,6 +1147,39 @@ textarea::placeholder{
     ) !important;
   }
 }
+    /* ✅ Mobile Pearl + Light Blue Card Final Fix */
+@media (max-width:600px){
+  .card{
+    background:
+      radial-gradient(circle at 30% 10%, rgba(255,255,255,.95), transparent 34%),
+      linear-gradient(
+        180deg,
+        #eafaff 0%,
+        #bfeeff 48%,
+        #8fd8ff 100%
+      ) !important;
+
+    border:1px solid rgba(255,255,255,.95) !important;
+
+    box-shadow:
+      0 10px 24px rgba(60,150,210,.18),
+      inset 0 1px 0 rgba(255,255,255,.9),
+      0 0 16px rgba(120,220,255,.22) !important;
+  }
+
+  .card span{
+    color:#16456d !important;
+    text-shadow:none !important;
+    font-weight:800 !important;
+  }
+
+  .game-icon-wrap{
+    background:rgba(255,255,255,.72) !important;
+    box-shadow:
+      0 8px 18px rgba(75,160,220,.18),
+      inset 0 1px 0 rgba(255,255,255,.95) !important;
+  }
+}
   </style>
   </head>
 <body>
