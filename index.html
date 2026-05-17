@@ -1180,27 +1180,28 @@ textarea::placeholder{
       inset 0 1px 0 rgba(255,255,255,.95) !important;
   }
 }
-    /* ✅ Pearl Glass Fix For Plans / Cart / Payment */
+    /* ✅ Soft Light Blue Glass Fix For Plans / Cart / Payment */
 
 .item,
 .cart-box,
 .payment label,
 #paymentInfo{
   background:
+    radial-gradient(circle at top left, rgba(255,255,255,.70), transparent 38%),
     linear-gradient(
       180deg,
-      rgba(255,255,255,.82),
-      rgba(205,240,255,.58)
+      rgba(190,232,255,.92),
+      rgba(126,203,255,.76)
     ) !important;
 
-  border:1px solid rgba(255,255,255,.88) !important;
+  border:1px solid rgba(210,245,255,.85) !important;
 
   box-shadow:
-    0 10px 24px rgba(90,170,220,.14),
-    inset 0 1px 0 rgba(255,255,255,.92),
-    0 0 12px rgba(120,220,255,.14) !important;
+    0 10px 24px rgba(40,140,220,.18),
+    inset 0 1px 0 rgba(255,255,255,.75),
+    0 0 16px rgba(90,200,255,.20) !important;
 
-  color:#16456d !important;
+  color:#0f3d68 !important;
 }
 
 /* Text readable */
@@ -1212,33 +1213,49 @@ textarea::placeholder{
 #paymentPhone,
 #paymentName,
 .payment label{
-  color:#16456d !important;
+  color:#0f3d68 !important;
   text-shadow:none !important;
+  font-weight:800 !important;
+}
+
+/* Payment Method title */
+.payment-title,
+.section-label{
+  color:#0a4f8f !important;
+  font-weight:900 !important;
+  text-shadow:
+    0 1px 0 rgba(255,255,255,.75),
+    0 0 10px rgba(70,180,255,.28) !important;
 }
 
 /* Total amount */
 .total{
-  color:#0b63ce !important;
-  text-shadow:none !important;
+  color:#005fc7 !important;
+  font-weight:900 !important;
+  text-shadow:
+    0 1px 0 rgba(255,255,255,.8),
+    0 0 10px rgba(80,170,255,.28) !important;
 }
 
 /* Empty cart */
 .empty-cart{
-  color:#4f6f8d !important;
+  color:#2e638d !important;
+  font-weight:700 !important;
 }
 
 /* Quantity buttons */
 .qty button{
   background:linear-gradient(
     135deg,
-    #7ee7ff,
-    #57b8ff
+    #5edcff,
+    #2d9cff
   ) !important;
 
   color:#ffffff !important;
 
   box-shadow:
-    0 6px 14px rgba(80,170,255,.22) !important;
+    0 6px 14px rgba(35,145,255,.28),
+    0 0 10px rgba(80,210,255,.22) !important;
 }
 
 /* Mobile */
@@ -1249,9 +1266,16 @@ textarea::placeholder{
   .payment label,
   #paymentInfo{
     background:
+      radial-gradient(circle at top left, rgba(255,255,255,.68), transparent 40%),
       linear-gradient(
         180deg,
-        rgba(255,255,255
+        rgba(185,230,255,.96),
+        rgba(118,197,255,.82)
+      ) !important;
+  }
+
+}
+
   </style>
   </head>
 <body>
