@@ -1180,6 +1180,78 @@ textarea::placeholder{
       inset 0 1px 0 rgba(255,255,255,.95) !important;
   }
 }
+    /* ✅ Pearl Glass Fix For Plans / Cart / Payment */
+
+.item,
+.cart-box,
+.payment label,
+#paymentInfo{
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.82),
+      rgba(205,240,255,.58)
+    ) !important;
+
+  border:1px solid rgba(255,255,255,.88) !important;
+
+  box-shadow:
+    0 10px 24px rgba(90,170,220,.14),
+    inset 0 1px 0 rgba(255,255,255,.92),
+    0 0 12px rgba(120,220,255,.14) !important;
+
+  color:#16456d !important;
+}
+
+/* Text readable */
+.item-name,
+.item-price,
+#cart,
+#paymentInfo,
+#paymentInfo strong,
+#paymentPhone,
+#paymentName,
+.payment label{
+  color:#16456d !important;
+  text-shadow:none !important;
+}
+
+/* Total amount */
+.total{
+  color:#0b63ce !important;
+  text-shadow:none !important;
+}
+
+/* Empty cart */
+.empty-cart{
+  color:#4f6f8d !important;
+}
+
+/* Quantity buttons */
+.qty button{
+  background:linear-gradient(
+    135deg,
+    #7ee7ff,
+    #57b8ff
+  ) !important;
+
+  color:#ffffff !important;
+
+  box-shadow:
+    0 6px 14px rgba(80,170,255,.22) !important;
+}
+
+/* Mobile */
+@media (max-width:600px){
+
+  .item,
+  .cart-box,
+  .payment label,
+  #paymentInfo{
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255,255,255
   </style>
   </head>
 <body>
