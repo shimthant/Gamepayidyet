@@ -1306,11 +1306,64 @@ textarea::placeholder{
     0 1px 0 rgba(255,255,255,.82),
     0 0 10px rgba(90,210,255,.18);
     }
+/* Floating Cart */
+#floatingCart{
+  position:fixed;
 
+  bottom:18px;
+  right:18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #5edcff,
+      #3a9fff
+    );
+
+  color:#fff;
+
+  padding:14px 18px;
+
+  border-radius:18px;
+
+  font-weight:800;
+
+  font-size:14px;
+
+  box-shadow:
+    0 14px 30px rgba(60,150,255,.24);
+
+  z-index:99999;
+
+  cursor:pointer;
+
+  transition:.25s ease;
+}
+
+#floatingCart:hover{
+  transform:translateY(-2px);
+}
+
+@media (max-width:600px){
+
+  #floatingCart{
+    bottom:14px;
+    right:14px;
+
+    padding:13px 16px;
+
+    border-radius:16px;
+
+    font-size:13px;
+  }
+
+}
   </style>
   </head>
 <body>
-
+<div id="floatingCart" onclick="scrollToCart()">
+  🛒 0 Items • 0 Ks
+</div>
 <div id="particles-js"></div>
 
 <div class="container">
@@ -2318,6 +2371,7 @@ function updateCart(){
   }
 
   totalBox.textContent = total;
+  updateFloatingCart();
 } // ✅ clean close
 
 function sendOrder(){
@@ -2465,6 +2519,29 @@ function showCopyPopup(tgLink, text){
 searchWrap.style.display = "flex";
 renderMenu();
 updateCart();
+    function updateFloatingCart(){
+
+  const total =
+    document.getElementById("total").textContent;
+
+  let count = 0;
+
+  for(const i in cart){
+    count += cart[i];
+  }
+
+  document.getElementById("floatingCart")
+    .innerHTML =
+    `🛒 ${count} Items • ${total} Ks`;
+}
+
+function scrollToCart(){
+
+  document.getElementById("cartBox")
+    .scrollIntoView({
+      behavior:"smooth"
+    });
+  
 </script>
 
 </body>
