@@ -2334,26 +2334,25 @@ function sendOrder(){
   const TELEGRAM_USERNAME = "angsthtun";
   let msg = "🧾 GAMEPAY HUB ORDER\n\n";
 
-msg += "🎮 Game\n";
-msg += data[currentGame].title + "\n\n";
+msg += "🎮 Game : " + data[currentGame].title + "\n\n";
 
 msg += "📦 Selected Items\n";
-msg += selected.map(i => "• " + i.text + " — " + i.total + " Ks").join("\n") + "\n\n";
+msg += selected.map(i =>
+  "• " + i.text + " — " + i.total + " Ks"
+).join("\n");
+msg += "\n\n";
 
-msg += "👤 Account Info\n";
-msg += account + "\n\n";
+msg += "👤 Account Info : " + account + "\n\n";
 
-msg += "💳 Payment Method\n";
-msg += payment + "\n\n";
+msg += "💳 Payment Method : " + payment + "\n\n";
 
 if(payInfo){
-  msg += "📱 Transfer To\n";
-  msg += payInfo.phone + "\n";
-  msg += payInfo.name + "\n\n";
+  msg += "💳 Transfer To\n";
+  msg += "Phone : " + payInfo.phone + "\n";
+  msg += "Name : " + payInfo.name + "\n\n";
 }
 
-msg += "💰 Total Amount\n";
-msg += total + " Ks\n\n";
+msg += "💰 Total Amount : " + total + " Ks\n\n";
 
 msg += "✅ Please send payment screenshot after transfer.";
   
