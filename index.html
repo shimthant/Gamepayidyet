@@ -1394,7 +1394,7 @@ textarea::placeholder{
   <div class="usage-text">
     📘 အသုံးပြုပုံကြည့်ရန် ဒီနေရာကိုနှိပ်ပါ
   </div>
-  <a href="guide.html" class="usage-btn">အသုံးပြုပုံ</a>
+  <a href="#" class="usage-btn" onclick="alert('Guide is currently unavailable.')">အသုံးပြုပုံ</a>
   </div>
 <div id="searchWrap" class="search-wrap">
   <input
@@ -1509,22 +1509,12 @@ particlesJS("particles-js",{
 const TELEGRAM = "angsthtun";
 const ICON_FALLBACK = "https://via.placeholder.com/120x120.png?text=GAME";
 const paymentData = {
-  Kpay: {
-    phone: "09795687480",
-    name: "Aung Shin Thant Htun"
-  },
-  Wave: {
-    phone: "09795687480",
-    name: "Aung Shin Thant Htun"
-  },
-  UAB: {
-    phone: "09795687480",
-    name: "Aung Shin Thant Htun"
-  },
-  AyaPay: {
-    phone: "09795687480",
-    name: "Aung Shin Thant Htun"
-  }
+  Kpay: { phone: "09795687480", name: "Aung Shin Thant Htun" },
+  Wave: { phone: "09795687480", name: "Aung Shin Thant Htun" },
+  UAB: { phone: "09795687480", name: "Aung Shin Thant Htun" },
+  Binance: { phone: "09795687480", name: "Aung Shin Thant Htun" },
+  AyaPay: { phone: "09795687480", name: "Aung Shin Thant Htun" },
+  "WeChat Pay": { phone: "09795687480", name: "Aung Shin Thant Htun" }
 };
 let cart = {};
 let currentGame = "";
@@ -1534,7 +1524,7 @@ let data = {
     title:"Mobile Legends",
     description:`ID(Server ID)နှင့်Account Nameကို‌ သေချာလည်းရိုက်ထည့်ပေးပါဗျ။`,
     top:true,
-    icon:"images/mlbb.png",
+    icon:"https://via.placeholder.com/120x120.png?text=MLBB",
     items: [
       {name:"💌 Weekly Pass", price:6400,bestSeller:true},
       {name:"🔑🧰 Weekly Elite Bundle", price:3450},
@@ -1566,7 +1556,7 @@ let data = {
   genshin_blessing: {
   title: "Genshin Impact 🆔 Topup",
   description:`ID နှင့်Severကို‌ သေချာလည်းရိုက်ထည့်ပေးပါဗျ။`,
-  icon: "unnamed.webp",
+  icon: "https://via.placeholder.com/120x120.png?text=Genshin",
   items: [
 
     {name:"🌙Blessing", price:20600,bestSeller:true,},
@@ -1601,7 +1591,7 @@ Currency Exchange Rate ပေါ်မူတည်၍
 ✅ Order မတင်မီ နောက်ဆုံးဈေးနှုန်းအား
 အတည်ပြုပေးပါရန် မေတ္တာရပ်ခံအပ်ပါသည်။`,
   top:true,
-  icon:"unnamed.webp",
+  icon:"https://via.placeholder.com/120x120.png?text=Genshin",
   items:[
     {name:"🌙Blessing", price:20600,bestSeller:true, login:true},
     {name:"💠 60 Genesis Crystal", price:4300, login:true},
@@ -1613,11 +1603,10 @@ Currency Exchange Rate ပေါ်မူတည်၍
     {name:"🌅 Gnostic Hym,", price:40000,},
     {name:"🌅 Gnostic Chorus,", price:85000,}
   ]
-  ]
 }, 
 honkaistarrail: {
   title: "Honkai: Star Rail",
-  icon: "1942.jpg",
+  icon: "https://via.placeholder.com/120x120.png?text=HSR",
   items: [
     // 🔖 Supply
     {name:"🌟🔖Express Supply", price:20000},
@@ -1633,7 +1622,7 @@ honkaistarrail: {
 },
 zenlesszonezero: {
   title: "Zenless Zone Zero",
-  icon: "Zenless_Zone_Zero_icon.webp",
+  icon: "https://via.placeholder.com/120x120.png?text=ZZZ",
   items: [
 
     // 😍 Membership
@@ -1919,11 +1908,10 @@ items:[
   {name:"🦪1800 Echo", price:122500},
   {name:"🦪3000 Echo", price:204000},
   {name:"🦪6000 Echo", price:405000},
-  {name:"🦪12000 Echo", price:813000}
-
+    {name:"🦪12000 Echo", price:813000}
   ]
 },
-  pubgmobile_packs: {
+pubgmobile_packs: {
   title: "PUBG Mobile Packs & Passes",
   icon: "1372.jpg",
   items: [
@@ -2316,11 +2304,10 @@ function openGame(key){
   accountInput.value = "";
   document.querySelectorAll('input[name="pay"]').forEach(el => el.checked = false);
   updatePaymentInfo();
-  
-renderGameDescription();
+  renderGameDescription();
   renderItems();
   updateCart();
-  window.scrollTo({top:0,behavior:"smooth"});
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 function backMenu(){
   currentGame = "";
@@ -2557,25 +2544,23 @@ function showCopyPopup(tgLink, text){
 });
     
 
-searchWrap.style.display = "flex";
-renderMenu();
-updateCart();
+document.addEventListener("DOMContentLoaded", () => {
+  searchWrap.style.display = "flex";
+  renderMenu();
+  updateCart();
+});
 
+function closePopup(){
+  successPopup.style.display = "none";
+}
 
 function updateFloatingCart(){
-
-  const total =
-    document.getElementById("total").textContent;
-
+  const total = document.getElementById("total").textContent;
   let count = 0;
-
   for(const i in cart){
     count += cart[i];
   }
-
-  document.getElementById("floatingCart")
-    .innerHTML =
-    `🛒 ${count} Items • ${total} Ks`;
+  document.getElementById("floatingCart").innerHTML = `🛒 ${count} Items • ${total} Ks`;
 }
 
 function scrollToCart(){
