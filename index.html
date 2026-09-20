@@ -3,21 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>System Maintenance | We'll be back soon</title>
+    <title>Server Maintenance & System Upgrade</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Padauk:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Padauk:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg-base: #f8fafc;
-            --glass-bg: rgba(255, 255, 255, 0.65);
-            --glass-border: rgba(255, 255, 255, 0.9);
-            --text-primary: #0f172a;
-            --text-secondary: #475569;
-            --accent-color: #3b82f6;
-            --accent-glow: rgba(59, 130, 246, 0.25);
+            --bg-base: #0a0f1d;
+            --primary: #3b82f6;
+            --primary-glow: rgba(59, 130, 246, 0.4);
+            --telegram: #0088cc;
+            --telegram-glow: rgba(0, 136, 204, 0.4);
+            --card-bg: rgba(16, 24, 40, 0.75);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+            --accent-amber: #f59e0b;
         }
 
         * {
@@ -27,344 +30,411 @@
         }
 
         body {
-            font-family: 'Inter', 'Padauk', sans-serif;
+            font-family: 'Plus Jakarta Sans', 'Padauk', sans-serif;
             background-color: var(--bg-base);
-            color: var(--text-primary);
+            color: var(--text-main);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
             position: relative;
-            padding: 20px;
+            padding: 24px 16px;
+            overflow-x: hidden;
         }
 
-        /* --- Dynamic Motion Background Blobs --- */
-        .ambient-sphere {
+        /* --- Ambient Gradient Moving Orbs --- */
+        .ambient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(80px);
-            z-index: 0;
-            opacity: 0.65;
-            animation: floatMotion 12s infinite alternate ease-in-out;
+            filter: blur(100px);
+            opacity: 0.45;
+            animation: moveOrb 18s infinite alternate ease-in-out;
         }
 
-        .sphere-1 {
-            width: 380px;
-            height: 380px;
-            background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
-            top: -50px;
-            left: -50px;
-            animation-duration: 14s;
+        .orb-1 {
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, #2563eb, #1d4ed8);
+            top: -10%;
+            left: -10%;
         }
 
-        .sphere-2 {
-            width: 420px;
-            height: 420px;
-            background: linear-gradient(135deg, #dbeafe, #bae6fd);
-            bottom: -80px;
-            right: -60px;
-            animation-duration: 10s;
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #7c3aed, #4f46e5);
+            bottom: -15%;
+            right: -10%;
+            animation-duration: 22s;
         }
 
-        .sphere-3 {
-            width: 300px;
-            height: 300px;
-            background: linear-gradient(135deg, #fce7f3, #fbcfe8);
-            top: 40%;
-            left: 60%;
-            animation-duration: 16s;
+        .orb-3 {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, #0ea5e9, #0284c7);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-duration: 15s;
         }
 
-        @keyframes floatMotion {
-            0% {
-                transform: translate(0, 0) scale(1);
-            }
-            50% {
-                transform: translate(30px, 40px) scale(1.08);
-            }
-            100% {
-                transform: translate(-30px, -20px) scale(0.95);
-            }
+        @keyframes moveOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(60px, 40px) scale(1.1); }
+            100% { transform: translate(-40px, -60px) scale(0.95); }
         }
 
         /* --- Glassmorphic Card Container --- */
         .glass-card {
             position: relative;
             z-index: 10;
-            max-width: 580px;
+            max-width: 560px;
             width: 100%;
-            background: var(--glass-bg);
+            background: var(--card-bg);
             backdrop-filter: blur(28px);
             -webkit-backdrop-filter: blur(28px);
-            border: 1px solid var(--glass-border);
+            border: 1px solid var(--card-border);
             border-radius: 28px;
-            padding: 48px 36px;
-            box-shadow: 
-                0 20px 40px -15px rgba(0, 0, 0, 0.05),
-                0 0 1px 1px rgba(255, 255, 255, 0.8) inset;
+            padding: 40px 32px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.05);
             text-align: center;
-            animation: cardAppear 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: fadeIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        @keyframes cardAppear {
-            0% {
-                opacity: 0;
-                transform: translateY(25px) scale(0.97);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* --- Status Pill Badge --- */
+        /* --- Status Pill --- */
         .status-badge {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(255, 255, 255, 0.85);
-            border: 1px solid rgba(226, 232, 240, 0.8);
+            background: rgba(245, 158, 11, 0.12);
+            border: 1px solid rgba(245, 158, 11, 0.3);
             padding: 6px 16px;
             border-radius: 9999px;
             font-size: 13px;
             font-weight: 600;
-            color: #d97706;
+            color: #fbbf24;
             margin-bottom: 24px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
         }
 
         .status-dot {
             width: 8px;
             height: 8px;
-            background-color: #f59e0b;
+            background-color: var(--accent-amber);
             border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-amber);
+            animation: pulse 1.8s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.85); }
+        }
+
+        /* --- Apology & Maintenance Icon --- */
+        .apology-icon-wrap {
             position: relative;
-        }
-
-        .status-dot::after {
-            content: '';
-            position: absolute;
-            top: -4px;
-            left: -4px;
-            right: -4px;
-            bottom: -4px;
-            border-radius: 50%;
-            background: rgba(245, 158, 11, 0.4);
-            animation: pulseDot 1.8s infinite;
-        }
-
-        @keyframes pulseDot {
-            0% { transform: scale(0.8); opacity: 1; }
-            100% { transform: scale(2.2); opacity: 0; }
-        }
-
-        /* --- Animated Center Icon --- */
-        .icon-container {
-            width: 76px;
-            height: 76px;
-            margin: 0 auto 24px;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #ffffff, #f1f5f9);
-            border: 1px solid rgba(255, 255, 255, 0.9);
-            border-radius: 22px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
-            animation: softBreath 3s infinite ease-in-out;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: float 4s ease-in-out infinite;
         }
 
-        @keyframes softBreath {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
         }
 
-        .icon-container svg {
-            width: 36px;
-            height: 36px;
-            stroke: var(--accent-color);
+        .apology-icon-wrap svg {
+            width: 42px;
+            height: 42px;
+            color: #60a5fa;
         }
 
-        /* --- Typography --- */
-        h1 {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--text-primary);
-            line-height: 1.4;
-            margin-bottom: 12px;
-            letter-spacing: -0.01em;
-        }
-
-        p.subtitle {
-            font-size: 14.5px;
-            line-height: 1.7;
-            color: var(--text-secondary);
-            margin-bottom: 28px;
-        }
-
-        /* --- Live Progress Indicator --- */
-        .progress-box {
-            background: rgba(255, 255, 255, 0.7);
-            border: 1px solid rgba(241, 245, 249, 0.9);
-            border-radius: 16px;
-            padding: 16px 20px;
-            margin-bottom: 30px;
-        }
-
-        .progress-header {
-            display: flex;
-            justify-content: space-between;
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--text-secondary);
-            margin-bottom: 8px;
-        }
-
-        .progress-bar-wrap {
+        /* --- Smooth Moving Marquee Notice Banner --- */
+        .marquee-container {
             width: 100%;
-            height: 6px;
-            background: #e2e8f0;
-            border-radius: 999px;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px dashed rgba(59, 130, 246, 0.35);
+            border-radius: 12px;
+            padding: 10px 0;
             overflow: hidden;
+            margin-bottom: 22px;
+            display: flex;
+            align-items: center;
+            position: relative;
         }
 
-        .progress-bar {
-            height: 100%;
-            width: 65%;
-            background: linear-gradient(90deg, #3b82f6, #60a5fa);
-            border-radius: 999px;
-            position: relative;
-            animation: shimmerBar 2s infinite linear;
+        .marquee-content {
+            display: flex;
+            white-space: nowrap;
+            gap: 40px;
+            animation: scrollText 22s linear infinite;
+        }
+
+        .marquee-content:hover {
+            animation-play-state: paused;
+        }
+
+        .marquee-item {
+            font-size: 13.5px;
+            font-weight: 500;
+            color: #93c5fd;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        @keyframes scrollText {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* --- Titles & Content --- */
+        h1 {
+            font-size: 22px;
+            font-weight: 700;
+            line-height: 1.5;
+            margin-bottom: 12px;
+            color: #ffffff;
+        }
+
+        p.description {
+            font-size: 14px;
+            line-height: 1.8;
+            color: var(--text-sub);
+            margin-bottom: 24px;
+        }
+
+        /* --- Info Highlight Cards --- */
+        .info-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 26px;
+            text-align: left;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 14px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .info-card-icon {
+            flex-shrink: 0;
+            margin-top: 3px;
+            color: #38bdf8;
+        }
+
+        .info-card-text {
+            font-size: 13.5px;
+            line-height: 1.6;
+            color: #cbd5e1;
+        }
+
+        .info-card-text strong {
+            color: #38bdf8;
+            font-weight: 600;
         }
 
         /* --- Action Buttons --- */
         .actions {
             display: flex;
+            flex-direction: column;
             gap: 12px;
-            justify-content: center;
-            flex-wrap: wrap;
         }
 
         .btn {
+            position: relative;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            padding: 12px 24px;
-            border-radius: 14px;
-            font-size: 14px;
+            gap: 10px;
+            padding: 14px 24px;
+            border-radius: 16px;
+            font-size: 14.5px;
             font-weight: 600;
             text-decoration: none;
-            transition: all 0.25s ease;
             cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+            overflow: hidden;
+            border: none;
         }
 
-        .btn-primary {
-            background: var(--text-primary);
+        .btn-telegram {
+            background: linear-gradient(135deg, #0088cc, #0077b5);
             color: #ffffff;
-            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
+            box-shadow: 0 4px 20px var(--telegram-glow);
         }
 
-        .btn-primary:hover {
+        .btn-telegram:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(15, 23, 42, 0.2);
+            box-shadow: 0 8px 25px rgba(0, 136, 204, 0.6);
+            filter: brightness(1.08);
+        }
+
+        .btn-telegram:active {
+            transform: translateY(0);
         }
 
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.85);
-            color: var(--text-primary);
-            border: 1px solid #e2e8f0;
+            background: rgba(255, 255, 255, 0.05);
+            color: #f1f5f9;
+            border: 1px solid rgba(255, 255, 255, 0.12);
         }
 
         .btn-secondary:hover {
-            background: #ffffff;
+            background: rgba(255, 255, 255, 0.09);
             transform: translateY(-2px);
-            border-color: #cbd5e1;
+            border-color: rgba(255, 255, 255, 0.2);
         }
 
         /* --- Footer --- */
         .footer-text {
-            margin-top: 28px;
+            margin-top: 24px;
             font-size: 12px;
-            color: #94a3b8;
+            color: #64748b;
         }
 
-        @media (max-width: 480px) {
-            .glass-card {
-                padding: 36px 22px;
-            }
-            h1 {
-                font-size: 20px;
+        @media (min-width: 500px) {
+            .actions {
+                flex-direction: row;
             }
             .btn {
-                width: 100%;
+                flex: 1;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- Motion Background Elements -->
-    <div class="ambient-sphere sphere-1"></div>
-    <div class="ambient-sphere sphere-2"></div>
-    <div class="ambient-sphere sphere-3"></div>
+    <!-- Ambient Dynamic Glows -->
+    <div class="ambient-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
 
-    <!-- Main Glassmorphism UI -->
+    <!-- Main Glassmorphism UI Card -->
     <div class="glass-card">
-        
-        <!-- Status Indicator -->
+
+        <!-- Status Badge -->
         <div class="status-badge">
             <span class="status-dot"></span>
-            <span>Server Upgrading</span>
+            <span>Server Upgrading & Maintenance</span>
         </div>
 
-        <!-- Center Dynamic Icon -->
-        <div class="icon-container">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                <path d="M12 8v4"/>
-                <path d="M12 16h.01"/>
+        <!-- Center Apology / Maintenance Icon -->
+        <div class="apology-icon-wrap">
+            <!-- Praying hands / Apology & Tools Combined Theme -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
             </svg>
         </div>
 
-        <!-- Main Heading & Burmese Apology -->
-        <h1>ဆာဗာပြုပြင်ထိန်းသိမ်းမှု ပြုလုပ်နေပါသည်</h1>
-        <p class="subtitle">
-            လူကြီးမင်းတို့ ပိုမိုမြန်ဆန်ပြီး ချောမွေ့သော ဝန်ဆောင်မှု ရရှိစေရန် System Upgrade လုပ်ဆောင်နေပါသည်။ အဆင်မပြေမှု ဖြစ်ပေါ်ခဲ့ပါက အထူးပင် လေးစားစွာ တောင်းပန်အပ်ပါသည်။
-        </p>
-
-        <!-- Progress Box -->
-        <div class="progress-box">
-            <div class="progress-header">
-                <span>စနစ်အဆင့်မြှင့်တင်မှု အခြေအနေ</span>
-                <span>မကြာမီ ပြီးစီးပါမည်</span>
-            </div>
-            <div class="progress-bar-wrap">
-                <div class="progress-bar"></div>
+        <!-- Moving Scroll Text Animation (Marquee) -->
+        <div class="marquee-container">
+            <div class="marquee-content">
+                <div class="marquee-item">
+                    ⚠️ Server Maintenance ကာလသည် October ၁၅ ရက် သို့မဟုတ် ၃၀ ရက်အထိ ကြာမြင့်နိုင်ပါသည်။
+                </div>
+                <div class="marquee-item">
+                    🎮 Digital Premium Website အသစ်ကို လာမည့်လအတွင်း Launch ပြုလုပ်ပေးပါမည်။
+                </div>
+                <!-- Duplicate for seamless loop -->
+                <div class="marquee-item">
+                    ⚠️ Server Maintenance ကာလသည် October ၁၅ ရက် သို့မဟုတ် ၃၀ ရက်အထိ ကြာမြင့်နိုင်ပါသည်။
+                </div>
+                <div class="marquee-item">
+                    🎮 Digital Premium Website အသစ်ကို လာမည့်လအတွင်း Launch ပြုလုပ်ပေးပါမည်။
+                </div>
             </div>
         </div>
-<!-- Contact Actions -->
-<div class="actions">
-    <!-- Telegram Link Updated -->
-    <a href="https://t.me/angsthtun" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="22" y1="2" x2="11" y2="13"></line>
-            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-        </svg>
-        Telegram သို့ ဆက်သွယ်ရန်
-    </a>
 
-    <!-- Page Reload Button -->
-    <button class="btn btn-secondary" onclick="location.reload()">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="23 4 23 10 17 10"></polyline>
-            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
-        </svg>
-        ပြန်လည်စစ်ဆေးမည်
-    </button>
-</div>
+        <!-- Heading -->
+        <h1>ဆာဗာပြုပြင်ထိန်းသိမ်းမှု ပြုလုပ်နေပါသည်</h1>
 
+        <!-- Apology Text -->
+        <p class="description">
+            လူကြီးမင်းတို့ ပိုမိုမြန်ဆန်ပြီး ချောမွေ့သော ဝန်ဆောင်မှု ရရှိစေရန် စနစ်အဆင့်မြှင့်တင်မှုများ ဆောင်ရွက်နေပါသည်။ ဝန်ဆောင်မှု ယာယီနှောင့်နှေးကြန့်ကြာမှုများအတွက် <strong>လေးစားစွာ အနူးအညွတ် တောင်းပန်အပ်ပါသည်။</strong>
+        </p>
 
+        <!-- Information Cards -->
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="info-card-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 11V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v7"></path>
+                        <path d="M4 15h16"></path>
+                        <path d="M10 19v2"></path>
+                        <path d="M14 19v2"></path>
+                        <rect x="2" y="11" width="20" height="8" rx="2"></rect>
+                    </svg>
+                </div>
+                <div class="info-card-text">
+                    ဒီလတ်တလောအတွင်း အဆင်ပြေချောမွေ့စွာ <strong>Game Topup</strong> ပြုလုပ်နိုင်ရန် <strong>Raw Website Link</strong> တစ်ခု စီစဉ်ပေးပါမည်။
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-card-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                    </svg>
+                </div>
+                <div class="info-card-text">
+                    ပိုမိုကောင်းမွန်စုံလင်သည့် <strong>Digital Premium Website</strong> အသစ်ကို လာမည့်လအတွင်း Launch ပြုလုပ်ပေးသွားပါမည်။
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="actions">
+            <!-- Telegram Button -->
+            <a href="https://t.me/angsthtun" class="btn btn-telegram" target="_blank" rel="noopener noreferrer">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+                @angsthtun သို့ ဆက်သွယ်ရန်
+            </a>
+
+            <!-- Page Reload Button -->
+            <button class="btn btn-secondary" onclick="location.reload()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="23 4 23 10 17 10"></polyline>
+                    <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                </svg>
+                ပြန်လည်စစ်ဆေးမည်
+            </button>
+        </div>
 
         <!-- Footer Notice -->
         <div class="footer-text">
